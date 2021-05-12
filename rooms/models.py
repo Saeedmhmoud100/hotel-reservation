@@ -2,7 +2,7 @@ from django.db import models
 from ckeditor.fields import RichTextField
 from django_countries.fields import CountryField
 from django.utils import timezone
-from django.template.defaultfilters import slugify
+
 # Create your models here.   
 
 class Room(models.Model):
@@ -18,10 +18,7 @@ class Room(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(default=timezone.now)
     slug = models.SlugField(blank=True, null=True)
-    def save(self):
-        self.slug = slugify(self.title)
 
 class Room_image(models.Model):
     room = models.ForeignKey(Room, on_delete=models.CASCADE, related_name='room_img')
     img = models.ImageField(upload_to='rooms/')
-
