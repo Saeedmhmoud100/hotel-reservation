@@ -16,4 +16,4 @@ def hotel(request):
     return render(request,'room/hotel.html')
 
 def hotel_single(request):
-    return render(request,'room/hotel.html')
+    return render(request,'room/hotel-single.html')
