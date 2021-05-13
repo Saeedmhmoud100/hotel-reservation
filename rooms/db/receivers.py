@@ -10,7 +10,9 @@ def room_slug(sender,instance,*args,**kwargs):
     
 def room_img(sender,instance,*args,**kwargs):
     if not instance.room_img.filter(img=instance.img).exists():
-        instance.room_img.create(img=instance.img)
+        l = instance.room_img.all().first()
+        l.img = instance.img
+        l.save()
         
 
 
