@@ -6,10 +6,6 @@ from django.utils.html import format_html
 from django.template.defaultfilters import truncatechars
 from django.utils.safestring import mark_safe
 
-    
-
-# Create your models here.   
-
 class Room(models.Model):
     title = models.CharField(max_length = 150)
     price = models.PositiveIntegerField()
@@ -34,6 +30,8 @@ class Room(models.Model):
             self.img.url,
         )
 
+
+
 class Room_image(models.Model):
     room = models.ForeignKey(Room, on_delete=models.CASCADE, related_name='room_img')
     img = models.ImageField(upload_to='rooms/')
@@ -50,25 +48,3 @@ class Room_image(models.Model):
         return str(self.room)
 
 
-class Active_Room_query(models.QuerySet):
-    def active(self):
-        return self.filter(active=True)
-
-
-class Active_Room_Maneger(models.Manager):
-    def get_queryset(self):
-        return Active_Room_query(
-            model=self.model,
-            using=self._db,
-            hints=self._hints
-            )
-    def active(self):
-        return self.get_queryset().active()
-
-
-class Active_Room(Room):
-    objects = Active_Room_Maneger()
-    class Meta:
-        proxy = True
-        verbose_name = 'Active Rooms'
-        verbose_name_plural = 'Active Rooms'
