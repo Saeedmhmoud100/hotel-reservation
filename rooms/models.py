@@ -23,6 +23,7 @@ class Room(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(default=timezone.now)
     slug = models.SlugField(blank=True, null=True)
+    active = models.BooleanField(default=True)
     
     def __str__(self):
         return self.title
@@ -48,3 +49,26 @@ class Room_image(models.Model):
     def __str__(self):
         return str(self.room)
 
+
+class Active_Room_query(models.QuerySet):
+    def active(self):
+        return self.filter(active=True)
+
+
+class Active_Room_Maneger(models.Manager):
+    def get_queryset(self):
+        return Active_Room_query(
+            model=self.model,
+            using=self._db,
+            hints=self._hints
+            )
+    def active(self):
+        return self.get_queryset().active()
+
+
+class Active_Room(Room):
+    objects = Active_Room_Maneger()
+    class Meta:
+        proxy = True
+        verbose_name = 'Active Rooms'
+        verbose_name_plural = 'Active Rooms'
