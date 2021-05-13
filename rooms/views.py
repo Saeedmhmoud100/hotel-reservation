@@ -9,9 +9,10 @@ def home(request):
 class HotelListView(ListView):
     template_name = 'room/hotel.html'
     model = Room
+    paginate_by = 1
 
 
-def hotel_single(request):
+def hotel_single(request,pk,slug):
     return render(request,'room/hotel-single.html')
 
 def tour(request):
