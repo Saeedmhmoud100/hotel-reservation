@@ -14,7 +14,7 @@ class Room_imageAdmin(admin.TabularInline):
 @admin.register(Room)
 class RoomAdmin(admin.ModelAdmin):
     inlines = [Room_imageAdmin]
-    list_display = ('title','img_tag','country', 'locality', 'street',  'days_number', 'created_at', 'update_at' )
+    list_display = ('title','img_tag','country', 'locality', 'days_number', 'update_at','total_rating' )
     readonly_fields = ['created_at']
     search_fields = ('title','descriptions')
     class Meta:
@@ -31,7 +31,7 @@ class RoomAdmin(admin.ModelAdmin):
 
 
 class Active_RoomAdmin(admin.ModelAdmin):
-    list_display = ('title','country','locality', 'created_at', 'update_at','active')
+    list_display = ('title','country','locality', 'update_at','total_rating','active')
     list_editable = ('active',)
     def get_queryset(self, request):
         return self.model.objects.active()
