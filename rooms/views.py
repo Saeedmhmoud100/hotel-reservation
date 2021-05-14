@@ -10,6 +10,9 @@ class HotelListView(ListView):
     template_name = 'room/hotel.html'
     model = Room
     paginate_by = 1
+    def get_queryset(self):
+        return super().get_queryset().filter(active=True)
+    
 
 
 def hotel_single(request,pk,slug):

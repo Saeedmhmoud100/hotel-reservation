@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import Room,Room_image,Active_Room
+from .models import Room,Room_image
+from .db.model import Active_Room
 # Register your models here.
 
 
