@@ -38,5 +38,13 @@ class Active_RoomAdmin(admin.ModelAdmin):
     class Meta:
         model = Active_Room
 
+
 admin.site.register(Active_Room,Active_RoomAdmin)
-admin.site.register(Room_Rating)
+
+
+class Room_RatingAdmin(admin.ModelAdmin):
+    list_display = ('room','user','rating')
+    class Meta:
+        model = Room_Rating
+
+admin.site.register(Room_Rating,Room_RatingAdmin)
