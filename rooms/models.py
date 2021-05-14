@@ -5,7 +5,8 @@ from django.utils import timezone
 from django.utils.html import format_html
 from django.template.defaultfilters import truncatechars
 from django.utils.safestring import mark_safe
-
+from django.contrib.auth import get_user_model
+from django.core.validators import MaxValueValidator, MinValueValidator
 class Room(models.Model):
     title = models.CharField(max_length = 150)
     price = models.PositiveIntegerField()
@@ -51,3 +52,21 @@ class Room_image(models.Model):
         return str(self.room)
 
 
+# class IntegerRangeField(models.IntegerField):
+#     def __init__(self, verbose_name=None, name=None, min_value=None, max_value=None, **kwargs):
+#         self.min_value, self.max_value = min_value, max_value
+#         models.IntegerField.__init__(self, verbose_name, name, **kwargs)
+#     def formfield(self, **kwargs):
+#         defaults = {'min_value': self.min_value, 'max_value':self.max_value}
+#         defaults.update(kwargs)
+#         return super(IntegerRangeField, self).formfield(**defaults)
+    
+
+
+class Room_Rating(models.Model):
+    user = models.ForeignKey(get_user_model(), related_name='rating', on_delete=models.CASCADE)
+    room = models.ForeignKey(Room, related_name='rating', on_delete=models.CASCADE)
+    rating = models.IntegerField(validators=[MaxValueValidator(5),MinValueValidator(1)])
+    
+    def __str__(self):
+        return f'{self.room.title} - rating'

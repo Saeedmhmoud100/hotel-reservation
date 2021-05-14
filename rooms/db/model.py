@@ -24,3 +24,4 @@ class Active_Room(Room):
         proxy = True
         verbose_name = 'Active Rooms'
         verbose_name_plural = 'Active Rooms'
+        

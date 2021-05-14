@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Room,Room_image
+from .models import Room,Room_image,Room_Rating
 from .db.model import Active_Room
 # Register your models here.
 
@@ -39,3 +39,4 @@ class Active_RoomAdmin(admin.ModelAdmin):
         model = Active_Room
 
 admin.site.register(Active_Room,Active_RoomAdmin)
+admin.site.register(Room_Rating)
