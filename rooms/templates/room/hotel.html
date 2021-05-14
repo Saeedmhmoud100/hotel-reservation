@@ -2,7 +2,7 @@
 {% load static %}
 {% load crispy_forms_tags %}
 {% block content %}
-  
+{% load custom_tags %}
     <div class="hero-wrap js-fullheight" style="background-image: url({% static 'images/bg_5.jpg' %});">
       <div class="overlay"></div>
       <div class="container">
@@ -22,7 +22,7 @@
         	<div class="col-lg-3 sidebar">
         		<div class="sidebar-wrap bg-light ftco-animate">
         			<h3 class="heading mb-4">Find City</h3>
-        			<form action="#">
+        			<form action="#" id="form1">
         				<div class="fields">
 		              {{filter.form|crispy}}
 		              
@@ -34,37 +34,38 @@
         		</div>
         		<div class="sidebar-wrap bg-light ftco-animate">
         			<h3 class="heading mb-4">Star Rating</h3>
-        			<form method="post" class="star-rating">
+        			<form method="GET" class="star-rating" id="form2">
 							  <div class="form-check">
-									<input type="checkbox" class="form-check-input" id="exampleCheck1">
-									<label class="form-check-label" for="exampleCheck1">
+									<input type="checkbox" data-rating="5" class="form-check-input" id="exampleCheck5">
+									<label class="form-check-label" for="exampleCheck5">
 										<p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></span></p>
 									</label>
 							  </div>
 							  <div class="form-check">
-						      <input type="checkbox" class="form-check-input" id="exampleCheck1">
-						      <label class="form-check-label" for="exampleCheck1">
+						      <input type="checkbox" data-rating="4" class="form-check-input" id="exampleCheck4">
+						      <label class="form-check-label" for="exampleCheck4">
 						    	   <p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star-o"></i></span></p>
 						      </label>
 							  </div>
 							  <div class="form-check">
-						      <input type="checkbox" class="form-check-input" id="exampleCheck1">
-						      <label class="form-check-label" for="exampleCheck1">
+						      <input type="checkbox" data-rating="3" class="form-check-input" id="exampleCheck3">
+						      <label class="form-check-label" for="exampleCheck3">
 						      	<p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star-o"></i><i class="icon-star-o"></i></span></p>
 						     </label>
 							  </div>
 							  <div class="form-check">
-							    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-						      <label class="form-check-label" for="exampleCheck1">
+							    <input type="checkbox" data-rating="2" class="form-check-input" id="exampleCheck2">
+						      <label class="form-check-label" for="exampleCheck2">
 						      	<p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star-o"></i><i class="icon-star-o"></i><i class="icon-star-o"></i></span></p>
 						      </label>
 							  </div>
 							  <div class="form-check">
-						      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+						      <input type="checkbox" data-rating="1" class="form-check-input" id="exampleCheck1">
 						      <label class="form-check-label" for="exampleCheck1">
 						      	<p class="rate"><span><i class="icon-star"></i><i class="icon-star-o"></i><i class="icon-star-o"></i><i class="icon-star-o"></i><i class="icon-star-o"></i></span></p>
 							    </label>
 							  </div>
+							  <input type="hidden" id="rat" name="rating">
 							</form>
         		</div>
           </div>
@@ -86,12 +87,22 @@
 							<div class="one">
 								<h3><a href="hotel-single.html">{{obj.title}}</a></h3>
 								<p class="rate">
-									<i class="icon-star"></i>
-									<i class="icon-star"></i>
-									<i class="icon-star"></i>
-									<i class="icon-star"></i>
-									<i class="icon-star-o"></i>
-									<span>8 Rating</span>
+									{% for i in '12345'|make_list %}
+									  
+									  {% if forloop.counter <= obj.total_rating %}
+									  	<i class="icon-star"></i>
+										  {% else %}
+										  <i class="icon-star-o"></i>
+									  {% endif %}
+										  {% empty %}
+										  <i class="icon-star-o"></i>
+										  <i class="icon-star-o"></i>
+										  <i class="icon-star-o"></i>
+										  <i class="icon-star-o"></i>
+										  <i class="icon-star-o"></i>
+									{% endfor %}
+									
+									<span style="padding-left: 3px;">{%minus_one obj.pk%} Rating</span>
 								</p>
 							</div>
 							<div class="two">
@@ -141,4 +152,18 @@
         </div>
       </div>
     </section> <!-- .section -->
+
+	
 {% endblock content %}
+{% block script %}
+<script>
+	$(function(e){
+		document.getElementById('div_id_total_rating').style.display = 'none'
+		$('#form2 input').on('change',function(e){
+			var rate = e.target.attributes[1].value
+			document.getElementById('id_total_rating').value = rate
+			$('#form1').submit()
+		})	
+	})
+</script>
+{% endblock script %}

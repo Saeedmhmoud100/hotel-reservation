@@ -10,7 +10,7 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 class Room(models.Model):
     title = models.CharField(max_length = 150)
     price = models.PositiveIntegerField()
-    #rating
+    total_rating = models.IntegerField(blank=True, null=True)
     country = CountryField()
     locality =models.CharField(max_length=50)
     street = models.CharField(max_length = 150)
@@ -33,14 +33,8 @@ class Room(models.Model):
             "<img src='{}'  width='50' height='50' />",
             self.img.url,
         )
-    @property
-    def total_rating(self):
-        count = int(self.rating.all().count())
-        rating = 0
-        for i in self.rating.all():
-            rating += i.rating
-        rating = rating / count
-        return  int(rating)
+
+
 
 class Room_image(models.Model):
     room = models.ForeignKey(Room, on_delete=models.CASCADE, related_name='room_img')

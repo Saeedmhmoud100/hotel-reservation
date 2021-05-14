@@ -17,8 +17,19 @@ def room_img(sender,instance,*args,**kwargs):
             
     else:
         instance.room_img.create(room=instance,img=instance.img)
-        
+    
+def total_rating(sender,instance,*args,**kwargs):
+    if instance.rating.filter(room=instance).exists():
+        count = int(instance.rating.all().count())
+        rating = 0
+        for i in instance.rating.all():
+            rating += i.rating
+        rating = rating / count
+        instance.total_rating = rating
+    else:
+        instance.total_rating = 1
 
 
 pre_save.connect(room_slug, sender=Room)
 post_save.connect(room_img, sender=Room)
+pre_save.connect(total_rating, sender=Room)
