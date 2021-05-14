@@ -1,6 +1,7 @@
 from django.db import models
 from ckeditor.fields import RichTextField
 from django_countries.fields import CountryField
+from django.urls import reverse
 from django.utils import timezone
 from django.utils.html import format_html
 from django.template.defaultfilters import truncatechars
@@ -33,6 +34,10 @@ class Room(models.Model):
             "<img src='{}'  width='50' height='50' />",
             self.img.url,
         )
+        
+    def get_absolute_url(self):
+        return reverse("rooms:hotel_room", kwargs={"pk": self.pk,'slug':self.slug})
+        
 
 
 

@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import ListView
+from django.views.generic import ListView,DeleteView
 from django_filters.views import FilterView
 
 from .models import Room
@@ -18,9 +18,10 @@ class HotelListView(FilterView):
         return super().get_queryset().filter(active=True)
 
 
+class HotelRoomView(DeleteView):
+    template_name = 'room/hotel-single.html'
+    model = Room
 
-def hotel_single(request,pk,slug):
-    return render(request,'room/hotel-single.html')
 
 def tour(request):
     return render(request,'room/tour.html')
