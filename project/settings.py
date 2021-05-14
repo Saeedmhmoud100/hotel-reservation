@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django_countries',
     'rooms.apps.RoomsConfig',
     'users',
+    'crispy_forms',
 ]
 
 
@@ -132,3 +133,6 @@ STATICFILES_DIRS = [
 
 MEDIA_URL='/media/'
 MEDIA_ROOT=BASE_DIR /'media'
+
+
+CRISPY_TEMPLATE_PACK  = 'bootstrap4'
