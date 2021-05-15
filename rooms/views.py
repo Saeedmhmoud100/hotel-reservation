@@ -1,9 +1,9 @@
 from django.shortcuts import render
 from django.views.generic import ListView,DeleteView
 from django_filters.views import FilterView
-
 from .models import Room
 # Create your views here.
+
 
 def home(request):
     return render(request,'room/home.html')
@@ -19,7 +19,7 @@ class HotelListView(FilterView):
 
 
 class HotelRoomView(DeleteView):
-    template_name = 'room/hotel-single.html'
+    template_name = 'room/hotel_room.html'
     model = Room
 
 
