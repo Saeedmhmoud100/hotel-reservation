@@ -40,6 +40,7 @@ class HotelRoomView(DeleteView):
         context = super().get_context_data(**kwargs)
         context["user_and_room"] = [self.request.user,self.get_object().pk]
         context["our_rooms"] = random_rooms(Room.objects.all().order_by('?'),3)
+        context['related_rooms'] = random_rooms(Room.objects.all().order_by('total_rating'),3)
         return context
     
 
