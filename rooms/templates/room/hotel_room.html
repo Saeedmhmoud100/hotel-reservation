@@ -222,37 +222,38 @@
           			<div class="row">
           				<div class="col-md-6">
           					<form method="post" class="star-rating">
-										  <div class="form-check">
-												<input type="checkbox" class="form-check-input" id="exampleCheck1">
-												<label class="form-check-label" for="exampleCheck1">
-													<p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i> 100 Ratings</span></p>
-												</label>
-										  </div>
-										  <div class="form-check">
-									      <input type="checkbox" class="form-check-input" id="exampleCheck1">
-									      <label class="form-check-label" for="exampleCheck1">
-									    	   <p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star-o"></i> 30 Ratings</span></p>
-									      </label>
-										  </div>
-										  <div class="form-check">
-									      <input type="checkbox" class="form-check-input" id="exampleCheck1">
-									      <label class="form-check-label" for="exampleCheck1">
-									      	<p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star-o"></i><i class="icon-star-o"></i> 5 Ratings</span></p>
-									     </label>
-										  </div>
-										  <div class="form-check">
-										    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-									      <label class="form-check-label" for="exampleCheck1">
-									      	<p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star-o"></i><i class="icon-star-o"></i><i class="icon-star-o"></i> 0 Ratings</span></p>
-									      </label>
-										  </div>
-										  <div class="form-check">
-									      <input type="checkbox" class="form-check-input" id="exampleCheck1">
-									      <label class="form-check-label" for="exampleCheck1">
-									      	<p class="rate"><span><i class="icon-star"></i><i class="icon-star-o"></i><i class="icon-star-o"></i><i class="icon-star-o"></i><i class="icon-star-o"></i> 0 Ratings</span></p>
-										    </label>
-										  </div>
-										</form>
+								<div class="form-check">
+									<input type="checkbox" class="form-check-input" id="exampleCheck1">
+									<label class="form-check-label" for="exampleCheck1">
+										<p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i> {% user_rating_numper object.pk 5 %} Ratings</span></p>
+									</label>
+								</div>
+								<div class="form-check">
+								<input type="checkbox" class="form-check-input" id="exampleCheck1">
+								<label class="form-check-label" for="exampleCheck1">
+									<p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star-o"></i> {% user_rating_numper object.pk 4 %} Ratings</span></p>
+								</label>
+								</div>
+								<div class="form-check">
+								<input type="checkbox" class="form-check-input" id="exampleCheck1">
+								<label class="form-check-label" for="exampleCheck1">
+								<p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star-o"></i><i class="icon-star-o"></i> {% user_rating_numper object.pk 3 %} Ratings</span></p>
+								</label>
+								</div>
+								<div class="form-check">
+								<input type="checkbox" class="form-check-input" id="exampleCheck1">
+								<label class="form-check-label" for="exampleCheck1">
+								<p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star-o"></i><i class="icon-star-o"></i><i class="icon-star-o"></i> {% user_rating_numper object.pk 2 %} Ratings</span></p>
+								</label>
+								</div>
+								<div class="form-check">
+								<input type="checkbox" class="form-check-input" id="exampleCheck1">
+								<label class="form-check-label" for="exampleCheck1">
+								<p class="rate"><span><i class="icon-star"></i><i class="icon-star-o"></i><i class="icon-star-o"></i><i class="icon-star-o"></i><i class="icon-star-o"></i> {% user_rating_numper object.pk 1 %} Ratings</span></p>
+								</label>
+								</div>
+								<input type="hidden">
+							</form>
           				</div>
           			</div>
           		</div>
