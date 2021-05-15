@@ -2,8 +2,22 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from django.views.generic import ListView,DeleteView
 from django_filters.views import FilterView
+from random import *
 from .models import Room,Room_Rating
 # Create your views here.
+
+
+
+
+def random_rooms(rooms,num=None):
+    try:
+        x =[p for p in rooms.objects.all()]
+    except AttributeError:
+        x = rooms   
+    if num:
+        return list(x[:num])
+    return list(x)
+
 
 
 def home(request):
@@ -25,6 +39,7 @@ class HotelRoomView(DeleteView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["user_and_room"] = [self.request.user,self.get_object().pk]
+        context["our_rooms"] = random_rooms(Room.objects.all().order_by('?'),3)
         return context
     
 
