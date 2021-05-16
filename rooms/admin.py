@@ -54,6 +54,7 @@ admin.site.register(Room_Rating,Room_RatingAdmin)
 class Room_ReservationAdmin(admin.ModelAdmin):
     list_display  = ('pk','room','user','email_registered','price','canceled','done')
     list_editable = ('canceled','done')
+    list_filter = ('canceled','done')
     class Meta:
         model = Room_Reservation
         fields = '__all__'
