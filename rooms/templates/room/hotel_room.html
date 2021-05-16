@@ -111,45 +111,30 @@
           			</div>
           		</div>
           		<div class="col-md-12 hotel-single ftco-animate mb-5 mt-4">
-          			<form method="POST">
+					  
+					  
+					  {% if messages %}
+					  {% for message in messages %}
+						  <div class="alert alert-{{message.tags}}">{{message}}</div>
+					  {% endfor %}
+					  {% endif %}
+						  
+						  
+          			<form method="POST" enctype="multipart/form-data">
 						  {% csrf_token %}
 						<h4 class="mb-5">Check Availability &amp; Booking</h4>
 						<div class="fields">
 							<div class="row">
-								<div class="col-md-6">
+								{% for f in form %}
+								  <div class="col-md-6">
 								<div class="form-group">
-								  {{form.name}}
+								  {{f}}
 								</div>
+								{{f.errors}}
 							</div>
-							<div class="col-md-6">
-								<div class="form-group">
-								  {{form.email_entred}}
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="form-group">
-								  <input type="text" id="checkin_date" class="form-control" placeholder="Date from" name='data_from'>
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="form-group">
-								  <input type="text" id="checkin_date" class="form-control" placeholder="Date to" name='data_to'>
-								</div>
-							  </div>
-							  <div class="col-md-6">
-								  <div class="form-group">
-								  <div class="select-wrap one-third">
-								  {{form.guste}}
-								</div>
-								</div>
-							</div>
-							<div class="col-md-6">
-								  <div class="form-group">
-								  <div class="select-wrap one-third">
-								  {{form.children}}
-								</div>
-								</div>
-							</div>
+								{% endfor %}
+								
+
 							  <div class="col-md-12">
 								<div class="form-group">
 								  <input type="submit" value="Check Availability" class="btn btn-primary py-3">

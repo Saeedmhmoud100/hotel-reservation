@@ -84,10 +84,12 @@ class Room_Reservation(models.Model):
     name = models.CharField(max_length=90)
     email_registered = models.EmailField()
     email_entred = models.EmailField()
-    Data_from = models.DateField()
-    Data_to = models.DateField()
-    guste = models.PositiveIntegerField(validators=[MinValueValidator(1),MaxValueValidator(6)])
-    children = models.PositiveIntegerField(validators=[MinValueValidator(0),MaxValueValidator(6)])
+    data_from = models.DateField()
+    data_to = models.DateField()
+    guste = models.PositiveIntegerField(validators=[MinValueValidator(1),MaxValueValidator(6)],blank=True)
+    children = models.PositiveIntegerField(validators=[MinValueValidator(0),MaxValueValidator(6)],blank=True)
     price = models.IntegerField()
     canceled = models.BooleanField(default=False)
     done = models.BooleanField(default=False)
+    
+    
