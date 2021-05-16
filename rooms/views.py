@@ -1,9 +1,11 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.views.generic import ListView,DeleteView
+from django.views.generic.edit import FormMixin
 from django_filters.views import FilterView
 from random import *
 from .models import Room,Room_Rating
+from .forms import RoomReservationForm
 # Create your views here.
 
 
@@ -33,16 +35,17 @@ class HotelListView(FilterView):
         return super().get_queryset().filter(active=True)
 
 
-class HotelRoomView(DeleteView):
+class HotelRoomView(DeleteView,FormMixin):
     template_name = 'room/hotel_room.html'
     model = Room
+    form_class = RoomReservationForm
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["user_and_room"] = [self.request.user,self.get_object().pk]
         context["our_rooms"] = random_rooms(Room.objects.all().order_by('?'),3)
         context['related_rooms'] = random_rooms(Room.objects.all().order_by('total_rating'),3)
         return context
-    
+
 
 def room_rate(request):
     room = request.GET.get('room_id')
