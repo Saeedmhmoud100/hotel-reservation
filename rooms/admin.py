@@ -50,4 +50,12 @@ class Room_RatingAdmin(admin.ModelAdmin):
 admin.site.register(Room_Rating,Room_RatingAdmin)
 
 
-admin.site.register(Room_Reservation)
+
+class Room_ReservationAdmin(admin.ModelAdmin):
+    list_display  = ('pk','room','user','email_registered','price','canceled','done')
+    list_editable = ('canceled','done')
+    class Meta:
+        model = Room_Reservation
+        fields = '__all__'
+
+admin.site.register(Room_Reservation,Room_ReservationAdmin)
