@@ -75,3 +75,18 @@ class Room_Rating(models.Model):
     
     def __str__(self):
         return f'{self.room.title} - rating'
+    
+    
+    
+class Room_Reservation(models.Model):
+    user = models.ForeignKey(get_user_model(), related_name='room_Reservation', on_delete=models.CASCADE)
+    room = models.ForeignKey(Room, related_name='room_Reservation', on_delete=models.CASCADE)
+    name = models.CharField(max_length=90)
+    email = models.EmailField()
+    Data_from = models.DateField()
+    Data_to = models.DateField()
+    guste = models.PositiveIntegerField(validators=[MinValueValidator(1),MaxValueValidator(6)])
+    children = models.PositiveIntegerField(validators=[MinValueValidator(1),MaxValueValidator(6)])
+    price = models.IntegerField()
+    canceled = models.BooleanField(default=False)
+    done = models.BooleanField(default=False)
