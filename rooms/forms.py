@@ -18,7 +18,7 @@ class RoomReservationForm(forms.ModelForm):
         fields = ('name','email_entred','data_from','data_to','guste','children')
 
 
-class NewRoomForm(forms.ModelForm):
+class RoomForm(forms.ModelForm):
     title = forms.CharField(max_length=30)
     price = forms.IntegerField()
     locality = forms.CharField(max_length=60)

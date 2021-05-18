@@ -1,16 +1,14 @@
 from django.shortcuts import render,redirect
 from django.urls import reverse
 from django.http import JsonResponse
-from django.views.generic import ListView,DeleteView,CreateView
+from django.views.generic import ListView,DeleteView,CreateView,UpdateView
 from django.views.generic.edit import FormMixin
 from django_filters.views import FilterView
 from django.contrib import messages
 from random import *
 from .models import Room,Room_Rating
-from .forms import RoomReservationForm,NewRoomForm
+from .forms import RoomReservationForm,RoomForm
 # Create your views here.
-
-
 
 
 def random_rooms(rooms,num=None):
@@ -21,7 +19,6 @@ def random_rooms(rooms,num=None):
     if num:
         return list(x[:num])
     return list(x)
-
 
 
 def home(request):
@@ -89,7 +86,12 @@ def room_rate(request):
 
 class HotelCreateView(CreateView):
     model = Room
-    form_class = NewRoomForm
+    form_class = RoomForm
+
+class HotelUpdateView(UpdateView):
+    model = Room
+    form_class = RoomForm
+    template_name = 'rooms/room_update.html'
 
     
 def tour(request):
