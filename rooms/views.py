@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from django.urls import reverse
 from django.http import JsonResponse
-from django.views.generic import ListView,DeleteView
+from django.views.generic import ListView,DeleteView,CreateView
 from django.views.generic.edit import FormMixin
 from django_filters.views import FilterView
 from django.contrib import messages
@@ -86,6 +86,10 @@ def room_rate(request):
         message = 'thanks for your rating'
         tag = 'success'
     return JsonResponse({'message':message,'tag':tag})
+
+class HotelCreateView(CreateView):
+    pass
+
 
 def tour(request):
     return render(request,'room/tour.html')
