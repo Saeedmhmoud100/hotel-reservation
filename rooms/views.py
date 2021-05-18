@@ -5,6 +5,7 @@ from django.views.generic import ListView,DeleteView,CreateView,UpdateView
 from django.views.generic.edit import FormMixin
 from django_filters.views import FilterView
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from random import *
 from .models import Room,Room_Rating
 from .forms import RoomReservationForm,RoomForm
@@ -22,7 +23,7 @@ def random_rooms(rooms,num=None):
 
 
 def home(request):
-    return render(request,'room/home.html')
+    return render(request,'rooms/home.html')
 
 class HotelListView(FilterView):
     template_name = 'rooms/hotel.html'
@@ -70,7 +71,8 @@ class HotelRoomView(DeleteView,FormMixin):
 
     def get_success_url(self):
         return reverse('rooms:hotel_room', kwargs={'pk': self.get_object().pk,'slug':self.get_object().slug})
-    
+
+@login_required
 def room_rate(request):
     room = request.GET.get('room_id')
     rating = request.GET.get('rating')
