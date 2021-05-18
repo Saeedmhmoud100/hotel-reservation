@@ -18,8 +18,6 @@ class Room(models.Model):
     descriptions = RichTextField()
     img = models.ImageField(upload_to='rooms/')
     days_number = models.PositiveIntegerField()
-    data_from = models.DateField(auto_now_add=True,blank=True)
-    data_to = models.DateField(auto_now_add=True,blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(default=timezone.now)
     slug = models.SlugField(blank=True, null=True)

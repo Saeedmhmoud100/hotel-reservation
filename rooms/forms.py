@@ -1,8 +1,10 @@
 from django import forms
 from django.utils import timezone
 from datetime import date
+from django_countries.data import COUNTRIES
+from . models import Room,Room_Reservation
 
-from . models import Room_Reservation
+
 class RoomReservationForm(forms.ModelForm):
     name = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Name'}))
     email_entred = forms.EmailField(widget=forms.EmailInput(attrs={'class':'form-control','placeholder':'Email'}))
@@ -13,3 +15,15 @@ class RoomReservationForm(forms.ModelForm):
     class Meta:
         model = Room_Reservation
         fields = ('name','email_entred','data_from','data_to','guste','children')
+
+
+class NewRoomForm(forms.ModelForm):
+    title = forms.CharField(max_length=30)
+    price = forms.IntegerField()
+    locality = forms.CharField(max_length=60)
+    street = forms.CharField(max_length=60)
+    img = forms.ImageField()
+    dayss_numper = forms.IntegerField(max_value=60)
+    class Meta:
+        model = Room
+        fields = ('title','price','country','locality','street','descriptions','img','days_number')
