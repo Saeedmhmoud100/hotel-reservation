@@ -7,7 +7,7 @@ from django_filters.views import FilterView
 from django.contrib import messages
 from random import *
 from .models import Room,Room_Rating
-from .forms import RoomReservationForm
+from .forms import RoomReservationForm,NewRoomForm
 # Create your views here.
 
 
@@ -28,7 +28,7 @@ def home(request):
     return render(request,'room/home.html')
 
 class HotelListView(FilterView):
-    template_name = 'room/hotel.html'
+    template_name = 'rooms/hotel.html'
     model = Room
     paginate_by = 2
     filterset_fields = ['country', 'locality','data_from','data_to','total_rating']
@@ -38,7 +38,7 @@ class HotelListView(FilterView):
 
 
 class HotelRoomView(DeleteView,FormMixin):
-    template_name = 'room/hotel_room.html'
+    template_name = 'rooms/hotel_room.html'
     model = Room
     form_class = RoomReservationForm
     def get_context_data(self, **kwargs):
@@ -88,9 +88,10 @@ def room_rate(request):
     return JsonResponse({'message':message,'tag':tag})
 
 class HotelCreateView(CreateView):
-    pass
+    model = Room
+    form_class = NewRoomForm
 
-
+    
 def tour(request):
     return render(request,'room/tour.html')
 

@@ -2,6 +2,7 @@ from django import forms
 from django.utils import timezone
 from datetime import date
 from django_countries.data import COUNTRIES
+from ckeditor.fields import RichTextField
 from . models import Room,Room_Reservation
 
 
@@ -22,8 +23,9 @@ class NewRoomForm(forms.ModelForm):
     price = forms.IntegerField()
     locality = forms.CharField(max_length=60)
     street = forms.CharField(max_length=60)
+    descriptions = RichTextField()
     img = forms.ImageField()
-    dayss_numper = forms.IntegerField(max_value=60)
+    days_number = forms.IntegerField(max_value=60)
     class Meta:
         model = Room
         fields = ('title','price','country','locality','street','descriptions','img','days_number')
