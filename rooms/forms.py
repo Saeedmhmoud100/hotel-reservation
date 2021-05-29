@@ -1,9 +1,10 @@
 from django import forms
+from django.forms.models import inlineformset_factory
 from django.utils import timezone
 from datetime import date
 from django_countries.data import COUNTRIES
 from ckeditor.fields import RichTextField
-from . models import Room,Room_Reservation
+from . models import Room,Room_Reservation,Room_image
 
 
 class RoomReservationForm(forms.ModelForm):
@@ -28,4 +29,12 @@ class RoomForm(forms.ModelForm):
     days_number = forms.IntegerField(max_value=60)
     class Meta:
         model = Room
-        fields = ('title','price','country','locality','street','descriptions','img','days_number')
+        fields = ('title','price','country','locality','street','descriptions','days_number','img')
+
+
+class RoomImgForm(forms.ModelForm):
+    class Meta:
+        model = Room_image
+        fields = ('img',)
+
+RoomImgInlineForm = inlineformset_factory(Room,Room_image,fields=('img',),extra=3,max_num=3,can_delete=False)

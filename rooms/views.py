@@ -7,8 +7,10 @@ from django_filters.views import FilterView
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from random import *
+from django.db import transaction
 from .models import Room,Room_Rating
-from .forms import RoomReservationForm,RoomForm
+from .forms import RoomReservationForm,RoomForm,RoomImgInlineForm
+
 # Create your views here.
 
 
@@ -89,7 +91,21 @@ def room_rate(request):
 class HotelCreateView(CreateView):
     model = Room
     form_class = RoomForm
+    
+    def get_context_data(self, **kwargs):
+        context = super(HotelCreateView, self).get_context_data(**kwargs)
+        context["form2"] = RoomImgInlineForm() 
+        return context
 
+    def form_valid(self, form):
+        with transaction.atomic():
+            form.instance.user = self.request.user
+            self.object = form.save()
+            form2 = RoomImgInlineForm(self.request.POST,self.request.FILES,instance=self.object)
+            if form2.is_valid():
+                form2.save()
+        return super(HotelCreateView, self).form_valid(form)
+        
 class HotelUpdateView(UpdateView):
     model = Room
     form_class = RoomForm

@@ -36,16 +36,16 @@ class Room(models.Model):
         )
         
     def get_absolute_url(self):
-        return reverse("rooms:hotel_room", kwargs={"pk": self.pk,'slug':self.slug})
+        return reverse("rooms:hotel_room", kwargs={'slug':self.slug})
     def get_update_url(self):
-        return reverse("rooms:update-room", kwargs={"pk": self.pk,'slug':self.slug})
+        return reverse("rooms:update_room", kwargs={'slug':self.slug})
         
 
 
 
 class Room_image(models.Model):
     room = models.ForeignKey(Room, on_delete=models.CASCADE, related_name='room_img')
-    img = models.ImageField(upload_to='rooms/')
+    img = models.ImageField(upload_to='rooms/',blank=True)
     
     def image_preview(self):
         if self.img:

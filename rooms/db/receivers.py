@@ -5,7 +5,7 @@ from rooms.models import Room
 
 
 def room_slug(sender,instance,*args,**kwargs):
-    instance.slug = slugify(instance.title)
+    instance.slug = slugify(f'{instance.pk}-{instance.title}')
     
     
 def room_img(sender,instance,*args,**kwargs):
