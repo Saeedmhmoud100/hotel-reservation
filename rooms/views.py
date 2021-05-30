@@ -114,7 +114,7 @@ class HotelCreateView(UserPassesTestMixin,LoginRequiredMixin,CreateView):
         if self.request.user.is_superuser or self.request.user.is_staff:
             return True
         return False
-class HotelUpdateView(UpdateView):
+class HotelUpdateView(UserPassesTestMixin,LoginRequiredMixin,UpdateView):
     model = Room
     form_class = RoomForm
     template_name = 'rooms/room_update.html'
@@ -131,6 +131,11 @@ class HotelUpdateView(UpdateView):
         if form2.is_valid():
             form2.save()
         return super(HotelUpdateView,self).form_valid(form)
+    
+    def test_func(self):
+        if self.request.user.is_superuser or self.request.user.is_staff:
+            return True
+        return False
     
 def tour(request):
     return render(request,'room/tour.html')
