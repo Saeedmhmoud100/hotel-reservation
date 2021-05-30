@@ -6,6 +6,7 @@ from django.views.generic.edit import FormMixin
 from django_filters.views import FilterView
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 from random import *
 from django.db import transaction
 from .models import Room,Room_Rating, Room_image
@@ -43,10 +44,12 @@ class HotelRoomView(DeleteView,FormMixin):
     form_class = RoomReservationForm
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["user_and_room"] = [self.request.user,self.get_object().pk]
+        if self.request.user.is_authenticated:
+            context["user_and_room"] = [self.request.user,self.get_object().pk]
         context["our_rooms"] = random_rooms(Room.objects.all().order_by('?'),3)
         context['related_rooms'] = random_rooms(Room.objects.all().order_by('total_rating'),3)
         return context
+    @method_decorator(login_required)
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
         form = self.get_form()
