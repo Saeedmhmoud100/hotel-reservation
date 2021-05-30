@@ -77,7 +77,7 @@ class HotelRoomView(DeleteView,FormMixin):
         return self.render_to_response(self.get_context_data(form=form))
 
     def get_success_url(self):
-        return reverse('rooms:hotel_room', kwargs={'pk': self.get_object().pk,'slug':self.get_object().slug})
+        return reverse('rooms:hotel_room', kwargs={'slug':self.get_object().slug})
 
 @login_required
 def room_rate(request):
