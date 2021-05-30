@@ -141,6 +141,12 @@ class HotelUpdateView(UserPassesTestMixin,LoginRequiredMixin,UpdateView):
 class HotelDeleteView(UserPassesTestMixin,LoginRequiredMixin,DeleteView):
     model = Room
     success_url = reverse_lazy('rooms:hotel')
+    success_message = 'deleted room successfully!'
+    def delete(self, request, *args, **kwargs):
+        messages.warning(self.request, self.success_message)
+        return super(HotelDeleteView, self).delete(request, *args, **kwargs)
+    def get_success_url(self):
+        return super().get_success_url()
     def test_func(self):
         if self.request.user.is_superuser or self.request.user.is_staff:
             return True
