@@ -146,9 +146,11 @@
 								{% for f in form %}
 								  <div class="col-md-6">
 								<div class="form-group">
+									{{f.label}}
 								  {{f}}
+								  <small class="text-danger">{{f.errors|striptags}}</small>
 								</div>
-								{{f.errors}}
+								
 							</div>
 								{% endfor %}
 								

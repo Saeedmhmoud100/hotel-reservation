@@ -75,6 +75,11 @@ class HotelRoomView(DeleteView,FormMixin):
         print(form.data)
         print(form.errors)
         return self.render_to_response(self.get_context_data(form=form))
+    
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs.update({'room': self.object})
+        return kwargs
 
     def get_success_url(self):
         return reverse('rooms:hotel_room', kwargs={'slug':self.get_object().slug})
