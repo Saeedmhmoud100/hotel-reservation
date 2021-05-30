@@ -32,9 +32,4 @@ class RoomForm(forms.ModelForm):
         fields = ('title','price','country','locality','street','descriptions','days_number','img')
 
 
-class RoomImgForm(forms.ModelForm):
-    class Meta:
-        model = Room_image
-        fields = ('img',)
-
 RoomImgInlineForm = inlineformset_factory(Room,Room_image,fields=('img',),extra=3,max_num=3,can_delete=False)

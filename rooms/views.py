@@ -8,7 +8,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from random import *
 from django.db import transaction
-from .models import Room,Room_Rating
+from .models import Room,Room_Rating, Room_image
 from .forms import RoomReservationForm,RoomForm,RoomImgInlineForm
 
 # Create your views here.
@@ -111,6 +111,18 @@ class HotelUpdateView(UpdateView):
     form_class = RoomForm
     template_name = 'rooms/room_update.html'
 
+    def get_context_data(self, **kwargs):
+        context = super(HotelUpdateView, self).get_context_data(**kwargs)
+        if self.request.POST: context["form2"] = RoomImgInlineForm(self.request.POST,self.request.FILES,instance=self.object) 
+        else:  context["form2"] = RoomImgInlineForm(instance=self.object)
+        return context
+    
+    def form_valid(self, form):
+        self.object = form.save()
+        form2 = self.get_context_data()['form2']
+        if form2.is_valid():
+            form2.save()
+        return super(HotelUpdateView,self).form_valid(form)
     
 def tour(request):
     return render(request,'room/tour.html')
