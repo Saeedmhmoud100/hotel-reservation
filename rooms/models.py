@@ -39,7 +39,8 @@ class Room(models.Model):
         return reverse("rooms:hotel_room", kwargs={'slug':self.slug})
     def get_update_url(self):
         return reverse("rooms:update_room", kwargs={'slug':self.slug})
-        
+    def get_delete_url(self):
+        return reverse("rooms:delete_room", kwargs={'slug':self.slug})
 
 
 

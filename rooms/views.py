@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from django.urls import reverse
 from django.http import JsonResponse
+from django.urls.base import reverse_lazy
 from django.views.generic import ListView,DeleteView,CreateView,UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
 from django.views.generic.edit import FormMixin
@@ -137,6 +138,9 @@ class HotelUpdateView(UserPassesTestMixin,LoginRequiredMixin,UpdateView):
             return True
         return False
     
+class HotelDeleteView(DeleteView):
+    model = Room
+    success_url = reverse_lazy('rooms:hotel')
 def tour(request):
     return render(request,'room/tour.html')
 
