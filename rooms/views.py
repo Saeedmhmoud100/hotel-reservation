@@ -138,9 +138,13 @@ class HotelUpdateView(UserPassesTestMixin,LoginRequiredMixin,UpdateView):
             return True
         return False
     
-class HotelDeleteView(DeleteView):
+class HotelDeleteView(UserPassesTestMixin,LoginRequiredMixin,DeleteView):
     model = Room
     success_url = reverse_lazy('rooms:hotel')
+    def test_func(self):
+        if self.request.user.is_superuser or self.request.user.is_staff:
+            return True
+        return False
 def tour(request):
     return render(request,'room/tour.html')
 
