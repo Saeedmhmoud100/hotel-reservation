@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from django.urls import reverse
 from django.http import JsonResponse
 from django.views.generic import ListView,DeleteView,CreateView,UpdateView
+from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
 from django.views.generic.edit import FormMixin
 from django_filters.views import FilterView
 from django.contrib import messages
@@ -9,7 +10,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from random import *
 from django.db import transaction
-from .models import Room,Room_Rating, Room_image
+from .models import Room,Room_Rating
 from .forms import RoomReservationForm,RoomForm,RoomImgInlineForm
 
 # Create your views here.
@@ -91,7 +92,7 @@ def room_rate(request):
         tag = 'success'
     return JsonResponse({'message':message,'tag':tag})
 
-class HotelCreateView(CreateView):
+class HotelCreateView(UserPassesTestMixin,LoginRequiredMixin,CreateView):
     model = Room
     form_class = RoomForm
     
@@ -109,6 +110,10 @@ class HotelCreateView(CreateView):
                 form2.save()
         return super(HotelCreateView, self).form_valid(form)
         
+    def test_func(self):
+        if self.request.user.is_superuser or self.request.user.is_staff:
+            return True
+        return False
 class HotelUpdateView(UpdateView):
     model = Room
     form_class = RoomForm
