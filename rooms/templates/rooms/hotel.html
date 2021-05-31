@@ -142,10 +142,10 @@
 			  {% else %}
 			  <center style="margin: auto;"><h2>Not Found</h2></center>
 				  {% endif %}
-					  
-				
           	</div>
-          	<div class="row mt-5">
+			  
+			  {% if page_obj.paginator.num_pages < 6 %}
+				<div class="row mt-5">
 		          <div class="col text-center">
 		            <div class="block-27">
 		              <ul>
@@ -167,7 +167,32 @@
 		              </ul>
 		            </div>
 		          </div>
-		    </div>
+		    	</div>
+				{% else %}
+				<div class="row mt-5">
+					<div class="col text-center">
+					  <div class="block-27">
+						<ul>
+						  {% if page_obj.has_previous %}
+						  <li><a href="?page={{ page_obj.previous_page_number }}">&lt;</a></li>
+						  <li style='cursor: default;'><a>...</a></li>
+						  <li><a href="?page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a></li>
+						  {% endif %}
+								<li class="active"><span>{{ page_obj.number }}</span></li>
+						  {% if page_obj.has_next %}
+						  <li><a href="?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a></li>
+						  <li style='cursor: default;'><a>...</a></li>
+						  <li><a href="?page={{ page_obj.next_page_number }}">&gt;</a></li>
+						  {% endif %}
+						</ul>
+					  </div>
+					</div>
+			  </div>
+			  {% endif %}
+				  
+          	
+
+			
           </div> <!-- .col-md-8 -->
         </div>
       </div>

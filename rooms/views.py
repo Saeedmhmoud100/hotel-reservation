@@ -33,7 +33,7 @@ def home(request):
 class HotelListView(FilterView):
     template_name = 'rooms/hotel.html'
     model = Room
-    paginate_by = 2
+    paginate_by = 9
     filterset_fields = ['country', 'locality','data_from','data_to','total_rating']
     
     def get_queryset(self):
