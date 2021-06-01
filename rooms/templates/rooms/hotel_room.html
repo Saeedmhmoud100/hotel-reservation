@@ -107,7 +107,7 @@
 									<hr>
 									<p class="bottom-area d-flex">
 										<span><i class="icon-map-o"></i> {{room.country.name}}, Fl</span> 
-										<span class="ml-auto"><a href="#">Book Now</a></span>
+										<span class="ml-auto"><a href="{{room.get_reservation_url}}">Book Now</a></span>
 									</p>
 								</div>
 							</div>
@@ -115,7 +115,7 @@
 						  {% endfor %}
           			</div>
           		</div>
-          		<div class="col-md-12 hotel-single ftco-animate mb-5 mt-4">
+          		<div class="col-md-12 hotel-single ftco-animate mb-5 mt-4" id="reservation_form">
 					  
 					  
 					  {% if messages %}
@@ -226,7 +226,7 @@
 									<hr>
 									<p class="bottom-area d-flex">
 										<span><i class="icon-map-o"></i> {{room.country.name}}, Fl</span> 
-										<span class="ml-auto"><a href="#">Book Now</a></span>
+										<span class="ml-auto"><a href="{{room.get_reservation_url}}">Book Now</a></span>
 									</p>
 								</div>
 							</div>
