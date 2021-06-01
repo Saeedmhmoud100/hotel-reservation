@@ -25,7 +25,7 @@ class RoomReservationForm(forms.ModelForm):
     def clean_data_from(self):
         data_from = self.cleaned_data['data_from']
         
-        if Room_Reservation.objects.filter(data_from=data_from,room=self.room).exists():
+        if Room_Reservation.objects.is_active().filter(data_from=data_from,room=self.room).exists():
             raise forms.ValidationError('This date is already booked')
         if data_from < timezone.now().date():
             raise forms.ValidationError('Enter a valid date')
@@ -33,7 +33,7 @@ class RoomReservationForm(forms.ModelForm):
     
     def clean_data_to(self):
         data_to = self.cleaned_data['data_to']   
-        if Room_Reservation.objects.filter(data_to=data_to,room=self.room).exists():
+        if Room_Reservation.objects.is_active().filter(data_to=data_to,room=self.room).exists():
             raise forms.ValidationError('This date is already booked')
         if data_to < self.cleaned_data['data_from']:
             raise forms.ValidationError('Enter a valid date')

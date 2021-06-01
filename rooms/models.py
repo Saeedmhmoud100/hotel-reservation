@@ -8,6 +8,9 @@ from django.template.defaultfilters import truncatechars
 from django.utils.safestring import mark_safe
 from django.contrib.auth import get_user_model
 from django.core.validators import MaxValueValidator, MinValueValidator
+
+
+
 class Room(models.Model):
     title = models.CharField(max_length = 150)
     price = models.PositiveIntegerField()
@@ -80,7 +83,11 @@ class Room_Rating(models.Model):
         return f'{self.room.title} - rating'
     
     
+class Active_Room_Reservation_Maneger(models.Manager):
+    def is_active(self):
+        return self.get_queryset().filter(canceled=False,done=False)
     
+
 class Room_Reservation(models.Model):
     user = models.ForeignKey(get_user_model(), related_name='room_Reservation', on_delete=models.CASCADE)
     room = models.ForeignKey(Room, related_name='room_Reservation', on_delete=models.CASCADE)
@@ -94,5 +101,10 @@ class Room_Reservation(models.Model):
     price = models.IntegerField()
     canceled = models.BooleanField(default=False)
     done = models.BooleanField(default=False)
+    
+    objects = Active_Room_Reservation_Maneger()
+    
+    class Meta:
+        ordering = ['-id']
     
     

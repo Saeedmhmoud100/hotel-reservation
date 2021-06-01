@@ -129,17 +129,16 @@
 						  {% csrf_token %}
 						<h4 class="mb-5">Check Availability &amp; Booking</h4>
 						{% if object.room_Reservation %}
-							<h6>Reservations of this room({{object.room_Reservation.count}})</h6>
+							<h6>Reservations of this room({{object.room_Reservation.is_active.count}})</h6>
 							<div class="row">
 								
-								{% for room in object.room_Reservation.all %}
+								{% for room in object.room_Reservation.is_active %}
 								<div class="col-md-3 border mx-2 mb-2"><strong>from &nbsp;</strong> {{room.data_from}} <br> <strong>to &nbsp;&nbsp;</strong> {{room.data_to}}</div>
 								{% endfor %}
 									
 								
 							</div>
 						{% endif %}
-
 						<h4 class='mt-5'>Booking Now</h4>
 						<div class="fields">
 							<div class="row">
