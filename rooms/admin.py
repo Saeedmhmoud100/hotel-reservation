@@ -45,6 +45,7 @@ admin.site.register(Active_Room,Active_RoomAdmin)
 
 class Room_RatingAdmin(admin.ModelAdmin):
     list_display = ('room','user','rating')
+    search_fields = ('room__title','room__descriptions','user__username')
     class Meta:
         model = Room_Rating
 
