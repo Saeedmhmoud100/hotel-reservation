@@ -4,6 +4,7 @@ from django.http import JsonResponse
 from django.urls.base import reverse_lazy
 from django.views.generic import ListView,DeleteView,CreateView,UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
+from django.views.generic.base import TemplateView
 from django.views.generic.edit import FormMixin
 from django_filters.views import FilterView
 from django.contrib import messages
@@ -11,7 +12,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from random import *
 from django.db import transaction
-from .models import Room,Room_Rating
+from .models import Room,Room_Rating,random_rooms
 from .forms import RoomReservationForm,RoomForm,RoomImgInlineForm
 
 # Create your views here.
@@ -26,9 +27,9 @@ def random_rooms(rooms,num=None):
         return list(x[:num])
     return list(x)
 
+class HomeView(TemplateView):
+    template_name = 'rooms/home.html'
 
-def home(request):
-    return render(request,'rooms/home.html')
 
 class HotelListView(FilterView):
     template_name = 'rooms/hotel.html'

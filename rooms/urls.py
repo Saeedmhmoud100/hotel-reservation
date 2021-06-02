@@ -6,7 +6,7 @@ app_name = 'rooms'
 
 urlpatterns = [
     #home page url
-    path('', views.home,name='home'),
+    path('', views.HomeView.as_view(),name='home'),
     #room list url
     path('hotel/', views.HotelListView.as_view(),name='hotel'),
     #room detail urls
