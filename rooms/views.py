@@ -12,7 +12,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from random import *
 from django.db import transaction
-from .models import Room,Room_Rating,random_rooms
+from .models import Room,Room_Rating
 from .forms import RoomReservationForm,RoomForm,RoomImgInlineForm
 
 # Create your views here.
@@ -29,7 +29,6 @@ def random_rooms(rooms,num=None):
 
 class HomeView(TemplateView):
     template_name = 'rooms/home.html'
-
 
 class HotelListView(FilterView):
     template_name = 'rooms/hotel.html'

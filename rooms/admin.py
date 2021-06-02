@@ -33,6 +33,7 @@ class RoomAdmin(admin.ModelAdmin):
 class Active_RoomAdmin(admin.ModelAdmin):
     list_display = ('title','country','locality', 'update_at','total_rating','active')
     list_editable = ('active',)
+    inlines = [Room_imageAdmin]
     def get_queryset(self, request):
         return self.model.objects.active()
     class Meta:

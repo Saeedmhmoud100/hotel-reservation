@@ -1,8 +1,7 @@
 from django.db.models.signals import pre_save,post_save
 from django.template.defaultfilters import slugify
-from django.dispatch import receiver
 from rooms.models import Room
-
+from .model import Active_Room
 
 def room_slug(sender,instance,*args,**kwargs):
     instance.slug = slugify(f'{instance.pk}-{instance.title}')
@@ -18,6 +17,7 @@ def room_img(sender,instance,*args,**kwargs):
     else:
         instance.room_img.create(room=instance,img=instance.img)
     
+    
 def total_rating(sender,instance,*args,**kwargs):
     if instance.rating.filter(room=instance).exists():
         count = int(instance.rating.all().count())
@@ -32,4 +32,5 @@ def total_rating(sender,instance,*args,**kwargs):
 
 pre_save.connect(room_slug, sender=Room)
 post_save.connect(room_img, sender=Room)
+post_save.connect(room_img, sender=Active_Room)
 pre_save.connect(total_rating, sender=Room)
