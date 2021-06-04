@@ -156,9 +156,5 @@ class HotelDeleteView(UserPassesTestMixin,LoginRequiredMixin,DeleteView):
         if self.request.user.is_superuser or self.request.user.is_staff:
             return True
         return False
-def tour(request):
-    return render(request,'room/tour.html')
 
-def tour_single(request):
-    return render(request,'room/tour.html')
 

@@ -17,7 +17,5 @@ urlpatterns = [
     #update room url
     path("hotel/room/<slug:slug>/update", views.HotelUpdateView.as_view(), name="update_room"),
     path("hotel/room/<slug:slug>/delete", views.HotelDeleteView.as_view(), name="delete_room"),
-    path('tour', views.tour,name='tour'),
-    path('tour_single', views.tour_single,name='tour_single'),
 
 ]

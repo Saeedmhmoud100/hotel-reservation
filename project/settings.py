@@ -37,9 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rooms.apps.RoomsConfig',
+    'tours.apps.ToursConfig',
     'ckeditor',
     'django_countries',
-    'rooms.apps.RoomsConfig',
     'users',
     'crispy_forms',
 ]

@@ -20,7 +20,8 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',include('rooms.urls', namespace='rooms'))
+    path('',include('rooms.urls', namespace='rooms')),
+    path('tours/',include('tours.urls', namespace='tours')),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
