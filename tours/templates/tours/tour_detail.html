@@ -31,19 +31,12 @@
 				<div class="row">
 					<div class="col-md-12 ftco-animate">
 						<div class="single-slider owl-carousel">
+							{% for obj in object.tour_img.all %}
 							<div class="item">
-								<div class="hotel-img" style="background-image: url({{object.img.url}});"></div>
+								<div class="hotel-img" style="background-image: url({{obj.img.url}});"></div>
 							</div>
+							{% endfor %}
 							
-							{% comment %}
-							<div class="item">
-								<div class="hotel-img" style="background-image: url(images/hotel-3.jpg);"></div>
-							</div>
-							<div class="item">
-								<div class="hotel-img" style="background-image: url(images/hotel-4.jpg);"></div>
-							</div>
-							{% endcomment %}
-								
 						</div>
 					</div>
 					<div class="col-md-12 hotel-single mt-4 mb-5 ftco-animate">
@@ -63,7 +56,7 @@
 							  {{object.descriptions|safe}}
 					<div class="col-md-12 hotel-single ftco-animate mb-5 mt-4">
 						
-						<h4 class="mb-4">Our Rooms</h4>
+						<h4 class="mb-4">Our Tours</h4>
 						<div class="row">
 							<div class="col-md-4">
 									  <div class="destination">
