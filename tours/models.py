@@ -25,6 +25,15 @@ class Tour(models.Model):
     
     def __str__(self):
         return self.title
+    
+    def image_preview(self):
+        if self.img:
+            return mark_safe(
+            "<img src='{}'  width='60' height='60' />".format(self.img.url)
+            )
+        else:
+            return '(No image)'
+        
     def get_absolute_url(self):
         return reverse('tours:tour_detail',kwargs={'slug':self.slug})
     
@@ -36,7 +45,7 @@ class Place(models.Model):
         return self.place
     
     
-class tour_image(models.Model):
+class Tour_image(models.Model):
     tour = models.ForeignKey(Tour, on_delete=models.CASCADE, related_name='tour_img')
     img = models.ImageField(upload_to='tour/',blank=True)
     
