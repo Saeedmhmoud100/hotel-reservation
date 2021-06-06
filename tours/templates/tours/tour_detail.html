@@ -60,7 +60,7 @@
 								  8 Rating</span>
 							  </p>
 
-							  {{object.descriptions}}
+							  {{object.descriptions|safe}}
 					<div class="col-md-12 hotel-single ftco-animate mb-5 mt-4">
 						
 						<h4 class="mb-4">Our Rooms</h4>
@@ -352,4 +352,6 @@
 		</div>
 	  </section> <!-- .section -->
   
+
+	  
 {% endblock content %}

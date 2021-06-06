@@ -2,6 +2,8 @@ from django.db import models
 from ckeditor.fields import RichTextField
 from django.utils import timezone
 from django.urls import reverse
+from django.utils.safestring import mark_safe
+
 # Create your models here.
 
 
@@ -33,3 +35,18 @@ class Place(models.Model):
     def __str__(self):
         return self.place
     
+    
+class tour_image(models.Model):
+    tour = models.ForeignKey(Tour, on_delete=models.CASCADE, related_name='tour_img')
+    img = models.ImageField(upload_to='tour/',blank=True)
+    
+    def image_preview(self):
+        if self.img:
+            return mark_safe(
+            "<img src='{}'  width='100' height='70' />".format(self.img.url)
+            )
+        else:
+            return '(No image)'
+    
+    def __str__(self):
+        return str(self.tour)
