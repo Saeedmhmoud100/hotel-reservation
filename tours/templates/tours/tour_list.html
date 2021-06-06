@@ -130,24 +130,56 @@
 							</p>
 						</div>
 					</div>
-				</div>		
+				</div>	
+				{% empty %}	
+				<center style="margin: auto;"><h2>Not Found</h2></center>
 				{% endfor %}
 			</div>
-			<div class="row mt-5">
-				<div class="col text-center">
-					<div class="block-27">
-					<ul>
-						<li><a href="#">&lt;</a></li>
-						<li class="active"><span>1</span></li>
-						<li><a href="#">2</a></li>
-						<li><a href="#">3</a></li>
-						<li><a href="#">4</a></li>
-						<li><a href="#">5</a></li>
-						<li><a href="#">&gt;</a></li>
-					</ul>
+			{% if page_obj.paginator.num_pages < 6 %}
+				<div class="row mt-5">
+		          <div class="col text-center">
+		            <div class="block-27">
+		              <ul>
+						{% if page_obj.has_previous %}
+						<li><a href="?page={{ page_obj.previous_page_number }}">&lt;</a></li>
+						{% endif %}
+		                
+						{% for i in page_obj.paginator.page_range %}
+							{% if page_obj.number == i %}
+								<li class="active"><span>{{ i }}</span></li>
+							{% else %}
+								<li><a href="?page={{ i }}">{{ i }}</a></li>
+							{% endif %}
+						{% endfor %}
+
+						{% if page_obj.has_next %}
+						<li><a href="?page={{ page_obj.next_page_number }}">&gt;</a></li>
+						{% endif %}
+		              </ul>
+		            </div>
+		          </div>
+		    	</div>
+				{% else %}
+				<div class="row mt-5">
+					<div class="col text-center">
+					  <div class="block-27">
+						<ul>
+						  {% if page_obj.has_previous %}
+						  <li><a href="?page={{ page_obj.previous_page_number }}">&lt;</a></li>
+						  <li style='cursor: default;'><a>...</a></li>
+						  <li><a href="?page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a></li>
+						  {% endif %}
+								<li class="active"><span>{{ page_obj.number }}</span></li>
+						  {% if page_obj.has_next %}
+						  <li><a href="?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a></li>
+						  <li style='cursor: default;'><a>...</a></li>
+						  <li><a href="?page={{ page_obj.next_page_number }}">&gt;</a></li>
+						  {% endif %}
+						</ul>
+					  </div>
 					</div>
-				</div>
-				</div>
+			  </div>
+			  {% endif %}
 		</div> <!-- .col-md-8 -->
 		</div>
 	</div>

@@ -8,7 +8,7 @@ class TourListView(FilterView):
     model = Tour
     template_name = 'tours/tour_list.html'
     filterset_fields= ['data_from','data_to','city','locality',]
-    
+    paginate_by = 1
     def get_queryset(self):
         return super().get_queryset().filter(active=True)
     def get_context_data(self, **kwargs):
