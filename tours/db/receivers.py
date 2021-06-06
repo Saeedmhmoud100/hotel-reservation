@@ -6,3 +6,4 @@ def tour_slug(sender,instance,*args,**kwargs):
     instance.slug = slugify(f'{instance.pk}-{instance.title}')
     
 pre_save.connect(tour_slug, sender=Tour)
+
