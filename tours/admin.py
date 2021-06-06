@@ -3,7 +3,7 @@ from .models import Tour,Place,Tour_image
 # Register your models here.
 
 
-class Tour_imageAdmin(admin.StackedInline):
+class Tour_imageAdmin(admin.TabularInline):
     model = Tour_image
     max_num = 4
     readonly_fields=('image_preview',)
