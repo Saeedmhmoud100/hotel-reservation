@@ -7,12 +7,14 @@ from django.utils import timezone
 class Tour(models.Model):
     title = models.CharField(max_length = 150)
     price = models.PositiveIntegerField()
-    country = models.ForeignKey('place', on_delete=models.CASCADE)
+    city = models.ForeignKey('place', on_delete=models.CASCADE)
     locality =models.CharField(max_length=50)
     street = models.CharField(max_length = 150)
     descriptions = RichTextField()
     img = models.ImageField(upload_to='rooms/')
     days_number = models.PositiveIntegerField()
+    data_from = models.DateField()
+    data_to = models.DateField()
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(default=timezone.now)
     slug = models.SlugField(blank=True, null=True)
@@ -21,7 +23,7 @@ class Tour(models.Model):
     def __str__(self):
         return self.title
     
-class place(models.Model):
+class Place(models.Model):
     place = models.CharField(max_length=100)
     created_at = models.DateTimeField(auto_now_add=True)
     
