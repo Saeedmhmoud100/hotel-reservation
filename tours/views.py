@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.views.generic import DetailView
 from django_filters.views import FilterView
 from .models import Tour, Place
 # Create your views here.
@@ -16,5 +17,8 @@ class TourListView(FilterView):
         context['places'] = Place.objects.all()
         return context
 
+
+class TourDetailView(DetailView):
+    model = Tour
 def tour_single(request):
     return render(request,'tours/tour.html')

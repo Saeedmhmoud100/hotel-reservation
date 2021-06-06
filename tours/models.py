@@ -1,6 +1,7 @@
 from django.db import models
 from ckeditor.fields import RichTextField
 from django.utils import timezone
+from django.urls import reverse
 # Create your models here.
 
 
@@ -22,6 +23,8 @@ class Tour(models.Model):
     
     def __str__(self):
         return self.title
+    def get_absolute_url(self):
+        return reverse('tours:tour_detail',kwargs={'slug':self.slug})
     
 class Place(models.Model):
     place = models.CharField(max_length=100)

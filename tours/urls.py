@@ -4,7 +4,9 @@ from . import views
 app_name = 'tours'
 
 urlpatterns = [
+    # tour_list url
     path('', views.TourListView.as_view(),name='tour'),
-    path('tour_single', views.tour_single,name='tour_single'),
+    #tour_detail url
+    path('<slug:slug>/detail/', views.TourDetailView.as_view(),name='tour_detail'),
 
 ]
