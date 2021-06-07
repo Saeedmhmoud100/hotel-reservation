@@ -64,6 +64,10 @@ class Tour_image(models.Model):
     def __str__(self):
         return str(self.tour)
     
+class Tour_Reservation_Manager(models.Manager):
+    def is_active(self):
+        return self.get_queryset().filter(canceled=False,done=False)
+    
 class Tour_Reservation(models.Model):
     user = models.ForeignKey(get_user_model(), related_name='tour_Reservation', on_delete=models.CASCADE)
     tour = models.ForeignKey(Tour, related_name='tour_Reservation', on_delete=models.CASCADE)
@@ -76,8 +80,9 @@ class Tour_Reservation(models.Model):
     price = models.IntegerField()
     canceled = models.BooleanField(default=False)
     done = models.BooleanField(default=False)
-    
+    objects = Tour_Reservation_Manager()
     class Meta:
         ordering = ['-id']
-    
+    def __str__(self):
+        return f'{self.tour.title} Reservation'
     

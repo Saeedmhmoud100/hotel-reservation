@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Tour,Place,Tour_image
+from .models import Tour,Place,Tour_image,Tour_Reservation
 # Register your models here.
 
 
@@ -21,3 +21,10 @@ class TourAdmin(admin.ModelAdmin):
 @admin.register(Place)
 class placeAdmin(admin.ModelAdmin):
     list_display = ( "place","created_at",)
+
+
+@admin.register(Tour_Reservation)
+class Tour_ReservationAdmin(admin.ModelAdmin):
+    class Meta:
+        model = Tour_Reservation
+        fields = '__all__'
