@@ -21,6 +21,7 @@ class TourAdmin(admin.ModelAdmin):
 @admin.register(Place)
 class placeAdmin(admin.ModelAdmin):
     list_display = ( "place","created_at",)
+    search_fields = ('place',)
 
 
 @admin.register(Tour_Reservation)
