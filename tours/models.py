@@ -3,6 +3,8 @@ from ckeditor.fields import RichTextField
 from django.utils import timezone
 from django.urls import reverse
 from django.utils.safestring import mark_safe
+from django.contrib.auth import get_user_model
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 # Create your models here.
 
@@ -36,6 +38,8 @@ class Tour(models.Model):
         
     def get_absolute_url(self):
         return reverse('tours:tour_detail',kwargs={'slug':self.slug})
+    class Meta:
+        ordering=['-id']
     
 class Place(models.Model):
     place = models.CharField(max_length=100)
@@ -59,3 +63,21 @@ class Tour_image(models.Model):
     
     def __str__(self):
         return str(self.tour)
+    
+class Tour_Reservation(models.Model):
+    user = models.ForeignKey(get_user_model(), related_name='tour_Reservation', on_delete=models.CASCADE)
+    tour = models.ForeignKey(Tour, related_name='tour_Reservation', on_delete=models.CASCADE)
+    name = models.CharField(max_length=90)
+    email = models.EmailField()
+    data_from = models.DateField()
+    data_to = models.DateField()
+    guste = models.PositiveIntegerField(validators=[MinValueValidator(1),MaxValueValidator(6)],blank=True)
+    children = models.PositiveIntegerField(validators=[MinValueValidator(0),MaxValueValidator(6)],blank=True)
+    price = models.IntegerField()
+    canceled = models.BooleanField(default=False)
+    done = models.BooleanField(default=False)
+    
+    class Meta:
+        ordering = ['-id']
+    
+    
