@@ -28,6 +28,7 @@ class placeAdmin(admin.ModelAdmin):
 class Tour_ReservationAdmin(admin.ModelAdmin):
     list_display=['user','tour','email','data_from','data_to','canceled','done']
     list_editable = ('canceled','done')
+    search_fields = ('user__username','tour__title','email','data_from','data_to','price')
     class Meta:
         model = Tour_Reservation
         fields = '__all__'
