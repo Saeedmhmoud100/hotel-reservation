@@ -25,6 +25,8 @@ class placeAdmin(admin.ModelAdmin):
 
 @admin.register(Tour_Reservation)
 class Tour_ReservationAdmin(admin.ModelAdmin):
+    list_display=['user','tour','email','data_from','data_to','canceled','done']
+    list_editable = ('canceled','done')
     class Meta:
         model = Tour_Reservation
         fields = '__all__'
