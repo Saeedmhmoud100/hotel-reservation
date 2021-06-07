@@ -41,12 +41,12 @@
 
       <div class="collapse navbar-collapse" id="ftco-nav">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item {{home}}"><a href="{% url 'rooms:home' %}" class="nav-link">Home</a></li>
-          <li class="nav-item {{about}}"><a href="about.html" class="nav-link">About</a></li>
-          <li class="nav-item {{tour}}"><a href="{% url 'tours:tour' %}" class="nav-link">Tour</a></li>
-          <li class="nav-item {{room}}"><a href="{% url 'rooms:hotel' %}" class="nav-link">Hotels</a></li>
-          <li class="nav-item {{blog}}"><a href="blog.html" class="nav-link">Blog</a></li>
-          <li class="nav-item {{content}}"><a href="contact.html" class="nav-link">Contact</a></li>
+          <li class="nav-item {% if urlpath == '/' %}active{% endif %}"><a href="{% url 'rooms:home' %}" class="nav-link">Home</a></li>
+          <li class="nav-item {% if 'about' in urlpath %}active{% endif %}"><a href="about.html" class="nav-link">About</a></li>
+          <li class="nav-item {% if 'tour' in urlpath %}active{% endif %}"><a href="{% url 'tours:tour' %}" class="nav-link">Tour</a></li>
+          <li class="nav-item {% if 'hotel' in urlpath %}active{% endif %}"><a href="{% url 'rooms:hotel' %}" class="nav-link">Hotels</a></li>
+          <li class="nav-item {% if 'blog' in urlpath %}active{% endif %}"><a href="blog.html" class="nav-link">Blog</a></li>
+          <li class="nav-item {% if 'content' in urlpath %}active{% endif %}"><a href="contact.html" class="nav-link">Contact</a></li>
           <li class="nav-item cta"><a href="contact.html" class="nav-link"><span>Add listing</span></a></li>
         </ul>
       </div>
