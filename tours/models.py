@@ -5,6 +5,7 @@ from django.urls import reverse
 from django.utils.safestring import mark_safe
 from django.contrib.auth import get_user_model
 from django.core.validators import MaxValueValidator, MinValueValidator
+from django.template.defaultfilters import truncatechars
 
 # Create your models here.
 
@@ -85,4 +86,16 @@ class Tour_Reservation(models.Model):
         ordering = ['-id']
     def __str__(self):
         return f'{self.tour.title} Reservation'
+    
+    
+class Tour_Rating(models.Model):
+    user = models.ForeignKey(get_user_model(), related_name='tour_rating', on_delete=models.CASCADE)
+    tour = models.ForeignKey(Tour, related_name='rating', on_delete=models.CASCADE)
+    rating = models.IntegerField(validators=[MaxValueValidator(5),MinValueValidator(1)])
+    feedback = models.TextField(blank=True, null=True)
+    
+    def shourt_feedback(self):
+        return truncatechars(self.feedback,150)  if self.feedback else '-'
+    def __str__(self):
+        return f'{self.tour.title} - ratin'
     

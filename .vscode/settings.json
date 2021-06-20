@@ -1,3 +1,4 @@
 {
-    "python.pythonPath": "/home/saeedmhmoud109/My-Projects/django/hotel-reservation/bin/python3"
+    "python.pythonPath": "/home/saeedmhmoud109/My-Projects/django/hotel-reservation/bin/python3",
+    "python.linting.enabled": true
 }

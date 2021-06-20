@@ -1,4 +1,3 @@
-import django
 from django.shortcuts import render
 from django.urls import reverse
 from django.views.generic import DetailView
@@ -8,7 +7,6 @@ from django.contrib import messages
 from .models import Tour, Place
 from .forms import TourReservationForm
 # Create your views here.
-
 
 class TourListView(FilterView):
     model = Tour
@@ -21,7 +19,6 @@ class TourListView(FilterView):
         context= super().get_context_data(**kwargs)
         context['places'] = Place.objects.all()
         return context
-
 
 class TourDetailView(DetailView,FormMixin):
     model = Tour

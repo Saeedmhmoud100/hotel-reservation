@@ -4,7 +4,6 @@ from django_countries.fields import CountryField
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.html import format_html
-from django.template.defaultfilters import truncatechars
 from django.utils.safestring import mark_safe
 from django.contrib.auth import get_user_model
 from django.core.validators import MaxValueValidator, MinValueValidator

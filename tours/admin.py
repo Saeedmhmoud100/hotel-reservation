@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Tour,Place,Tour_image,Tour_Reservation
+from .models import Tour,Place,Tour_image,Tour_Reservation,Tour_Rating
 # Register your models here.
 
 
@@ -32,3 +32,8 @@ class Tour_ReservationAdmin(admin.ModelAdmin):
     class Meta:
         model = Tour_Reservation
         fields = '__all__'
+
+
+@admin.register(Tour_Rating)
+class Tous_RatingAdmin(admin.ModelAdmin):
+    list_display = ( "user",'shourt_feedback', "tour","rating")
