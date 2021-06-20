@@ -1,10 +1,13 @@
+from django.contrib.auth.decorators import login_required
+from django.http.response import JsonResponse
 from django.shortcuts import render
 from django.urls import reverse
+from django.utils import timezone
 from django.views.generic import DetailView
 from django.views.generic.edit import FormMixin 
 from django_filters.views import FilterView
 from django.contrib import messages
-from .models import Tour, Place
+from .models import Tour, Place, Tour_Rating, Tour_Reservation
 from .forms import TourReservationForm
 # Create your views here.
 
@@ -45,5 +48,24 @@ class TourDetailView(DetailView,FormMixin):
         return super(TourDetailView, self).form_valid(form)
     def get_success_url(self):
         return f'{self.get_object().get_absolute_url()}#Reservation_form' 
+
+
+@login_required
+def tour_rate(request):
+    tour = request.GET.get('tour_id')
+    rating = request.GET.get('rating')
+    tours = Tour_Rating.objects.filter(tour__id=tour,user=request.user)
+    if not Tour_Reservation.objects.filter(tour=tour,user=request.user,data_to__lte=timezone.now()).exists():
+        return JsonResponse({'message':'You have not booked this tour before','tag':'danger'})
+    if tours.exists():
+        message= 'you are alraly rating!!'
+        tag = 'warning'
+    else:
+        Tour_Rating.objects.create(rating=rating,user=request.user,tour=Tour.objects.get(id=tour)).save()
+        message = 'thanks for your rating'
+        tag = 'success'
+    return JsonResponse({'message':message,'tag':tag})
+
+
 def tour_single(request):
     return render(request,'tours/tour.html')

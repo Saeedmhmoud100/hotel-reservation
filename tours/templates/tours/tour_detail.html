@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load custom_tags %}
 {% load crispy_forms_tags %}
 
 {% block title %}
@@ -177,42 +178,28 @@
 						  </div>
 						</div>
 					</form>
-					<div class="col-md-12 hotel-single ftco-animate mb-5 mt-4">
+					<div class="col-md-12 hotel-single ftco-animate mb-5 mt-4" id='rating_div_id's>
 						<h4 class="mb-4">Review &amp; Ratings</h4>
 						<div class="row">
 							<div class="col-md-6">
-								<form method="post" class="star-rating">
-											<div class="form-check">
-												  <input type="checkbox" class="form-check-input" id="exampleCheck1">
-												  <label class="form-check-label" for="exampleCheck1">
-													  <p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i> 100 Ratings</span></p>
-												  </label>
-											</div>
-											<div class="form-check">
-											<input type="checkbox" class="form-check-input" id="exampleCheck1">
-											<label class="form-check-label" for="exampleCheck1">
-												 <p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star-o"></i> 30 Ratings</span></p>
-											</label>
-											</div>
-											<div class="form-check">
-											<input type="checkbox" class="form-check-input" id="exampleCheck1">
-											<label class="form-check-label" for="exampleCheck1">
-												<p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star-o"></i><i class="icon-star-o"></i> 5 Ratings</span></p>
-										   </label>
-											</div>
-											<div class="form-check">
-											  <input type="checkbox" class="form-check-input" id="exampleCheck1">
-											<label class="form-check-label" for="exampleCheck1">
-												<p class="rate"><span><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star-o"></i><i class="icon-star-o"></i><i class="icon-star-o"></i> 0 Ratings</span></p>
-											</label>
-											</div>
-											<div class="form-check">
-											<input type="checkbox" class="form-check-input" id="exampleCheck1">
-											<label class="form-check-label" for="exampleCheck1">
-												<p class="rate"><span><i class="icon-star"></i><i class="icon-star-o"></i><i class="icon-star-o"></i><i class="icon-star-o"></i><i class="icon-star-o"></i> 0 Ratings</span></p>
-											  </label>
-											</div>
-										  </form>
+								<form method="post" class="star-rating" id='form2'>
+									{% for i in '12345' %}
+									  <div class="form-check">
+									  <input type="checkbox" data-rate="{{ forloop.revcounter }}" class="form-check-input" id="exampleCheck{{ forloop.revcounter }}"  {% tour_rating_chekd request.user object.pk forloop.revcounter %}>
+									  <label class="form-check-label" for="exampleCheck{{ forloop.revcounter }}">
+										  <p class="rate"><span>
+											  <i class="icon-star"></i> 
+											  <i class="{% if forloop.counter|for_loop:5 %}icon-star {% else %}icon-star-o{% endif %}"></i>
+											  <i class="{% if forloop.counter|for_loop:4 %}icon-star {% else %}icon-star-o{% endif %}"></i>
+											  <i class="{% if forloop.counter|for_loop:3 %}icon-star {% else %}icon-star-o{% endif %}"></i>
+											  <i class="{% if forloop.counter|for_loop:2 %}icon-star {% else %}icon-star-o{% endif %}"></i>
+											  <span data-rating="{% user_rating_numper object.pk forloop.revcounter %}">{% user_rating_numper object.pk forloop.revcounter %} Ratings</span></span></p>
+									  </label>
+								  </div>
+									{% endfor %}
+								  
+								  
+							  </form>
 							</div>
 						</div>
 					</div>
@@ -318,3 +305,41 @@
 
 	  
 {% endblock content %}
+
+
+{% block script %}
+  <script>
+	  $(function(){
+		  const input_checked= $("input[type='checkbox']:checked")
+		$("input[type='checkbox']").change(function(e){	
+			$("input[type='checkbox']").not($(this)).removeAttr('checked')
+			$.ajax({
+				datatype:'json',
+				data:{
+					'tour_id':'{{object.pk}}',
+					'rating':e.target.attributes[1].value,
+				},
+				url:"{% url 'tours:tour-rating' %}",
+				success:function(res){
+					var msg = `<div class="alert alert-${res.tag} rating_message_div_id">${res.message}</div>`
+					var rate_message_l = $('.rating_message_div_id')
+					if (rate_message_l.length > 0){
+						setTimeout(()=>{$('#rating_div_id').prepend(msg)},200)
+						setTimeout(() =>{$('.rating_message_div_id').remove()},500)
+						setTimeout(()=>{$('#rating_div_id').prepend(msg)},510)
+					}else{
+					$('#rating_div_id').prepend(msg)
+					}
+					console.log(input_checked)
+				},error(err){
+					console.log(err)
+					{% comment %}
+					//window.location.replace("{% url 'rooms:login' %}"+'?next={{request.path}}')
+					{% endcomment %}
+					window.location.replace("{% url 'tours:tour' %}")
+				}
+			})
+		  }) 
+	  })
+  </script>
+  {% endblock script %}

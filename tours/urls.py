@@ -8,5 +8,6 @@ urlpatterns = [
     path('', views.TourListView.as_view(),name='tour'),
     #tour_detail url
     path('<slug:slug>/detail/', views.TourDetailView.as_view(),name='tour_detail'),
+    path("tour_rating/", views.tour_rate, name="tour-rating"),
 
 ]

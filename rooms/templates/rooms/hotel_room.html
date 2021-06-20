@@ -250,10 +250,6 @@
 	  $(function(){
 		  const input_checked= $("input[type='checkbox']:checked")
 		$("input[type='checkbox']").change(function(e){	
-			
-			if(!'{{request.user.is_authenticated}}'){
-				console.log('yes')
-			}
 			$("input[type='checkbox']").not($(this)).removeAttr('checked')
 			$.ajax({
 				datatype:'json',
