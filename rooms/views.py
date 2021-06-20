@@ -10,9 +10,10 @@ from django_filters.views import FilterView
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
+from django.utils import timezone
 from random import *
 from django.db import transaction
-from .models import Room,Room_Rating
+from .models import Room,Room_Rating, Room_Reservation
 from .forms import RoomReservationForm,RoomForm,RoomImgInlineForm
 
 # Create your views here.
@@ -89,6 +90,8 @@ def room_rate(request):
     room = request.GET.get('room_id')
     rating = request.GET.get('rating')
     rooms = Room_Rating.objects.filter(room__id=room,user=request.user)
+    if not Room_Reservation.objects.filter(room=room,user=request.user,data_to__lte=timezone.now()).exists():
+        return JsonResponse({'message':'You have not booked this room before','tag':'danger'})
     if rooms.exists():
         message= 'you are alraly rating!!'
         tag = 'warning'
