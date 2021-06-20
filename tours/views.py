@@ -11,6 +11,15 @@ from .models import Tour, Place, Tour_Rating, Tour_Reservation
 from .forms import TourReservationForm
 # Create your views here.
 
+def random_tours(tours,num=None):
+    try:
+        x =[p for p in tours.objects.all()]
+    except AttributeError:
+        x = tours   
+    if num:
+        return list(x[:num])
+    return list(x)
+
 class TourListView(FilterView):
     model = Tour
     template_name = 'tours/tour_list.html'
@@ -31,6 +40,11 @@ class TourDetailView(DetailView,FormMixin):
         kwargs.update({'tour': self.object})
         return kwargs
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["our_tours"] = random_tours(Tour.objects.all().order_by('?'),3)
+        return context
+    
     def post(self,request,*args,**kwargs):
         self.object = self.get_object()
         form = self.get_form()

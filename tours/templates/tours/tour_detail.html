@@ -58,13 +58,14 @@
 						
 						<h4 class="mb-4">Our Tours</h4>
 						<div class="row">
-							<div class="col-md-4">
+							{% for tour in our_tours %}
+							  <div class="col-md-4">
 									  <div class="destination">
-										  <a href="hotel-single.html" class="img img-2" style="background-image: url({% static 'images/room-4.jpg' %});"></a>
+										  <a href="{{tour.get_absolute_urlget_absolute_url}}" class="img img-2" style="background-image: url({{tour.img.url}});"></a>
 										  <div class="text p-3">
 											  <div class="d-flex">
 												  <div class="one">
-													  <h3><a href="hotel-single.html">Hotel, Italy</a></h3>
+													  <h3><a href="{{tour.get_absolute_urlget_absolute_url}}">{{tour.title}}</a></h3>
 													  <p class="rate">
 														  <i class="icon-star"></i>
 														  <i class="icon-star"></i>
@@ -75,76 +76,20 @@
 													  </p>
 												  </div>
 												  <div class="two">
-													  <span class="price per-price">$40<br><small>/night</small></span>
+													  <span class="price per-price">${{tour.price}}<br><small>/night</small></span>
 												  </div>
 											  </div>
-											  <p>Far far away, behind the word mountains, far from the countries</p>
+											  <p>{{tour.descriptions|safe|truncatewords:20}}</p>
 											  <hr>
 											  <p class="bottom-area d-flex">
-												  <span><i class="icon-map-o"></i> Miami, Fl</span> 
+												  <span><i class="icon-map-o"></i>  {{tour.city}}, {{tour.locality|truncatechars:8}}</span> 
 												  <span class="ml-auto"><a href="#">Book Now</a></span>
 											  </p>
 										  </div>
 									  </div>
 								  </div>
-								  <div class="col-md-4">
-									  <div class="destination">
-										  <a href="hotel-single.html" class="img img-2" style="background-image: url({% static 'images/room-5.jpg' %});"></a>
-										  <div class="text p-3">
-											  <div class="d-flex">
-												  <div class="one">
-													  <h3><a href="hotel-single.html">Hotel, Italy</a></h3>
-													  <p class="rate">
-														  <i class="icon-star"></i>
-														  <i class="icon-star"></i>
-														  <i class="icon-star"></i>
-														  <i class="icon-star"></i>
-														  <i class="icon-star-o"></i>
-														  <span>8 Rating</span>
-													  </p>
-												  </div>
-												  <div class="two">
-													  <span class="price per-price">$40<br><small>/night</small></span>
-												  </div>
-											  </div>
-											  <p>Far far away, behind the word mountains, far from the countries</p>
-											  <hr>
-											  <p class="bottom-area d-flex">
-												  <span><i class="icon-map-o"></i> Miami, Fl</span> 
-												  <span class="ml-auto"><a href="#">Book Now</a></span>
-											  </p>
-										  </div>
-									  </div>
-								  </div>
-								  <div class="col-md-4">
-									  <div class="destination">
-										  <a href="hotel-single.html" class="img img-2" style="background-image: url({% static 'images/room-6.jpg' %});"></a>
-										  <div class="text p-3">
-											  <div class="d-flex">
-												  <div class="one">
-													  <h3><a href="hotel-single.html">Hotel, Italy</a></h3>
-													  <p class="rate">
-														  <i class="icon-star"></i>
-														  <i class="icon-star"></i>
-														  <i class="icon-star"></i>
-														  <i class="icon-star"></i>
-														  <i class="icon-star-o"></i>
-														  <span>8 Rating</span>
-													  </p>
-												  </div>
-												  <div class="two">
-													  <span class="price per-price">$40<br><small>/night</small></span>
-												  </div>
-											  </div>
-											  <p>Far far away, behind the word mountains, far from the countries</p>
-											  <hr>
-											  <p class="bottom-area d-flex">
-												  <span><i class="icon-map-o"></i> Miami, Fl</span> 
-												  <span class="ml-auto"><a href="#">Book Now</a></span>
-											  </p>
-										  </div>
-									  </div>
-								  </div>
+							{% endfor %}
+							
 						</div>
 					</div>
 					<form method="POST" id="Reservation_form">
