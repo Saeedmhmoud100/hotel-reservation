@@ -4,6 +4,7 @@ from django.shortcuts import render
 from django.urls import reverse
 from django.urls.base import reverse_lazy
 from django.utils import timezone
+from django.utils.decorators import method_decorator
 from django.views.generic import DetailView
 from django.views.generic.edit import CreateView, DeleteView, FormMixin, UpdateView 
 from django_filters.views import FilterView
@@ -48,7 +49,7 @@ class TourDetailView(DetailView,FormMixin):
         related_tours = Tour.objects.all().exclude(pk=self.object.pk)
         context["related_tours"] = random_tours(related_tours.filter(city=self.object.city).order_by('?'),3) if related_tours.filter(city=self.object.city).exists() else random_tours(related_tours,3)
         return context
-    
+    @method_decorator(login_required)
     def post(self,request,*args,**kwargs):
         self.object = self.get_object()
         form = self.get_form()
