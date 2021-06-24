@@ -45,14 +45,21 @@
 						<p class="rate mb-5">
 							<span class="loc"><a href="#"><i class="icon-map"></i> {{object.street}}, {{object.city}}</a></span>
 							<span class="star">
-								  <i class="icon-star"></i>
-								  <i class="icon-star"></i>
-								  <i class="icon-star"></i>
-								  <i class="icon-star"></i>
-								  <i class="icon-star-o"></i>
-								  8 Rating</span>
+								{% for i in '12345'|make_list %}
+								{% if forloop.counter <= object.total_rating %}
+									<i class="icon-star"></i>
+									{% else %}
+									<i class="icon-star-o"></i>
+								{% endif %}
+									{% empty %}
+									<i class="icon-star-o"></i>
+									<i class="icon-star-o"></i>
+									<i class="icon-star-o"></i>
+									<i class="icon-star-o"></i>
+									<i class="icon-star-o"></i>
+							  {% endfor %}
+							  {{object.total_rating}} Rating</span>
 							  </p>
-
 							  {{object.descriptions|safe}}
 					<div class="col-md-12 hotel-single ftco-animate mb-5 mt-4">
 						
@@ -61,19 +68,29 @@
 							{% for tour in our_tours %}
 							  <div class="col-md-4">
 									  <div class="destination">
-										  <a href="{{tour.get_absolute_urlget_absolute_url}}" class="img img-2" style="background-image: url({{tour.img.url}});"></a>
+										  <a href="{{tour.get_absolute_url}}" class="img img-2" style="background-image: url({{tour.img.url}});"></a>
 										  <div class="text p-3">
 											  <div class="d-flex">
 												  <div class="one">
-													  <h3><a href="{{tour.get_absolute_urlget_absolute_url}}">{{tour.title}}</a></h3>
+													  <h3><a href="{{tour.get_absolute_url}}">{{tour.title}}</a></h3>
 													  <p class="rate">
-														  <i class="icon-star"></i>
-														  <i class="icon-star"></i>
-														  <i class="icon-star"></i>
-														  <i class="icon-star"></i>
-														  <i class="icon-star-o"></i>
-														  <span>8 Rating</span>
-													  </p>
+														{% for i in '12345'|make_list %}
+														  
+														  {% if forloop.counter <= tour.total_rating %}
+															  <i class="icon-star"></i>
+															  {% else %}
+															  <i class="icon-star-o"></i>
+														  {% endif %}
+															  {% empty %}
+															  <i class="icon-star-o"></i>
+															  <i class="icon-star-o"></i>
+															  <i class="icon-star-o"></i>
+															  <i class="icon-star-o"></i>
+															  <i class="icon-star-o"></i>
+														{% endfor %}
+														
+														<span style="padding-left: 3px;">{{tour.total_rating}} Rating</span>
+													</p>
 												  </div>
 												  <div class="two">
 													  <span class="price per-price">${{tour.price}}<br><small>/night</small></span>

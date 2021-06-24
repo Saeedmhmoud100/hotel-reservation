@@ -46,7 +46,7 @@ class Tour(models.Model):
         else:
             return '(No image)'
         
-    def c(self):
+    def get_absolute_url(self):
         return reverse('tours:tour_detail',kwargs={'slug':self.slug})
     class Meta:
         ordering=['-id']
