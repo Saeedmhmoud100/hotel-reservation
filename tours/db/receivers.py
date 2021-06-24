@@ -14,7 +14,7 @@ def tour_img(sender,instance,*args,**kwargs):
             l.save()
             
     else:
-        instance.room_img.create(room=instance,img=instance.img)
+        instance.tour_img.create(tour=instance,img=instance.img)
     
     
 pre_save.connect(tour_slug, sender=Tour)

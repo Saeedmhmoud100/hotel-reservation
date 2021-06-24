@@ -33,7 +33,9 @@ class Tour(models.Model):
         rating = 0
         for i in rating_count:
             rating += i.rating
-        return int(rating/len(rating_count))
+        if rating_count.exists():
+            return int(rating/len(rating_count))
+        return '0'
     
     def __str__(self):
         return self.title

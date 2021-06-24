@@ -43,6 +43,8 @@ class TourDetailView(DetailView,FormMixin):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["our_tours"] = random_tours(Tour.objects.all().order_by('?'),3)
+        related_tours = Tour.objects.all().exclude(pk=self.object.pk)
+        context["related_tours"] = random_tours(related_tours.filter(city=self.object.city).order_by('?'),3) if related_tours.filter(city=self.object.city).exists() else random_tours(related_tours,3)
         return context
     
     def post(self,request,*args,**kwargs):
