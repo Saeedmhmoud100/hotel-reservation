@@ -32,3 +32,10 @@ def check_users_for_new_tour(user):
     else:
         return False
     
+@register.filter
+def check_users_for_update_tour(user,tour):
+    if user.is_authenticated:
+        if user.is_superuser or user.is_staff and tour.owner == user:
+            return True
+    else:
+        return False

@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.urls import reverse
 from django.utils import timezone
 from django.views.generic import DetailView
-from django.views.generic.edit import CreateView, FormMixin 
+from django.views.generic.edit import CreateView, FormMixin, UpdateView 
 from django_filters.views import FilterView
 from django.contrib import messages
 from django.db import transaction
@@ -103,5 +103,22 @@ class CreateTourView(CreateView):
                 form2.save()
         return super(CreateTourView, self).form_valid(form)
 
+class UpdateTourView(UpdateView):
+    model = Tour
+    form_class = TourForm
+    
+    def get_context_data(self, **kwargs):
+        context = super(UpdateTourView, self).get_context_data(**kwargs)
+        if self.request.POST: context["form2"] = TourImgInlineForm(self.request.POST,self.request.FILES,instance=self.object) 
+        else:  context["form2"] = TourImgInlineForm(instance=self.object)
+        return context
+    
+    def form_valid(self, form):
+        self.object = form.save()
+        form2 = self.get_context_data()['form2']
+        if form2.is_valid():
+            form2.save()
+        return super(UpdateTourView,self).form_valid(form)
+    
 def tour_single(request):
     return render(request,'tours/tour.html')

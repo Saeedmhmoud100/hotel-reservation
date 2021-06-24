@@ -51,6 +51,8 @@ class Tour(models.Model):
         
     def get_absolute_url(self):
         return reverse('tours:tour_detail',kwargs={'slug':self.slug})
+    def get_update_url(self):
+        return reverse('tours:tour-update',kwargs={'slug':self.slug})
     class Meta:
         ordering=['-id']
     

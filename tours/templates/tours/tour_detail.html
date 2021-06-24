@@ -41,6 +41,9 @@
 					</div>
 					<div class="col-md-12 hotel-single mt-4 mb-5 ftco-animate">
 						<span>Our Best Tours &amp; Tours</span>
+						{% if request.user|check_users_for_update_tour:object %}
+					  	<a href="{{object.get_update_url}}" class="btn btn-success" style="float:right">Update Room</a>
+					  {% endif %}
 						<h2>{{object.title}}</h2>
 						<p class="rate mb-5">
 							<span class="loc"><a href="#"><i class="icon-map"></i> {{object.street}}, {{object.city}}</a></span>
