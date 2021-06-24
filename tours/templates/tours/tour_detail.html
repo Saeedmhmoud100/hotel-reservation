@@ -95,6 +95,7 @@
 														
 														<span style="padding-left: 3px;">{{tour.total_rating}} Rating</span>
 													</p>
+													<span id="reservation_form"></span>
 												  </div>
 												  <div class="two">
 													  <span class="price per-price">${{tour.price}}<br><small>/night</small></span>
@@ -104,7 +105,7 @@
 											  <hr>
 											  <p class="bottom-area d-flex">
 												  <span><i class="icon-map-o"></i>  {{tour.city}}, {{tour.locality|truncatechars:8}}</span> 
-												  <span class="ml-auto"><a href="#">Book Now</a></span>
+												  <span class="ml-auto"><a href="{{tour.get_reservation_url}}">Book Now</a></span>
 											  </p>
 										  </div>
 									  </div>
@@ -207,7 +208,7 @@
 											  <hr>
 											  <p class="bottom-area d-flex">
 												  <span><i class="icon-map-o"></i>  {{tour.city}}, {{tour.locality|truncatechars:8}}</span> 
-												  <span class="ml-auto"><a href="#">Book Now</a></span>
+												  <span class="ml-auto"><a href="{{tour.get_reservation_url}}">Book Now</a></span>
 											  </p>
 										  </div>
 									  </div>

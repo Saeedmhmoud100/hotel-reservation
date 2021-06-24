@@ -55,6 +55,9 @@ class Tour(models.Model):
         return reverse('tours:tour-update',kwargs={'slug':self.slug})
     def get_delete_url(self):
         return reverse('tours:tour-delete',kwargs={'slug':self.slug})
+    def get_reservation_url(self):
+        return '{}#reservation_form'.format(reverse("tours:tour_detail", kwargs={'slug':self.slug}))
+
     class Meta:
         ordering=['-id']
     
