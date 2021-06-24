@@ -26,6 +26,15 @@ class Tour(models.Model):
     slug = models.SlugField(blank=True, null=True)
     active = models.BooleanField(default=True)
     
+    
+    @property
+    def total_rating(self):
+        rating_count= self.rating.all()
+        rating = 0
+        for i in rating_count:
+            rating += i.rating
+        return int(rating/len(rating_count))
+    
     def __str__(self):
         return self.title
     
@@ -97,5 +106,5 @@ class Tour_Rating(models.Model):
     def shourt_feedback(self):
         return truncatechars(self.feedback,150)  if self.feedback else '-'
     def __str__(self):
-        return f'{self.tour.title} - ratin'
+        return f'{self.tour.title} - rating'
     
