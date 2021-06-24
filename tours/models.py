@@ -53,6 +53,8 @@ class Tour(models.Model):
         return reverse('tours:tour_detail',kwargs={'slug':self.slug})
     def get_update_url(self):
         return reverse('tours:tour-update',kwargs={'slug':self.slug})
+    def get_delete_url(self):
+        return reverse('tours:tour-delete',kwargs={'slug':self.slug})
     class Meta:
         ordering=['-id']
     

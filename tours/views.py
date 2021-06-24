@@ -2,9 +2,10 @@ from django.contrib.auth.decorators import login_required
 from django.http.response import JsonResponse
 from django.shortcuts import render
 from django.urls import reverse
+from django.urls.base import reverse_lazy
 from django.utils import timezone
 from django.views.generic import DetailView
-from django.views.generic.edit import CreateView, FormMixin, UpdateView 
+from django.views.generic.edit import CreateView, DeleteView, FormMixin, UpdateView 
 from django_filters.views import FilterView
 from django.contrib import messages
 from django.db import transaction
@@ -119,6 +120,13 @@ class UpdateTourView(UpdateView):
         if form2.is_valid():
             form2.save()
         return super(UpdateTourView,self).form_valid(form)
-    
+
+class DeleteTourView(DeleteView):
+    model = Tour
+    success_url = reverse_lazy('tours:tour')
+    success_message = 'deleted room successfully!'
+    def delete(self, request, *args, **kwargs):
+        messages.warning(self.request, self.success_message)
+        return super(DeleteTourView, self).delete(request, *args, **kwargs)
 def tour_single(request):
     return render(request,'tours/tour.html')
