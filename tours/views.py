@@ -4,11 +4,12 @@ from django.shortcuts import render
 from django.urls import reverse
 from django.utils import timezone
 from django.views.generic import DetailView
-from django.views.generic.edit import FormMixin 
+from django.views.generic.edit import CreateView, FormMixin 
 from django_filters.views import FilterView
 from django.contrib import messages
+from django.db import transaction
 from .models import Tour, Place, Tour_Rating, Tour_Reservation
-from .forms import TourReservationForm
+from .forms import TourForm, TourImgInlineForm, TourReservationForm
 # Create your views here.
 
 def random_tours(tours,num=None):
@@ -82,6 +83,25 @@ def tour_rate(request):
         tag = 'success'
     return JsonResponse({'message':message,'tag':tag})
 
+
+class CreateTourView(CreateView):
+    model = Tour
+    form_class = TourForm
+    
+    def get_context_data(self, **kwargs):
+        context = super(CreateTourView, self).get_context_data(**kwargs)
+        context["form2"] = TourImgInlineForm() 
+        return context
+
+    def form_valid(self, form):
+        with transaction.atomic():
+            form.instance.user = self.request.user
+            form.instance.owner = self.request.user
+            self.object = form.save()
+            form2 = TourImgInlineForm(self.request.POST,self.request.FILES,instance=self.object)
+            if form2.is_valid():
+                form2.save()
+        return super(CreateTourView, self).form_valid(form)
 
 def tour_single(request):
     return render(request,'tours/tour.html')

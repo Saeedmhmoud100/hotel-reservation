@@ -23,3 +23,12 @@ def tour_rating_chekd(user,tour,num):
     except:
         return ''
     return ''
+    
+@register.filter
+def check_users_for_new_tour(user):
+    if user.is_authenticated:
+        if user.is_superuser or user.is_staff:
+            return True
+    else:
+        return False
+    

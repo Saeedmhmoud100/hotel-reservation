@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load custom_tags %}
 {% load static %}
 
 
@@ -20,7 +21,9 @@
         </div>
       </div>
     </div>
-
+	{% if request.user|check_users_for_new_tour %}
+	<a href="{% url 'tours:new-tour' %}" class="btn btn-success" style="margin: 27px 15px;cursor: pointer;z-index: 2;position: absolute;right: 12px;color: white;">Add New Room</a>
+	{% endif %}
 <section class="ftco-section ftco-degree-bg">
 	<div class="container">
 		<div class="row">

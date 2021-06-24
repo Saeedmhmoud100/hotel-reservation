@@ -4,10 +4,10 @@ from . import views
 app_name = 'tours'
 
 urlpatterns = [
-    # tour_list url
     path('', views.TourListView.as_view(),name='tour'),
-    #tour_detail url
     path('<slug:slug>/detail/', views.TourDetailView.as_view(),name='tour_detail'),
     path("tour_rating/", views.tour_rate, name="tour-rating"),
+    path('create/', views.CreateTourView.as_view(),name='new-tour'),
+    
 
 ]

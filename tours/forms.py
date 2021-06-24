@@ -1,7 +1,9 @@
+from ckeditor.fields import RichTextField
 from django import forms
 from datetime import date
+from django.forms.models import inlineformset_factory
 from django.utils import timezone
-from .models import Tour_Reservation
+from .models import Tour, Tour_Reservation, Tour_image
 
 class TourReservationForm(forms.ModelForm):
     name = forms.CharField(label='',widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Name'}))
@@ -33,3 +35,20 @@ class TourReservationForm(forms.ModelForm):
         if data_to < self.cleaned_data['data_from']:
             raise forms.ValidationError('Enter a valid date')
         return data_to
+
+
+class TourForm(forms.ModelForm):
+    title = forms.CharField(max_length=30)
+    price = forms.IntegerField()
+    locality = forms.CharField(max_length=60)
+    street = forms.CharField(max_length=60)
+    descriptions = RichTextField()
+    data_from = forms.DateField(initial=date.today,widget=forms.DateInput(attrs={'class':'form-control','placeholder':'{}'.format(timezone.now().date())}))
+    data_to = forms.DateField(initial=date.today,widget=forms.DateInput(attrs={'class':'form-control','placeholder':'{}'.format(timezone.now().date())}))
+    img = forms.ImageField()
+    days_number = forms.IntegerField(max_value=60)
+    class Meta:
+        model = Tour
+        fields = ('title','price','city','locality','street','descriptions','data_from','data_to','days_number','img')
+
+TourImgInlineForm = inlineformset_factory(Tour,Tour_image,fields=('img',),extra=3,max_num=3,can_delete=False)
