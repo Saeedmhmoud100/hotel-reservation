@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http.response import JsonResponse
 from django.shortcuts import render
 from django.urls import reverse
@@ -86,7 +87,7 @@ def tour_rate(request):
     return JsonResponse({'message':message,'tag':tag})
 
 
-class CreateTourView(CreateView):
+class CreateTourView(LoginRequiredMixin,CreateView):
     model = Tour
     form_class = TourForm
     
@@ -105,7 +106,7 @@ class CreateTourView(CreateView):
                 form2.save()
         return super(CreateTourView, self).form_valid(form)
 
-class UpdateTourView(UpdateView):
+class UpdateTourView(LoginRequiredMixin,UpdateView):
     model = Tour
     form_class = TourForm
     
@@ -122,7 +123,7 @@ class UpdateTourView(UpdateView):
             form2.save()
         return super(UpdateTourView,self).form_valid(form)
 
-class DeleteTourView(DeleteView):
+class DeleteTourView(LoginRequiredMixin,DeleteView):
     model = Tour
     success_url = reverse_lazy('tours:tour')
     success_message = 'deleted room successfully!'
