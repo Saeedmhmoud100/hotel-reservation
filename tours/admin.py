@@ -12,8 +12,9 @@ class Tour_imageAdmin(admin.TabularInline):
 @admin.register(Tour)
 class TourAdmin(admin.ModelAdmin):
     inlines=[Tour_imageAdmin]
-    list_display=('title','image_preview','city', 'locality', 'days_number', 'update_at','total_rating')
+    list_display=('title','image_preview','city', 'locality', 'days_number', 'update_at','total_rating','check_avablity')
     readonly_fields = ['created_at']
+    search_fields =['title','city__place','locality']
     class Meta:
         model = Tour
         fields = '__all__'

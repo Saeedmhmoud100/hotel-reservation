@@ -5,7 +5,7 @@ from django.urls import reverse
 from django.utils.safestring import mark_safe
 from django.contrib.auth import get_user_model
 from django.core.validators import MaxValueValidator, MinValueValidator
-from django.template.defaultfilters import truncatechars
+from django.template.defaultfilters import slugify, truncatechars
 
 # Create your models here.
 
@@ -27,7 +27,10 @@ class Tour(models.Model):
     slug = models.SlugField(blank=True, null=True)
     active = models.BooleanField(default=True)
     
-    
+    def save(self,*args, **kwargs):
+        if self.title:
+            self.slug = slugify(f'{self.pk}-{self.title}')  
+        super(Tour, self).save(*args, **kwargs)
     @property
     def total_rating(self):
         rating_count= self.rating.all()
@@ -37,7 +40,20 @@ class Tour(models.Model):
         if rating_count.exists():
             return int(rating/len(rating_count))
         return '0'
-    
+    @property
+    def check_avablity(self):
+        all_reservations = self.tour_Reservation.all()
+        now = timezone.now().date()
+        for reservation in all_reservations:
+            if now > reservation.data_to : 
+                return 'Avialable'
+
+            elif now > reservation.data_from and now < reservation.data_to:
+                reserved_to = reservation.data_to
+                return f'In Progress to {reserved_to}'
+        else:
+            return 'Avialable'
+        
     def __str__(self):
         return self.title
     
@@ -48,7 +64,7 @@ class Tour(models.Model):
             )
         else:
             return '(No image)'
-        
+
     def get_absolute_url(self):
         return reverse('tours:tour_detail',kwargs={'slug':self.slug})
     def get_update_url(self):
