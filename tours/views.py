@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.http.response import JsonResponse
 from django.shortcuts import render
 from django.urls import reverse
@@ -87,7 +87,7 @@ def tour_rate(request):
     return JsonResponse({'message':message,'tag':tag})
 
 
-class CreateTourView(LoginRequiredMixin,CreateView):
+class CreateTourView(UserPassesTestMixin,LoginRequiredMixin,CreateView):
     model = Tour
     form_class = TourForm
     
@@ -105,8 +105,11 @@ class CreateTourView(LoginRequiredMixin,CreateView):
             if form2.is_valid():
                 form2.save()
         return super(CreateTourView, self).form_valid(form)
-
-class UpdateTourView(LoginRequiredMixin,UpdateView):
+    def test_func(self):
+        if self.request.user.is_superuser or self.request.user.is_staff:
+            return True
+        return False
+class UpdateTourView(UserPassesTestMixin,LoginRequiredMixin,UpdateView):
     model = Tour
     form_class = TourForm
     
@@ -122,13 +125,18 @@ class UpdateTourView(LoginRequiredMixin,UpdateView):
         if form2.is_valid():
             form2.save()
         return super(UpdateTourView,self).form_valid(form)
-
-class DeleteTourView(LoginRequiredMixin,DeleteView):
+    def test_func(self):
+        if self.request.user.is_superuser or self.request.user.is_staff and self.get_object().owner==self.request.user:
+            return True
+        return False
+class DeleteTourView(UserPassesTestMixin,LoginRequiredMixin,DeleteView):
     model = Tour
     success_url = reverse_lazy('tours:tour')
     success_message = 'deleted room successfully!'
     def delete(self, request, *args, **kwargs):
         messages.warning(self.request, self.success_message)
         return super(DeleteTourView, self).delete(request, *args, **kwargs)
-def tour_single(request):
-    return render(request,'tours/tour.html')
+    def test_func(self):
+        if self.request.user.is_superuser or self.request.user.is_staff and self.get_object().owner==self.request.user:
+            return True
+        return False
