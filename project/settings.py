@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rooms.apps.RoomsConfig',
     'tours.apps.ToursConfig',
+    'blog.apps.BlogConfig',
     'ckeditor',
     'django_countries',
     'users',
