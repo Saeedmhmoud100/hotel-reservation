@@ -1,9 +1,8 @@
 from django.shortcuts import render
-
+from django.views.generic import ListView
+from .models import Post
 # Create your views here.
-
-def blog(request):
-    return render(request,'blog/blog.html')
-
+class BlogListView(ListView):
+    model = Post
 def blog_single(request):
     return render(request,'blog/blog-single.html')
