@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import ListView,DetailView
-from .models import Post
+from django.db.models.aggregates import Count
+from .models import Categorie, Post
 # Create your views here.
 class BlogListView(ListView):
     model = Post
@@ -10,3 +11,7 @@ class BlogListView(ListView):
 class BlogDetailView(DetailView):
     model=Post
     
+    def get_context_data(self, **kwargs):
+        context = super(BlogDetailView, self).get_context_data(**kwargs)
+        context['categories'] = Categorie.objects.all().annotate(posts=Count('post'))
+        return context
