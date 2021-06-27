@@ -89,7 +89,7 @@
                   <div class="meta">
                     <div><a href="{{post.get_absolute_url}}"><span class="icon-calendar"></span> {{post.created_at|date:'b j, Y'}}</a></div>
                     <div><a href="{{post.get_absolute_url}}"><span class="icon-person"></span> {{post.author}}</a></div>
-                    <!-- <div><a href="#"><span class="icon-chat"></span> 19</a></div> -->
+                    <div><a href="{{post.get_absolute_url}}#disqus_threads"><span class="icon-chat"></span> </a></div>
                   </div>
                 </div>
               </div>
@@ -126,7 +126,6 @@
   };
   (function() { // DON'T EDIT BELOW THIS LINE
   var d = document, s = d.createElement('script');
-  //s.src = 'https://django-hotels.disqus.com/embed.js';
   s.src = 'https://django-hotels.disqus.com/embed.js';
   s.setAttribute('data-timestamp', +new Date());
   (d.head || d.body).appendChild(s);
