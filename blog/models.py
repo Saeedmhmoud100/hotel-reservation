@@ -1,4 +1,5 @@
 from django.db import models
+from django.shortcuts import reverse
 from taggit.managers import TaggableManager
 from ckeditor.fields import RichTextField
 from django.contrib.auth import get_user_model
@@ -22,8 +23,14 @@ class Post(models.Model):
             self.slug = slugify(f'{self.pk}-{self.title}')
         super(Post,self).save(*args, **kwargs)
     
+    class Meta:
+        ordering = ['-id']
     def __str__(self):
         return self.title
+    
+    def get_absolute_url(self):
+        return reverse("blog:blog-detail", kwargs={"slug": self.slug})
+    
     
 class Categorie(models.Model):
     title = models.CharField(max_length=25)
