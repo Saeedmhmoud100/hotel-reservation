@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import ListView,DetailView
 from django.db.models.aggregates import Count
+from django.db.models.query_utils import Q
 from taggit.models import Tag
 from .models import Categorie, Post
 # Create your views here.
@@ -12,6 +13,9 @@ class BlogListView(ListView):
         queryset = super(BlogListView, self).get_queryset() 
         if self.request.GET.get('tag',False):queryset=Post.objects.filter(tags__name=self.request.GET['tag'])
         if self.request.GET.get('categorie',False): queryset=Post.objects.filter(categorie__title=self.request.GET['categorie'])
+        if self.request.GET.get('q',False):
+            q = self.request.GET['q']
+            queryset=Post.objects.filter(Q(title__icontains=q)|Q(description__icontains=q))
         return queryset
     
 class BlogDetailView(DetailView):
