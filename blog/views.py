@@ -9,7 +9,7 @@ class BlogListView(ListView):
     paginate_by=1
     
     def get_queryset(self):
-        queryset = super(BlogListView, self).get_queryset()
+        queryset = super(BlogListView, self).get_queryset() 
         if self.request.GET.get('tag',False):queryset=Post.objects.filter(tags__name=self.request.GET['tag'])
         return queryset
     
