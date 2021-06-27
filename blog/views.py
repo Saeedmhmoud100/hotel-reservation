@@ -11,6 +11,7 @@ class BlogListView(ListView):
     def get_queryset(self):
         queryset = super(BlogListView, self).get_queryset() 
         if self.request.GET.get('tag',False):queryset=Post.objects.filter(tags__name=self.request.GET['tag'])
+        if self.request.GET.get('categorie',False): queryset=Post.objects.filter(categorie__title=self.request.GET['categorie'])
         return queryset
     
 class BlogDetailView(DetailView):

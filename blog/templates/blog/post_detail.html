@@ -73,7 +73,7 @@
                 <h3>Categories</h3>
                 
                 {% for categorie in categories %}
-                  <li><a href="#">{{categorie}} <span>({{categorie.posts}})</span></a></li>
+                  <li><a href="{% url 'blog:blog' %}?categorie={{categorie}}">{{categorie}} <span>({{categorie.posts}})</span></a></li>
                 {% endfor %}
               </div>
             </div>
