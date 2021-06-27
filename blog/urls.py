@@ -20,5 +20,5 @@ app_name = 'blog'
 
 urlpatterns = [
     path('', views.BlogListView.as_view(),name='blog'),
-    path('detail/', views.blog_single,name='blog-detail'),
+    path('<slug:slug>/detail/', views.BlogDetailView.as_view(),name='blog-detail'),
 ]
