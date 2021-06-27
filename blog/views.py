@@ -8,6 +8,10 @@ class BlogListView(ListView):
     model = Post
     paginate_by=1
     
+    def get_queryset(self):
+        queryset = super(BlogListView, self).get_queryset()
+        if self.request.GET.get('tag',False):queryset=Post.objects.filter(tags__name=self.request.GET['tag'])
+        return queryset
     
 class BlogDetailView(DetailView):
     model=Post
