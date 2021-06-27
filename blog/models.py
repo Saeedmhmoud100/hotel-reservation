@@ -10,6 +10,7 @@ class Post(models.Model):
     title = models.CharField(max_length = 30)
     img = models.ImageField(upload_to='blog/')
     tags = TaggableManager()
+    categorie = models.ForeignKey('Categorie', on_delete=models.CASCADE )
     description = RichTextField()
     created_at = models.DateTimeField(auto_now=True)
     updated_at = models.DateTimeField(default=timezone.now)
@@ -20,6 +21,12 @@ class Post(models.Model):
         if self.title:
             self.slug = slugify(f'{self.pk}-{self.title}')
         super(Post,self).save(*args, **kwargs)
+    
+    def __str__(self):
+        return self.title
+    
+class Categorie(models.Model):
+    title = models.CharField(max_length=25)
     
     def __str__(self):
         return self.title
