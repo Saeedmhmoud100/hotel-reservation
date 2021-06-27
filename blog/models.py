@@ -1,11 +1,13 @@
 from django.db import models
 from django.shortcuts import reverse
+from django.utils.safestring import mark_safe
 from taggit.managers import TaggableManager
 from ckeditor.fields import RichTextField
 from django.contrib.auth import get_user_model
 from django.utils import timezone
-from django.template.defaultfilters import slugify
+from django.template.defaultfilters import slugify, truncatechars
 # Create your models here.
+
 class Post(models.Model):
     author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     title = models.CharField(max_length = 30)
@@ -25,11 +27,21 @@ class Post(models.Model):
     
     class Meta:
         ordering = ['-id']
+        
+    def show_img(self):
+        return mark_safe(
+            f"<img src='{self.img.url}'  width='50' height='50' />"
+        )
+        
+    def sourt_description(self):
+        return truncatechars(mark_safe(self.description),150)
+    
     def __str__(self):
         return self.title
     
     def get_absolute_url(self):
         return reverse("blog:blog-detail", kwargs={"slug": self.slug})
+    
     
     
 class Categorie(models.Model):

@@ -5,6 +5,8 @@ from .models import Post,Categorie
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
+    list_display=('title','show_img','sourt_description','categorie','updated_at','active')
+    list_editable=('active',)
     class Meta:
         model = Post
         fields = '__all__'
