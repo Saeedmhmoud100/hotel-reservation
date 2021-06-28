@@ -1,9 +1,11 @@
 from django.shortcuts import render
-from django.views.generic import ListView,DetailView
+from django.views.generic import ListView,DetailView,CreateView
 from django.db.models.aggregates import Count
 from django.db.models.query_utils import Q
 from taggit.models import Tag
 from .models import Categorie, Post
+from .forms import BlogForm
+
 # Create your views here.
 class BlogListView(ListView):
     model = Post
@@ -27,3 +29,13 @@ class BlogDetailView(DetailView):
         context['recent_posts'] = Post.objects.active().exclude(pk=self.get_object().pk)[:3]
         context['tags'] = Tag.objects.all()
         return context
+    
+class BlogCreateView(CreateView):
+    model= Post
+    form_class = BlogForm
+    
+    def form_valid(self,form):
+        myform = form.save(commit=False)
+        myform.author=self.request.user
+        self.object=form.save()
+        return super(BlogCreateView, self).form_valid(form)
