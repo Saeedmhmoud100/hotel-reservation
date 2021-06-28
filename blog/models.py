@@ -8,6 +8,9 @@ from django.utils import timezone
 from django.template.defaultfilters import slugify, truncatechars
 # Create your models here.
 
+class PostManager(models.Manager):
+    def active(self):
+        return self.get_queryset().filter(active=True)
 class Post(models.Model):
     author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     title = models.CharField(max_length = 30)
@@ -19,7 +22,7 @@ class Post(models.Model):
     updated_at = models.DateTimeField(default=timezone.now)
     slug = models.SlugField(blank=True, null=True)
     active = models.BooleanField(default=True)
-    
+    objects=PostManager()
     def save(self,*args, **kwargs) :
         if self.title:
             self.slug = slugify(f'{self.pk}-{self.title}')
