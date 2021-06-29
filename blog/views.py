@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls.base import reverse_lazy
 from django.views.generic import ListView,DetailView,CreateView,UpdateView,DeleteView
 from django.db.models.aggregates import Count
@@ -30,7 +31,7 @@ class BlogDetailView(DetailView):
         context['tags'] = Tag.objects.all()
         return context
     
-class BlogCreateView(CreateView):
+class BlogCreateView(LoginRequiredMixin,CreateView):
     model= Post
     form_class = BlogForm
     
@@ -40,11 +41,11 @@ class BlogCreateView(CreateView):
         self.object=form.save()
         return super(BlogCreateView, self).form_valid(form)
     
-class BlogUpdateView(UpdateView):
+class BlogUpdateView(LoginRequiredMixin,UpdateView):
     model = Post
     form_class= BlogForm
     
-class BlogDeleteView(DeleteView):
+class BlogDeleteView(LoginRequiredMixin,DeleteView):
     model = Post
     success_url=reverse_lazy('blog:blog')
     
