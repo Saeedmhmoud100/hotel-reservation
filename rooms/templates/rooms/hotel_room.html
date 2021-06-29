@@ -41,7 +41,7 @@
           		</div>
           		<div class="col-md-12 hotel-single mt-4 mb-5 ftco-animate">
           			<span>Our Best hotels &amp; Rooms</span>
-					  {% if request.user|check_users_for_update_room %}
+					  {% if request.user|check_users_for_update_room:object %}
 					  <a href="{{object.get_delete_url}}" class="btn btn-danger ml-3	" style="float:right">Delete Room</a>
 					  	<a href="{{object.get_update_url}}" class="btn btn-success" style="float:right">Update Room</a>
 					  {% endif %}

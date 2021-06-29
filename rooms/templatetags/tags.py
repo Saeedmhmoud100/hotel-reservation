@@ -42,9 +42,9 @@ def check_users_for_new_room(user):
         return False
     
 @register.filter
-def check_users_for_update_room(user):
+def check_users_for_update_room(user,room):
     if user.is_authenticated:
-        if user.is_superuser or user.is_staff:
+        if user.is_superuser or user.is_staff and room.owner==user:
             return True
     else:
         return False

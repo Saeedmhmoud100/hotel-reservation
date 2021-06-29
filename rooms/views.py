@@ -112,7 +112,7 @@ class HotelCreateView(UserPassesTestMixin,LoginRequiredMixin,CreateView):
 
     def form_valid(self, form):
         with transaction.atomic():
-            form.instance.user = self.request.user
+            form.instance.owner = self.request.user
             self.object = form.save()
             form2 = RoomImgInlineForm(self.request.POST,self.request.FILES,instance=self.object)
             if form2.is_valid():
@@ -142,7 +142,7 @@ class HotelUpdateView(UserPassesTestMixin,LoginRequiredMixin,UpdateView):
         return super(HotelUpdateView,self).form_valid(form)
     
     def test_func(self):
-        if self.request.user.is_superuser or self.request.user.is_staff:
+        if self.request.user.is_superuser or self.request.user.is_staff and self.get_object().owner==self.request.user:
             return True
         return False
     
@@ -156,7 +156,7 @@ class HotelDeleteView(UserPassesTestMixin,LoginRequiredMixin,DeleteView):
     def get_success_url(self):
         return super().get_success_url()
     def test_func(self):
-        if self.request.user.is_superuser or self.request.user.is_staff:
+        if self.request.user.is_superuser or self.request.user.is_staff and self.get_object().owner==self.request.user:
             return True
         return False
 

@@ -11,6 +11,7 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 
 
 class Room(models.Model):
+    owner = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     title = models.CharField(max_length = 150)
     price = models.PositiveIntegerField()
     total_rating = models.IntegerField(blank=True, null=True)
