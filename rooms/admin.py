@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Room,Room_image,Room_Rating,Room_Reservation
+from .models import Room,Room_image,Room_Rating,Room_Reservation,Place
 from .db.model import Active_Room
 # Register your models here.
 
@@ -14,7 +14,7 @@ class Room_imageAdmin(admin.TabularInline):
 @admin.register(Room)
 class RoomAdmin(admin.ModelAdmin):
     inlines = [Room_imageAdmin]
-    list_display = ('title','img_tag','country', 'locality', 'days_number', 'update_at','total_rating' )
+    list_display = ('title','img_tag','city', 'locality', 'days_number', 'update_at','total_rating' )
     readonly_fields = ['created_at']
     search_fields = ('title','descriptions')
     class Meta:
@@ -31,7 +31,7 @@ class RoomAdmin(admin.ModelAdmin):
 
 
 class Active_RoomAdmin(admin.ModelAdmin):
-    list_display = ('title','country','locality', 'update_at','total_rating','active')
+    list_display = ('title','city','locality', 'update_at','total_rating','active')
     list_editable = ('active',)
     inlines = [Room_imageAdmin]
     def get_queryset(self, request):
@@ -63,3 +63,10 @@ class Room_ReservationAdmin(admin.ModelAdmin):
         fields = '__all__'
 
 admin.site.register(Room_Reservation,Room_ReservationAdmin)
+
+
+@admin.register(Place)
+class PlaceAdmin(admin.ModelAdmin):
+    class Meta:
+        model = Place
+        fields = '__all__'

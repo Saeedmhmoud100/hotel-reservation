@@ -48,7 +48,7 @@
           			<h2>{{object.title}}</h2>
 					  
           			<p class="rate mb-5">
-          				<span class="loc"><a href="#"><i class="icon-map"></i> {{object.street}}, {{object.locality}}, {{object.country.name}} </a></span>
+          				<span class="loc"><a href="#"><i class="icon-map"></i> {{object.street}}, {{object.locality}}, {{object.city.name}} </a></span>
           				<span class="star">
 							{% for i in '12345'|make_list %}
 							{% if forloop.counter <= object.total_rating %}
@@ -106,7 +106,7 @@
 									<p>{{room.descriptions|safe|truncatewords:20}}</p>
 									<hr>
 									<p class="bottom-area d-flex">
-										<span><i class="icon-map-o"></i> {{room.country.name}}, Fl</span> 
+										<span><i class="icon-map-o"></i> {{room.city.name}}, Fl</span> 
 										<span class="ml-auto"><a href="{{room.get_reservation_url}}">Book Now</a></span>
 									</p>
 								</div>
@@ -225,7 +225,7 @@
 									<p>{{room.descriptions|safe|truncatewords:20}}</p>
 									<hr>
 									<p class="bottom-area d-flex">
-										<span><i class="icon-map-o"></i> {{room.country.name}}, Fl</span> 
+										<span><i class="icon-map-o"></i> {{room.city.name}}, Fl</span> 
 										<span class="ml-auto"><a href="{{room.get_reservation_url}}">Book Now</a></span>
 									</p>
 								</div>
