@@ -51,7 +51,10 @@ class BlogUpdateView(UserPassesTestMixin,LoginRequiredMixin,UpdateView):
         if self.request.user.is_superuser or self.request.user.is_staff and self.get_object().author==self.request.user:
             return True
         return False
-class BlogDeleteView(LoginRequiredMixin,DeleteView):
+class BlogDeleteView(UserPassesTestMixin,LoginRequiredMixin,DeleteView):
     model = Post
     success_url=reverse_lazy('blog:blog')
-    
+    def test_func(self):
+        if self.request.user.is_superuser or self.request.user.is_staff and self.get_object().author==self.request.user:
+            return True
+        return False
