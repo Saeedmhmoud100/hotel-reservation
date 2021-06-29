@@ -1,7 +1,9 @@
 from django import template
 from rooms.models import Room,Room_Rating
-register = template.Library()
 
+
+
+register = template.Library()
 @register.simple_tag
 def minus_one(num):
     rate = 1
