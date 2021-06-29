@@ -35,8 +35,10 @@
                   <a href="{% url 'blog:blog' %}?tag={{tag}}" class="tag-cloud-link">{{tag}}</a>
                 {% endfor %}
                   
-                
               </div>
+              {% if request.user.is_superuser or request.user.is_staff and object.author == request.user %}
+					  	<a href="{{object.get_update_url}}" class="btn btn-success" style="float:right">Update Post</a>
+					    {% endif %}
             </div>
             
             <div class="about-author d-flex p-5 bg-light">
