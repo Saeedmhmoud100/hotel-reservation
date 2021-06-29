@@ -17,7 +17,9 @@
       </div>
     </div>
 
-
+	{% if request.user.is_superuser or request.user.is_staff %}
+	<a href="{% url 'blog:blog-create' %}" class="btn btn-success" style="margin: 27px 15px;cursor: pointer;z-index: 2;position: absolute;right: 12px;color: white;">Add New Post</a>
+	{% endif %}
     <section class="ftco-section bg-light">
       <div class="container">
         <div class="row d-flex">
