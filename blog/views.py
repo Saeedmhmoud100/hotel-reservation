@@ -1,4 +1,4 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.urls.base import reverse_lazy
 from django.views.generic import ListView,DetailView,CreateView,UpdateView,DeleteView
 from django.db.models.aggregates import Count
@@ -31,7 +31,7 @@ class BlogDetailView(DetailView):
         context['tags'] = Tag.objects.all()
         return context
     
-class BlogCreateView(LoginRequiredMixin,CreateView):
+class BlogCreateView(UserPassesTestMixin,LoginRequiredMixin,CreateView):
     model= Post
     form_class = BlogForm
     
@@ -40,7 +40,10 @@ class BlogCreateView(LoginRequiredMixin,CreateView):
         myform.author=self.request.user
         self.object=form.save()
         return super(BlogCreateView, self).form_valid(form)
-    
+    def test_func(self):
+        if self.request.user.is_superuser or self.request.user.is_staff:
+            return True
+        return False
 class BlogUpdateView(LoginRequiredMixin,UpdateView):
     model = Post
     form_class= BlogForm
