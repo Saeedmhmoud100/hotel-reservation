@@ -1,5 +1,5 @@
-from django.shortcuts import render
-from django.views.generic import ListView,DetailView,CreateView,UpdateView
+from django.urls.base import reverse_lazy
+from django.views.generic import ListView,DetailView,CreateView,UpdateView,DeleteView
 from django.db.models.aggregates import Count
 from django.db.models.query_utils import Q
 from taggit.models import Tag
@@ -44,3 +44,6 @@ class BlogUpdateView(UpdateView):
     model = Post
     form_class= BlogForm
     
+class BlogDeleteView(DeleteView):
+    model = Post
+    success_url=reverse_lazy('blog:blog')

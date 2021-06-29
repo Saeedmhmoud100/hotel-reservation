@@ -46,6 +46,8 @@ class Post(models.Model):
         return reverse("blog:blog-detail", kwargs={"slug": self.slug})
     def get_update_url(self):
         return reverse('blog:blog-update',kwargs={'slug':self.slug})
+    def get_delete_url(self):
+        return reverse('blog:blog-delete',kwargs={'slug':self.slug})
     
     
     
