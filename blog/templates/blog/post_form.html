@@ -3,7 +3,11 @@
 {% load crispy_forms_tags %}
 
 {% block title %}
-  New Post
+  {% if 'update' in request.path %}
+	  Update Post
+  {% else %}
+  		New Post
+  {% endif %}
 {% endblock title %}
 
 {% block content %}
@@ -14,7 +18,7 @@
 			data-scrollax-parent="true">
 			<div class="col-md-9 ftco-animate text-center" data-scrollax=" properties: { translateY: '70%' }">
 				<p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span
-						class="mr-2"><a href="index.html">Home</a></span> <span>Hotel</span></p>
+						class="mr-2"><a href="/">Home</a></span> <span>Hotel</span></p>
 				<h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Hotels</h1>
 			</div>
 		</div>

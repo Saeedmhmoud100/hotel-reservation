@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import ListView,DetailView,CreateView
+from django.views.generic import ListView,DetailView,CreateView,UpdateView
 from django.db.models.aggregates import Count
 from django.db.models.query_utils import Q
 from taggit.models import Tag
@@ -39,3 +39,8 @@ class BlogCreateView(CreateView):
         myform.author=self.request.user
         self.object=form.save()
         return super(BlogCreateView, self).form_valid(form)
+    
+class BlogUpdateView(UpdateView):
+    model = Post
+    form_class= BlogForm
+    
