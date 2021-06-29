@@ -44,10 +44,13 @@ class BlogCreateView(UserPassesTestMixin,LoginRequiredMixin,CreateView):
         if self.request.user.is_superuser or self.request.user.is_staff:
             return True
         return False
-class BlogUpdateView(LoginRequiredMixin,UpdateView):
+class BlogUpdateView(UserPassesTestMixin,LoginRequiredMixin,UpdateView):
     model = Post
     form_class= BlogForm
-    
+    def test_func(self):
+        if self.request.user.is_superuser or self.request.user.is_staff and self.get_object().author==self.request.user:
+            return True
+        return False
 class BlogDeleteView(LoginRequiredMixin,DeleteView):
     model = Post
     success_url=reverse_lazy('blog:blog')
