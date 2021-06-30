@@ -272,8 +272,9 @@
 				},error(err){
 					{% comment %}
 					//window.location.replace("{% url 'rooms:login' %}"+'?next={{request.path}}')
-					{% endcomment %}
+					
 					window.location.replace("{% url 'rooms:home' %}")
+					{% endcomment %}
 				}
 			})
 		  }) 

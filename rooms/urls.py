@@ -5,17 +5,15 @@ from . import views
 app_name = 'rooms'
 
 urlpatterns = [
-    #home page url
-    path('', views.HomeView.as_view(),name='home'),
     #room list url
-    path('hotel/', views.HotelListView.as_view(),name='hotel'),
+    path('', views.HotelListView.as_view(),name='hotel'),
     #room detail urls
-    path('hotel/room/<slug:slug>/', views.HotelRoomView.as_view(),name='hotel_room'),
+    path('room/<slug:slug>/', views.HotelRoomView.as_view(),name='hotel_room'),
     path("room_rating/", views.room_rate, name="room-rating"),
     #create new room url
-    path("hotel/rooms/create/", views.HotelCreateView.as_view(), name="new-room"),
+    path("rooms/create/", views.HotelCreateView.as_view(), name="new-room"),
     #update room url
-    path("hotel/room/<slug:slug>/update", views.HotelUpdateView.as_view(), name="update_room"),
-    path("hotel/room/<slug:slug>/delete", views.HotelDeleteView.as_view(), name="delete_room"),
+    path("room/<slug:slug>/update", views.HotelUpdateView.as_view(), name="update_room"),
+    path("room/<slug:slug>/delete", views.HotelDeleteView.as_view(), name="delete_room"),
 
 ]

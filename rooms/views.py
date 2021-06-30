@@ -2,9 +2,8 @@ from django.shortcuts import render,redirect
 from django.urls import reverse
 from django.http import JsonResponse
 from django.urls.base import reverse_lazy
-from django.views.generic import ListView,DeleteView,CreateView,UpdateView
+from django.views.generic import DeleteView,CreateView,UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
-from django.views.generic.base import TemplateView
 from django.views.generic.edit import FormMixin
 from django_filters.views import FilterView
 from django.contrib import messages
@@ -27,9 +26,6 @@ def random_rooms(rooms,num=None):
     if num:
         return list(x[:num])
     return list(x)
-
-class HomeView(TemplateView):
-    template_name = 'rooms/home.html'
 
 class HotelListView(FilterView):
     template_name = 'rooms/hotel.html'
