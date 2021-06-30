@@ -87,9 +87,9 @@ class Room_Rating(models.Model):
         return f'{self.room.title} - rating'
     
     
-class Active_Room_Reservation_Maneger(models.Manager):
+class Room_Reservation_Maneger(models.Manager):
     def is_active(self):
-        return self.get_queryset().filter(canceled=False,done=False)
+        return self.get_queryset().filter(canceled=False,done=False,data_to__gte=timezone.now())
     
 
 class Room_Reservation(models.Model):
@@ -106,7 +106,7 @@ class Room_Reservation(models.Model):
     canceled = models.BooleanField(default=False)
     done = models.BooleanField(default=False)
     
-    objects = Active_Room_Reservation_Maneger()
+    objects = Room_Reservation_Maneger()
     
     class Meta:
         ordering = ['-id']
