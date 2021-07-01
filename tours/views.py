@@ -11,8 +11,10 @@ from django.views.generic.edit import CreateView, DeleteView, FormMixin, UpdateV
 from django_filters.views import FilterView
 from django.contrib import messages
 from django.db import transaction
-from .models import Tour, Place, Tour_Rating, Tour_Reservation
+from .models import Tour, Tour_Rating, Tour_Reservation
 from .forms import TourForm, TourImgInlineForm, TourReservationForm
+from main.models import Place
+
 # Create your views here.
 
 def random_tours(tours,num=None):

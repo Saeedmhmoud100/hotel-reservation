@@ -6,4 +6,5 @@ app_name = 'main'
 
 urlpatterns = [
     path('', views.HomeView.as_view(),name='home'),
+    path('search/', views.places_search,name='search'),
 ]

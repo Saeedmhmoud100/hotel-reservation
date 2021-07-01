@@ -6,6 +6,7 @@ from django.utils.safestring import mark_safe
 from django.contrib.auth import get_user_model
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.template.defaultfilters import slugify, truncatechars
+from main.models import Place
 
 # Create your models here.
 
@@ -14,7 +15,7 @@ class Tour(models.Model):
     owner = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     title = models.CharField(max_length = 150)
     price = models.PositiveIntegerField()
-    city = models.ForeignKey('place', on_delete=models.CASCADE)
+    city = models.ForeignKey(Place, on_delete=models.CASCADE)
     locality =models.CharField(max_length=50)
     street = models.CharField(max_length = 150)
     descriptions = RichTextField()
@@ -76,13 +77,6 @@ class Tour(models.Model):
 
     class Meta:
         ordering=['-id']
-    
-class Place(models.Model):
-    place = models.CharField(max_length=100)
-    created_at = models.DateTimeField(auto_now_add=True)
-    
-    def __str__(self):
-        return self.place
     
     
 class Tour_image(models.Model):

@@ -7,7 +7,7 @@ from django.utils.html import format_html
 from django.utils.safestring import mark_safe
 from django.contrib.auth import get_user_model
 from django.core.validators import MaxValueValidator, MinValueValidator
-
+from main.models import Place
 
 
 class Room(models.Model):
@@ -15,7 +15,7 @@ class Room(models.Model):
     title = models.CharField(max_length = 150)
     price = models.PositiveIntegerField()
     total_rating = models.IntegerField(blank=True, null=True)
-    city = models.ForeignKey('place', on_delete=models.CASCADE)
+    city = models.ForeignKey(Place, on_delete=models.CASCADE)
     locality =models.CharField(max_length=50)
     street = models.CharField(max_length = 150)
     descriptions = RichTextField()
@@ -47,10 +47,6 @@ class Room(models.Model):
     def get_reservation_url(self):
         return '{}#reservation_form'.format(reverse("rooms:hotel_room", kwargs={'slug':self.slug}))
 
-class Place(models.Model):
-    name = models.CharField(max_length = 100)
-    def __str__(self):
-        return self.name
 class Room_image(models.Model):
     room = models.ForeignKey(Room, on_delete=models.CASCADE, related_name='room_img')
     img = models.ImageField(upload_to='rooms/',blank=True)

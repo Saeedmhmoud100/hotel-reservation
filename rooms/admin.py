@@ -64,9 +64,3 @@ class Room_ReservationAdmin(admin.ModelAdmin):
 
 admin.site.register(Room_Reservation,Room_ReservationAdmin)
 
-
-@admin.register(Place)
-class PlaceAdmin(admin.ModelAdmin):
-    class Meta:
-        model = Place
-        fields = '__all__'
