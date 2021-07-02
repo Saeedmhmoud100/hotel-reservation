@@ -5,7 +5,7 @@
 
 
 {% block title %}
-	Hotel
+	Search
 {% endblock title %}
 
 
@@ -29,8 +29,8 @@
         <div class="row">
           <div class="col-lg-12">
           	<div class="row">
-				  {% if post_list %}
-				  {% for obj in post_list %}
+				  {% if response %}
+				  {% for obj in response %}
 				  <div class="col-md-4 col-lg-3 ftco-animate">
 				<div class="destination">
 					<a href="{{obj.get_absolute_url}}" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url({{obj.img.url}});">
@@ -58,7 +58,7 @@
 										  <i class="icon-star-o"></i>
 									{% endfor %}
 									
-									<span style="padding-left: 3px;">{%minus_one obj%} Rating</span>
+									<span style="padding-left: 3px;">{{obj.total_rating}} Rating</span>
 								</p>
 							</div>
 							<div class="two">

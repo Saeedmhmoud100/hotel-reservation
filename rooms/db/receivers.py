@@ -25,9 +25,9 @@ def total_rating(sender,instance,*args,**kwargs):
         for i in instance.rating.all():
             rating += i.rating
         rating = rating / count
-        instance.total_rating = rating
+        instance.total_rate = rating
     else:
-        instance.total_rating = 1
+        instance.total_rate = 1
 
 
 pre_save.connect(room_slug, sender=Room)

@@ -41,6 +41,7 @@
 
       <div class="collapse navbar-collapse" id="ftco-nav">
         <ul class="navbar-nav ml-auto">
+          
           <li class="nav-item {% if urlpath == '/' %}active{% endif %}"><a href="{% url 'main:home' %}" class="nav-link">Home</a></li>
           <li class="nav-item {% if 'about' in urlpath %}active{% endif %}"><a href="about.html" class="nav-link">About</a></li>
           <li class="nav-item {% if 'tour' in urlpath %}active{% endif %}"><a href="{% url 'tours:tour' %}" class="nav-link">Tour</a></li>
