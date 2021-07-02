@@ -6,7 +6,7 @@ from django.utils.safestring import mark_safe
 from django.contrib.auth import get_user_model
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.template.defaultfilters import slugify, truncatechars
-from main.models import Place
+from main.models import Category, Place
 
 # Create your models here.
 
@@ -18,6 +18,7 @@ class Tour(models.Model):
     city = models.ForeignKey(Place, on_delete=models.CASCADE)
     locality =models.CharField(max_length=50)
     street = models.CharField(max_length = 150)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
     descriptions = RichTextField()
     img = models.ImageField(upload_to='rooms/')
     days_number = models.PositiveIntegerField()

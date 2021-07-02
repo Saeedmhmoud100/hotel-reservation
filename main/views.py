@@ -5,7 +5,7 @@ from django.db.models.query_utils import Q
 from rooms.models import Room
 from itertools import chain
 from tours.models import Tour
-from .models import Place
+from .models import Place,Category
 # Create your views here.
 
 class HomeView(TemplateView):
@@ -13,6 +13,7 @@ class HomeView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(HomeView, self).get_context_data(**kwargs)
         context['places'] = Place.objects.all()
+        context['Categorys']=Category.objects.all()
         return context
     
 def places_search(request):

@@ -7,7 +7,7 @@ from django.utils.html import format_html
 from django.utils.safestring import mark_safe
 from django.contrib.auth import get_user_model
 from django.core.validators import MaxValueValidator, MinValueValidator
-from main.models import Place
+from main.models import Category, Place
 
 
 class Room(models.Model):
@@ -18,6 +18,7 @@ class Room(models.Model):
     city = models.ForeignKey(Place, on_delete=models.CASCADE)
     locality =models.CharField(max_length=50)
     street = models.CharField(max_length = 150)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
     descriptions = RichTextField()
     img = models.ImageField(upload_to='rooms/')
     days_number = models.PositiveIntegerField()
