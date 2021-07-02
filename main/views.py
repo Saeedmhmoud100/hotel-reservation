@@ -16,6 +16,7 @@ class HomeView(TemplateView):
         context['places'] = Place.objects.all().annotate(rooms=Count('room'),tours=Count('tour'))
         context['Categorys']=Category.objects.all()
         context['Home_Carts']=Home_Cart.objects.all()[:4]
+        context['top_tours']=Tour.objects.all().order_by('tour_Reservation')[:5]
         return context
     
 def places_search(request):
