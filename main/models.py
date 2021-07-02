@@ -16,3 +16,14 @@ class Category(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     def __str__(self):
         return self.name
+    
+class Home_Cart(models.Model):
+    title = models.CharField(max_length =30)
+    text = models.CharField(max_length=200)
+    icon = models.CharField(max_length=50)
+    created_add = models.DateTimeField(auto_now=False)
+    
+    def __str__(self):
+        return self.title
+    class Meta:
+        ordering=['-id']

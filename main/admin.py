@@ -1,5 +1,5 @@
 from django.contrib import admin
-from main.models import Place,Category
+from main.models import Place,Category,Home_Cart
 
 # Register your models here.
 
@@ -14,4 +14,11 @@ class placeAdmin(admin.ModelAdmin):
 class CategoryAdmin(admin.ModelAdmin):
     class Meta:
         model = Category
+        fields = '__all__'
+
+
+@admin.register(Home_Cart)
+class Home_CartAdmin(admin.ModelAdmin):
+    class Meta:
+        model = Home_Cart
         fields = '__all__'
