@@ -83,13 +83,13 @@
 					  {% for place in places %}
 						  <div class="item">
 						  <div class="destination">
-							  <a href="#" class="img d-flex justify-content-center align-items-center" style="background-image: url({{place.img.url}});">
+							  <a href="{% url 'main:palce_filter' place %}" class="img d-flex justify-content-center align-items-center" style="background-image: url({{place.img.url}});">
 								  <div class="icon d-flex justify-content-center align-items-center">
 									  <span class="icon-search2"></span>
 								  </div>
 							  </a>
 							  <div class="text p-3">
-								  <h3><a href="#">{{place.name}}</a></h3>
+								  <h3><a href="{% url 'main:palce_filter' place %}">{{place.name}}</a></h3>
 								  <span class="listing">{{place.rooms|add:place.tours}} Listing</span>
 							  </div>
 						  </div>

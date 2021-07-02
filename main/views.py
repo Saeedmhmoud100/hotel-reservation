@@ -41,3 +41,10 @@ def category_filter(request,category):
     res = list(chain(rooms,tours))
     shuffle(res)
     return render(request,'main/search.html',{'response':res})
+
+def place_filter(request,place):
+    rooms=Room.objects.filter(city__name=place)
+    tours=Tour.objects.filter(city__name=place)
+    res = list(chain(rooms,tours))
+    shuffle(res)
+    return render(request,'main/search.html',{'response':res})
