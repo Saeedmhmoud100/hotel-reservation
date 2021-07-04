@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.views.generic import TemplateView
 from django.db.models.query_utils import Q
 from django.db.models.aggregates import Count
+from django.contrib.auth import get_user_model
 from rooms.models import Room
 from itertools import chain
 from tours.models import Tour
@@ -23,6 +24,10 @@ class HomeView(TemplateView):
         context['popular_restaurants']= res[:4]
         posts =Post.objects.all().order_by('-id')[:20];shuffle(posts)
         context['recent_blog']=posts[:4]
+        context['users_count'] = get_user_model().objects.all().count()
+        context['places_count']=Place.objects.all().count()
+        context['hotels_count']=Room.objects.all().count()
+        context['restaurants_count']=Room.objects.all().count() + Tour.objects.all().count() 
         return context
     
 def places_search(request):
