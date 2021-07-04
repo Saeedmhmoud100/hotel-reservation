@@ -14,7 +14,7 @@ class Room(models.Model):
     owner = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     title = models.CharField(max_length = 150)
     price = models.PositiveIntegerField()
-    total_rate = models.IntegerField(blank=True, null=True)
+    total_rating = models.IntegerField(blank=True, null=True)
     city = models.ForeignKey(Place, on_delete=models.CASCADE)
     locality =models.CharField(max_length=50)
     street = models.CharField(max_length = 150)
@@ -38,15 +38,6 @@ class Room(models.Model):
             "<img src='{}'  width='50' height='50' />",
             self.img.url,
         )
-    @property
-    def total_rating(self):
-        rating_count= self.rating.all()
-        rating = 0
-        for i in rating_count:
-            rating += i.rating
-        if rating_count.exists():
-            return int(rating/len(rating_count))
-        return '0'
     def get_absolute_url(self):
         return reverse("rooms:hotel_room", kwargs={'slug':self.slug})
     def get_update_url(self):

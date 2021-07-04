@@ -31,7 +31,7 @@ class HotelListView(FilterView):
     template_name = 'rooms/hotel.html'
     model = Room
     paginate_by = 9
-    filterset_fields = ['city', 'locality','data_from','data_to','total_rate']
+    filterset_fields = ['city', 'locality','data_from','data_to','total_rating']
     
     def get_queryset(self):
         return super().get_queryset().filter(active=True)
