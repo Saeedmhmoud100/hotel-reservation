@@ -17,6 +17,7 @@ class HomeView(TemplateView):
         context['Categorys']=Category.objects.all()
         context['Home_Carts']=Home_Cart.objects.all()[:4]
         context['top_tours']=Tour.objects.all().order_by('tour_Reservation')[:5]
+        context['popular_rooms'] = Room.objects.all().order_by('total_rating')[:5]
         return context
     
 def places_search(request):
