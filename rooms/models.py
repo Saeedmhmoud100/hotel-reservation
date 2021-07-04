@@ -14,7 +14,7 @@ class Room(models.Model):
     owner = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     title = models.CharField(max_length = 150)
     price = models.PositiveIntegerField()
-    total_rating = models.IntegerField(blank=True, null=True)
+    total_rating = models.IntegerField(default=0,blank=True, null=True)
     city = models.ForeignKey(Place, on_delete=models.CASCADE)
     locality =models.CharField(max_length=50)
     street = models.CharField(max_length = 150)
