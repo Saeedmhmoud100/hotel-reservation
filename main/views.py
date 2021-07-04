@@ -6,6 +6,7 @@ from django.db.models.aggregates import Count
 from rooms.models import Room
 from itertools import chain
 from tours.models import Tour
+from blog.models import Post
 from .models import Home_Cart, Place,Category
 # Create your views here.
 
@@ -20,6 +21,8 @@ class HomeView(TemplateView):
         context['popular_rooms'] = Room.objects.order_by('total_rating')[:5]
         res = list(chain(Room.objects.filter(category__name='Restaurant'),Tour.objects.filter(category__name='Restaurant')));shuffle(res)
         context['popular_restaurants']= res[:4]
+        posts =Post.objects.all().order_by('-id')[:20];shuffle(posts)
+        context['recent_blog']=posts[:4]
         return context
     
 def places_search(request):
