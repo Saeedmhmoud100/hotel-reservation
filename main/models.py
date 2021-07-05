@@ -28,3 +28,14 @@ class Home_Cart(models.Model):
         return self.title
     class Meta:
         ordering=['-id']
+
+class Newsletter_Email(models.Model):
+    email = models.EmailField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = 'Newsletter_Email'
+        verbose_name_plural = 'Newsletter_Emails'
+
+    def __str__(self):
+        return self.email
