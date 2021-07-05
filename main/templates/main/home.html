@@ -433,23 +433,54 @@
 	<div class="parallax-img d-flex align-items-center">
 	  <div class="container">
 		<div class="row d-flex justify-content-center">
-		  <div class="col-md-7 text-center heading-section heading-section-white ftco-animate">
+		  <div id="main_form_div" class="col-md-7 text-center heading-section heading-section-white ftco-animate">
 			<h2>Subcribe to our Newsletter</h2>
 			<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in</p>
 			<div class="row d-flex justify-content-center mt-5">
 			  <div class="col-md-8">
-				<form action="#" class="subscribe-form">
+				<form action="{% url 'main:news_letter_Subcriber' %}" method="POST" class="subscribe-form" id="newsletter_form">
+					{% csrf_token %}
 				  <div class="form-group d-flex">
-					<input type="text" class="form-control" placeholder="Enter email address">
+					<input type="text" name='email' class="form-control" placeholder="Enter email address">
 					<input type="submit" value="Subscribe" class="submit px-3">
 				  </div>
 				</form>
 			  </div>
 			</div>
 		  </div>
+		  <div id="success_div" style='display:none' class="col-md-7 text-center heading-section heading-section-white ftco-animate">
+		  <h2>Subscribed Successfully</h2>
+		</div>
 		</div>
 	  </div>
 	</div>
   </section>
 
 {% endblock content %}
+
+{% block script %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajaxy/1.6.1/scripts/jquery.ajaxy.min.js" integrity="sha512-bztGAvCE/3+a1Oh0gUro7BHukf6v7zpzrAb3ReWAVrt+bVNNphcl2tDTKCBr5zk7iEDmQ2Bv401fX3jeVXGIcA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+	$('#newsletter_form').submit(function(e){
+		e.preventDefault()
+		var form = $(this)
+		var url = form.attr('action')
+		$.ajax({
+			type:'POST',
+			url:url,
+			data:form.serialize(),
+			success:function(e){
+				document.getElementById('main_form_div').style.display='none';
+				document.getElementById('success_div').style.display='block'
+			},error(err){
+					{% comment %}
+					//window.location.replace("{% url 'rooms:login' %}"+'?next={{request.path}}')
+					
+					window.location.replace("{% url 'main:home' %}")
+					{% endcomment %}
+		})
+	})
+	
+</script>
+{% endblock script %}
+	

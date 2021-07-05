@@ -1,14 +1,16 @@
 from random import shuffle
+from django.http import JsonResponse
 from django.shortcuts import render
 from django.views.generic import TemplateView
 from django.db.models.query_utils import Q
 from django.db.models.aggregates import Count
 from django.contrib.auth import get_user_model
+from django.contrib.auth.decorators import login_required   
 from rooms.models import Room
 from itertools import chain
 from tours.models import Tour
 from blog.models import Post
-from .models import Home_Cart, Place,Category
+from .models import Home_Cart, Newsletter_Email, Place,Category
 # Create your views here.
 
 class HomeView(TemplateView):
@@ -60,3 +62,8 @@ def place_filter(request,place):
     res = list(chain(rooms,tours))
     shuffle(res)
     return render(request,'main/search.html',{'response':res})
+@login_required
+def news_letter_Subcriber(request):
+    email = request.POST.get('email',None)
+    Newsletter_Email.objects.create(email=email) if email else JsonResponse({'done':'no'})
+    return JsonResponse({'done':'success'})
