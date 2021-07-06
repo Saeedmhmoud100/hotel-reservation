@@ -1,3 +1,4 @@
+from random import shuffle
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.http.response import JsonResponse
@@ -19,18 +20,20 @@ from main.models import Place
 
 def random_tours(tours,num=None):
     try:
-        x =[p for p in tours.objects.all()]
+        x =[p for p in tours]
     except AttributeError:
         x = tours   
     if num:
+        shuffle(list(x))
         return list(x[:num])
+    shuffle(list(x))
     return list(x)
 
 class TourListView(FilterView):
     model = Tour
     template_name = 'tours/tour_list.html'
     filterset_fields= ['data_from','data_to','city','locality',]
-    paginate_by = 1
+    paginate_by = 9
     def get_queryset(self):
         return super().get_queryset().filter(active=True)
     def get_context_data(self, **kwargs):

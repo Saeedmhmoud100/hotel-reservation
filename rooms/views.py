@@ -10,7 +10,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.utils import timezone
-from random import *
+from random import shuffle  
 from django.db import transaction
 from .models import Room,Room_Rating, Room_Reservation
 from .forms import RoomReservationForm,RoomForm,RoomImgInlineForm
@@ -20,11 +20,13 @@ from .forms import RoomReservationForm,RoomForm,RoomImgInlineForm
 
 def random_rooms(rooms,num=None):
     try:
-        x =[p for p in rooms.objects.all()]
+        x =[p for p in rooms]
     except AttributeError:
         x = rooms   
     if num:
+        shuffle(list(x))
         return list(x[:num])
+    shuffle(list(x))
     return list(x)
 
 class HotelListView(FilterView):

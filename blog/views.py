@@ -12,7 +12,7 @@ from .forms import BlogForm
 # Create your views here.
 class BlogListView(ListView):
     model = Post
-    paginate_by=1
+    paginate_by=12
     
     def get_queryset(self):
         queryset = super(BlogListView, self).get_queryset().filter(active=True)
