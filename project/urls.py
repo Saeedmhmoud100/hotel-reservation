@@ -24,6 +24,7 @@ urlpatterns = [
     path('hotels/',include('rooms.urls', namespace='rooms')),
     path('tours/',include('tours.urls', namespace='tours')),
     path('blog/',include('blog.urls', namespace='blog')),
+    path('about/',include('about.urls', namespace='about')),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
