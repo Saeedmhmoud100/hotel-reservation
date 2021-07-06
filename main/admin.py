@@ -1,5 +1,5 @@
 from django.contrib import admin
-from main.models import Place,Category,Home_Cart,Newsletter_Email
+from main.models import Place,Category,Home_Cart,Newsletter_Email,Info
 
 # Register your models here.
 
@@ -30,4 +30,11 @@ class Newsletter_EmailAdmin(admin.ModelAdmin):
     readonly_fields = ['created_at']    
     class Meta:
         model = Newsletter_Email
+        fields = '__all__'
+
+
+@admin.register(Info)
+class MyFooterAdmin(admin.ModelAdmin):
+    class Meta:
+        model = Info
         fields = '__all__'
