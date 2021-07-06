@@ -10,6 +10,7 @@ from rooms.models import Room
 from itertools import chain
 from tours.models import Tour
 from blog.models import Post
+from about.models import About
 from .models import Home_Cart, Newsletter_Email, Place,Category
 # Create your views here.
 
@@ -30,6 +31,7 @@ class HomeView(TemplateView):
         context['places_count']=Place.objects.all().count()
         context['hotels_count']=Room.objects.all().count()
         context['restaurants_count']=Room.objects.all().count() + Tour.objects.all().count() 
+        context["about"] = About.objects.last() 
         return context
     
 def places_search(request):
