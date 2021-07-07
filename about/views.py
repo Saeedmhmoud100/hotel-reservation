@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import ListView
+from django.views.generic import ListView,View
 from about.models import About, FAQ
 
 # Create your views here.
@@ -12,5 +12,6 @@ class Aboutview(ListView):
         context["about"] = About.objects.last() 
         return context
     
-def contact(request):
-    return render(request,'about/contact.html')
+class ContactView(View):
+    def get(self,request, *args, **kwargs):
+        return render(request,'about/contact.html')
