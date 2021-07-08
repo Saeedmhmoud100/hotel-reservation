@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'about.apps.AboutConfig',
     'ckeditor',
     'django_countries',
+    'phonenumber_field',
     'crispy_forms',
     'taggit',
 ]
@@ -140,9 +141,10 @@ STATICFILES_DIRS = [
 
 MEDIA_URL='/media/'
 MEDIA_ROOT=BASE_DIR /'media'
-
-
 CRISPY_TEMPLATE_PACK  = 'bootstrap4'
+
+AUTH_USER_MODEL = 'accounts.User'
+DEFAULT_AUTO_FIELD='django.db.models.AutoField' 
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
