@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView,View
 from django.contrib import messages
 from about.models import About, FAQ
@@ -18,6 +20,7 @@ class Aboutview(ListView):
 class ContactView(View):
     def get(self,request, *args, **kwargs):
         return render(request,'about/contact.html',{'info':Info.objects.last()})
+    @method_decorator(login_required)
     def post(self, request, *args, **kwargs):
         subject = request.POST['subject']
         name = request.POST['name']

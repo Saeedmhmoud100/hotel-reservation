@@ -8,9 +8,10 @@ from .models import User
 @admin.register(User)
 class UserAdmin(UserAdmin):
     readonly_fields=('slug','last_update')
+    
     fieldsets = (
         (None, {'fields': ('username', 'password')}),
-        (_('Personal info'), {'fields': ('first_name', 'last_name', 'email','phone_number','img','country', 'city')}),
+        (_('Personal info'), {'fields': ('first_name', 'last_name', 'email','phone_number','image','country', 'city')}),
         (_('Permissions'), {
             'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions'),
         }),
