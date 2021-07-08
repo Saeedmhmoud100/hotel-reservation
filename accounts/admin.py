@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.utils.translation import gettext, gettext_lazy as _
 from .models import User
+from .forms import UserAdminCreationsForm
 # Register your models here.
 
 
@@ -17,3 +18,10 @@ class UserAdmin(UserAdmin):
         }),
         (_('Important dates'), {'fields': ('last_login', 'last_update' , 'date_joined','slug')}),
     )
+    add_fieldsets = (
+        (None, {
+            'classes': ('wide',),
+            'fields': ('username', 'email' , 'password1', 'password2'),
+        }),
+    )
+    add_form = UserAdminCreationsForm
