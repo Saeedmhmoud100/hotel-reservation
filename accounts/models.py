@@ -17,7 +17,7 @@ def get_profile_image_filepath(self, filename):
 
 class User(AbstractUser):
     email = models.EmailField('email address',unique=True)
-    image = models.ImageField(upload_to=get_profile_image_filepath,blank=True)
+    image = models.ImageField(upload_to=get_profile_image_filepath,default='default.png')
     country = CountryField(blank=True)
     city = models.CharField(max_length = 150,blank=True)
     phone_number = PhoneNumberField(blank=True)
