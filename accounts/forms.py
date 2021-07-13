@@ -13,4 +13,4 @@ class UserRegisterForm(UserCreationForm):
         
 class LoginForm(AuthenticationForm):
     username = UsernameField()
-    password = forms.CharField(widget=forms.PasswordInput())
+    password = forms.CharField(min_length=8,widget=forms.PasswordInput())

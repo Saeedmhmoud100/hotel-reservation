@@ -152,3 +152,8 @@ EMAIL_HOST_USER = 'yor email@gmail.com'
 EMAIL_HOST_PASSWORD = 'your password'
 EMAIL_USE_TLS = True
 EMAIL_PORT = '587'
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'accounts.backends.EmailBackend',
+]
