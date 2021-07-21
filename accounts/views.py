@@ -31,5 +31,5 @@ class UserLoginView(LoginView):
             self.request.session.set_expiry(0)
         return super(UserLoginView, self).form_valid(form)
 def profile(request):
-    return render(request,'profile.html')
+    return render(request,'accounts/profile.html')
 

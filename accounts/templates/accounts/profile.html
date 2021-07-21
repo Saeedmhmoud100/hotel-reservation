@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+  Profile
+{% endblock title %}
+{% block content %}
+<div class="hero-wrap js-fullheight" style="background-image: url('{% static 'images/bg_2.jpg' %}');">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center" data-scrollax-parent="true">
+        <div class="col-md-9 ftco-animate text-center" data-scrollax=" properties: { translateY: '70%' }">
+          <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="index.html">Home</a></span> <span>Registe</span></p>
+          <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Profile</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="ftco-section contact-section ftco-degree-bg">
+      <center class="mb-5 mt-2"><h1>Your Profile</h1></center>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 mx-auto">
+            <center class="mb-3"><h5>Your Image</h5>
+                <img class="img-fluid rounded-circle border" src="{% static 'images/person_1.jpg' %}" width="120px" alt="">
+            <center>
+        </div>
+        <div class="col-md-4 mx-auto">
+            <center class="mb-3"><h5>email Info</h5>
+                <h6>username: test</h6>
+                <h6>first name: test</h6>
+                <h6>last name: test</h6>
+                <h6>email: test </h6>
+            </center>
+        </div>
+        <div class="col-md-4 mx-auto">
+            <center class="mb-5"><h5>personal Info</h5>
+                <h6>phone: test</h6>
+                <h6>country: test</h6>
+                <h6>city: test</h6>
+            </center>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock content %}
+    
