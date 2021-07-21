@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+  Logout
+{% endblock title %}
+{% block content %}
+<div class="hero-wrap js-fullheight" style="background-image: url('{% static 'images/bg_2.jpg' %}');">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center" data-scrollax-parent="true">
+        <div class="col-md-9 ftco-animate text-center" data-scrollax=" properties: { translateY: '70%' }">
+          <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="index.html">Home</a></span> <span>Registe</span></p>
+          <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Logout</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="ftco-section contact-section ftco-degree-bg">
+    <div class="container">
+      <div class="row block-9">
+        <div class="col-md-10 pr-md-10 mx-auto">
+            <center>
+                <h2>You have been successfully logged out</h2>
+                <h5><a href="{% url 'accounts:login' %}">login page</a></h5>
+            </center>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock content %}
+    
