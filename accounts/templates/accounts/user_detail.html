@@ -23,22 +23,22 @@
       <div class="row">
         <div class="col-md-4 mx-auto">
             <center class="mb-3"><h5>Your Image</h5>
-                <img class="img-fluid rounded-circle border" src="{% static 'images/person_1.jpg' %}" width="120px" alt="">
+                <img class="img-fluid rounded-circle border" src="{{object.image.url}}" width="120px" alt="">
             <center>
         </div>
         <div class="col-md-4 mx-auto">
-            <center class="mb-3"><h5>email Info</h5>
-                <h6>username: test</h6>
-                <h6>first name: test</h6>
-                <h6>last name: test</h6>
-                <h6>email: test </h6>
+            <center class="mb-3"><h5>Email Info</h5>
+                <h6><strong>Username</strong>: {{object.username}}</h6>
+                <h6><strong>First Name</strong>: {{object.first_name}}</h6>
+                <h6><strong>Last Name</strong>: {{object.last_name}}</h6>
+                <h6><strong>Email</strong>: {{object.email}}</h6>
             </center>
         </div>
         <div class="col-md-4 mx-auto">
-            <center class="mb-5"><h5>personal Info</h5>
-                <h6>phone: test</h6>
-                <h6>country: test</h6>
-                <h6>city: test</h6>
+            <center class="mb-5"><h5>Personal Info</h5>
+                <h6><strong>Phone Numper</strong>: {{object.phone_number}}</h6>
+                <h6><strong>Country</strong>: {{object.country.name}}</h6>
+                <h6><strong>City</strong>: {{object.city}}</h6>
             </center>
         </div>
       </div>

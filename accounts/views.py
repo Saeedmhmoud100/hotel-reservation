@@ -1,7 +1,7 @@
 from django.shortcuts import redirect, render
-from django.views.generic import View
+from django.views.generic import View,DetailView
 from django.contrib.auth.views import LoginView
-from django.contrib.auth import login
+from django.contrib.auth import get_user_model, login
 from .forms import LoginForm, UserRegisterForm
 
 # Create your views here.
@@ -30,6 +30,7 @@ class UserLoginView(LoginView):
         if not remember_me:
             self.request.session.set_expiry(0)
         return super(UserLoginView, self).form_valid(form)
-def profile(request):
-    return render(request,'accounts/profile.html')
+class ProfileView(DetailView):
+    model =  get_user_model()
+    
 
