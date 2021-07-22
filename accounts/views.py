@@ -2,6 +2,7 @@ from django.shortcuts import redirect, render
 from django.views.generic import View,DetailView
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import get_user_model, login
+from rooms.models import Room
 from .forms import LoginForm, UserRegisterForm
 
 # Create your views here.
@@ -33,4 +34,9 @@ class UserLoginView(LoginView):
 class ProfileView(DetailView):
     model =  get_user_model()
     
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        print(self.get_slug_field)
+        context['object_list'] = Room.objects.filter(owner__slug=self.kwargs['slug'])
+        return context
 
