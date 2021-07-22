@@ -1,4 +1,5 @@
 from django.shortcuts import redirect, render
+from django.urls import reverse
 from django.views.generic import View,DetailView
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import get_user_model, login
@@ -31,6 +32,9 @@ class UserLoginView(LoginView):
         if not remember_me:
             self.request.session.set_expiry(0)
         return super(UserLoginView, self).form_valid(form)
+    def get_success_url(self):
+        return self.request.user.get_absolute_url()
+    
 class ProfileView(DetailView):
     model =  get_user_model()
     

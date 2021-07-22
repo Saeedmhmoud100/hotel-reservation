@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser,UserManager
 from django.template.defaultfilters import slugify
 from django.utils.html import format_html
+from django.urls import reverse
 from django_countries.fields import CountryField
 from phonenumber_field.modelfields import PhoneNumberField
 # Create your models here.
@@ -26,11 +27,15 @@ class User(AbstractUser):
     
     objects = MyUserManager()
     def get_profile_image_filename(self):
-        return str(self.profile_image)[str(self.profile_image).index('profile_images/' + str(self.pk) +  ' - ' + str(self.username) + "/"):]
-    
+        if self.image:
+            return str(self.image)[str(self.image).index('profile_images/' + str(self.pk) +  ' - ' + str(self.username) + "/"):]
+        else:
+            return 'Not Image'
     def save(self,*args, **kwargs):
         if self.username:
             self.slug = slugify(self.username)  
         super(User, self).save(*args, **kwargs)
+    def get_absolute_url(self):
+        return reverse('accounts:profile', args=[self.slug])
     
 	
