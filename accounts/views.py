@@ -1,25 +1,25 @@
 from django.shortcuts import redirect, render
 from django.urls import reverse
-from django.views.generic import View,DetailView
+from django.views.generic import View,DetailView,UpdateView
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import get_user_model, login
 from rooms.models import Room
-from .forms import LoginForm, UserRegisterForm
+from .forms import LoginForm, UserRegisterForm, UserUpdateForm
 
 # Create your views here.
 
 class UserRegisterView(View):
     def get(self,request, *args, **kwargs):
-        return render(request,'accounts/register.html',{'form':UserRegisterForm()})
+        return render(request,'accounts/user_form.html',{'form':UserRegisterForm()})
     def post(self,request, *args, **kwargs):
         form = UserRegisterForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('accounts:profile')
+            return redirect('accounts:login')
         else:
             print('yes')
 
-            return render(request,'accounts/register.html',{'form':form})
+            return render(request,'accounts/user_form.html',{'form':form})
         
 
 class UserLoginView(LoginView):
@@ -44,3 +44,8 @@ class ProfileView(DetailView):
         context['object_list'] = Room.objects.filter(owner__slug=self.kwargs['slug'])
         return context
 
+class ProfileUpdateView(UpdateView):
+    model=get_user_model()
+    form_class=UserUpdateForm
+    def get_success_url(self):
+        return self.get_object().get_absolute_url()

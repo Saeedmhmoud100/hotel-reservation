@@ -28,7 +28,7 @@ class User(AbstractUser):
     objects = MyUserManager()
     def get_profile_image_filename(self):
         if self.image:
-            return str(self.image)[str(self.image).index('profile_images/' + str(self.pk) +  ' - ' + str(self.username) + "/"):]
+            return'/media/'+ str(self.image)[str(self.image).index('profile_images/' + str(self.pk) +  ' - ' + str(self.username) + "/"):]
         else:
             return 'Not Image'
     def save(self,*args, **kwargs):
