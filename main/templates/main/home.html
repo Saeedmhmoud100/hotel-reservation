@@ -458,8 +458,7 @@
 {% endblock content %}
 
 {% block script %}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajaxy/1.6.1/scripts/jquery.ajaxy.min.js" integrity="sha512-bztGAvCE/3+a1Oh0gUro7BHukf6v7zpzrAb3ReWAVrt+bVNNphcl2tDTKCBr5zk7iEDmQ2Bv401fX3jeVXGIcA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script>
+c<script>
 	$('#newsletter_form').submit(function(e){
 		e.preventDefault()
 		var form = $(this)
@@ -472,11 +471,8 @@
 				document.getElementById('main_form_div').style.display='none';
 				document.getElementById('success_div').style.display='block'
 			},error(err){
-					{% comment %}
-					//window.location.replace("{% url 'rooms:login' %}"+'?next={{request.path}}')
-					
-					window.location.replace("{% url 'main:home' %}")
-					{% endcomment %}
+					window.location.replace("{% url 'accounts:login' %}"+'?next={{request.path}}')
+			}
 		})
 	})
 	

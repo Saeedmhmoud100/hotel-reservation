@@ -1,5 +1,6 @@
+from django.http import JsonResponse
 from django.shortcuts import redirect, render
-from django.urls import reverse
+from django.template.loader import render_to_string
 from django.views.generic import View,DetailView,UpdateView
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import get_user_model, login
@@ -44,8 +45,25 @@ class ProfileView(DetailView):
         context['object_list'] = Room.objects.filter(owner__slug=self.kwargs['slug'])
         return context
 
+def profile_option(request,slug):
+    obj = None
+    title = None
+    if slug == 'rooms' : obj = request.user.room_set.all()
+    if slug == 'tours' : obj = request.user.tour_set.all()
+    if slug == 'posts' : obj = request.user.post_set.all();title='posts'
+    context={
+        'object_list':obj,'title':title
+    }
+    t = render_to_string('accounts/profile_option.html',context)
+    data = {
+        'data':t,
+        'title':'Your '+slug.title()
+    }
+    return JsonResponse(data)
+
 class ProfileUpdateView(UpdateView):
     model=get_user_model()
     form_class=UserUpdateForm
     def get_success_url(self):
         return self.get_object().get_absolute_url()
+    

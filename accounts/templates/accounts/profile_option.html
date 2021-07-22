@@ -1,0 +1,73 @@
+<div class="row">
+    {% if title == 'posts' %}
+        {% for post in object_list %}
+          <div class="col-md-3 d-flex ftco-animate fadeInUp ftco-animated">
+          <div class="blog-entry align-self-stretch">
+            <a href="{{post.get_absolute_url}}" class="block-20" style="background-image: url('{{post.img.url}}');">
+            </a>
+            <div class="text p-4 d-block">
+                <span class="tag">{{post.tags.first}}, {{post.tags.last}}</span>
+              <h3 class="heading mt-3"><a href="{{post.get_absolute_url}}">{{post.title}}</a></h3>
+              <div class="meta mb-3">
+                <div><a href="{{post.get_absolute_url}}">{{post.created_at|date:'F j Y'}}</a></div>
+                <div><a href="{{post.get_absolute_url}}">{{post.author.username}}</a></div>
+                <div><a href="{{post.get_absolute_url}}#disqus_threads" class="meta-chat"><span class="icon-chat"></span> </a></div>
+              </div>
+            </div>
+          </div>
+                  {% empty %}
+        <center style="margin: auto;"><h2>Not Found</h2></center>
+        {% endfor %}
+    {% else %}
+    
+    {% for obj in object_list %}
+        <div class="col-md-3 ftco-animate fadeInUp ftco-animated">
+        <div class="destination">
+          <a href="{{obj.get_absolute_url}}" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url({{obj.img.url}});">
+            <div class="icon d-flex justify-content-center align-items-center">
+          <span class="icon-search2"></span>
+        </div>
+          </a>
+          <div class="text p-3">
+            <div class="d-flex">
+              <div class="one">
+                <h3><a href="{{obj.get_absolute_url}}">{{obj.title}}</a></h3>
+                <p class="rate">
+                  {% for i in '12345'|make_list %}
+                    
+                    {% if forloop.counter <= obj.total_rating %}
+                      <i class="icon-star"></i>
+                      {% else %}
+                      <i class="icon-star-o"></i>
+                    {% endif %}
+                      {% empty %}
+                      <i class="icon-star-o"></i>
+                      <i class="icon-star-o"></i>
+                      <i class="icon-star-o"></i>
+                      <i class="icon-star-o"></i>
+                      <i class="icon-star-o"></i>
+                  {% endfor %}
+                  
+                  <span style="padding-left: 3px;">{{ obj.total_rating }} Rating</span>
+                </p>
+              </div>
+              <div class="two">
+                <span class="price per-price">${{obj.price}}<br><small>/night</small></span>
+              </div>
+            </div>
+            <p>{{obj.descriptions|safe|truncatechars:95}}</p>
+            <hr>
+            <p class="bottom-area d-flex">
+              <span><i class="icon-map-o"></i> {{obj.city.name}}, Fl</span> 
+              <span class="ml-auto"><a href="{{obj.get_reservation_url}}">Book Now</a></span>
+            </p>
+          </div>
+        </div>
+          </div>
+        {% empty %}
+        <center style="margin: auto;"><h2>Not Found</h2></center>
+
+        {% endfor %}
+    {% endif %}
+  
+      </div>

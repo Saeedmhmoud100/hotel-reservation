@@ -48,67 +48,44 @@
       </div>
       
       {% if request.user.is_superuser or request.user.is_staff%}
-      <div class="row my-3">
-        <div class="col-md-4"><center><h5><a href="">Your Rooms</a></h5></center></div>
-        <div class="col-md-4"><center><h5><a href="">Your Tours</a></h5></center></div>
-        <div class="col-md-4"><center><h5><a href="">Your Posts</a> </h5></center></div>
+      <div class="row my-3" id="option_div">
+        <div class="col-md-4" data-option='tours'><center><h5><a href="{% url 'accounts:profile-option' 'tours' %}">Your Tours</a></h5></center></div>
+        <div class="col-md-4" data-option='rooms'><center><h5><a href="{% url 'accounts:profile-option' 'rooms' %}">Your Rooms</a></h5></center></div>
+        <div class="col-md-4" data-option='posts'><center><h5><a href="{% url 'accounts:profile-option' 'posts' %}">Your Posts</a> </h5></center></div>
       </div>
       <hr>
-        <center><h2>Your Rooms</h2></center>
-      <div class="row">
-        {% if object_list %}
-        {% for obj in object_list %}
-        <div class="col-md-3 ftco-animate">
-      <div class="destination">
-        <a href="{{obj.get_absolute_url}}" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url({{obj.img.url}});">
-          <div class="icon d-flex justify-content-center align-items-center">
-        <span class="icon-search2"></span>
-      </div>
-        </a>
-        <div class="text p-3">
-          <div class="d-flex">
-            <div class="one">
-              <h3><a href="{{obj.get_absolute_url}}">{{obj.title}}</a></h3>
-              <p class="rate">
-                {% for i in '12345'|make_list %}
-                  
-                  {% if forloop.counter <= obj.total_rating %}
-                    <i class="icon-star"></i>
-                    {% else %}
-                    <i class="icon-star-o"></i>
-                  {% endif %}
-                    {% empty %}
-                    <i class="icon-star-o"></i>
-                    <i class="icon-star-o"></i>
-                    <i class="icon-star-o"></i>
-                    <i class="icon-star-o"></i>
-                    <i class="icon-star-o"></i>
-                {% endfor %}
-                
-                <span style="padding-left: 3px;">{{ obj.total_rating }} Rating</span>
-              </p>
-            </div>
-            <div class="two">
-              <span class="price per-price">${{obj.price}}<br><small>/night</small></span>
-            </div>
-          </div>
-          <p>{{obj.descriptions|safe|truncatechars:95}}</p>
-          <hr>
-          <p class="bottom-area d-flex">
-            <span><i class="icon-map-o"></i> {{obj.city.name}}, Fl</span> 
-            <span class="ml-auto"><a href="{{obj.get_reservation_url}}">Book Now</a></span>
-          </p>
+        <center><h2 id="profile_option_title">Your Rooms</h2></center>
+        <div id="profile_option_div_row_root">
+          {% include "accounts/profile_option.html" %}
         </div>
-      </div>
-      </div>
-      {% endfor %}
-      {% else %}
-      <center style="margin: auto;"><h2>Not Found</h2></center>
-        {% endif %}
-          </div>
       {% endif %}
         
     </div>
   </section>
 {% endblock content %}
     
+{% block script %}
+{% if request.user.is_superuser or request.user.is_staff%}
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+	$("#option_div > div[data-option] a").on('click',function(e){
+    e.preventDefault()
+		elm = $(this)
+		$.ajax({
+      type:'PoST',
+      dataType:'json',
+			url:elm.attr('href'),
+			data:{"csrfmiddlewaretoken" : "{{csrf_token}}"},
+      success:function(res){
+        console.log(res['data'])
+        $('#profile_option_title').text(res.title)
+        $('#profile_option_div_row_root').html(res['data'])
+      },s
+    })
+	})
+	
+</script>
+{% endif %} 
+{% endblock script %}
+	
+      
