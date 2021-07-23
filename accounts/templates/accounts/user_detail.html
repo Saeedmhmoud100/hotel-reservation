@@ -25,12 +25,12 @@
     <div class="container">
       
       <div class="row border p-5">
-        <div class="col-md-4 mx-auto">
+        <div class="col-md-4 mx-auto {% if request.user.is_superuser or request.user.is_staff%} border-bottom mb-5 {% endif %}">
             <center class="mb-3"><h5>Your Image</h5>
                 <img class="img-fluid rounded-circle border" src="{{object.get_profile_image_filename}}" width="120px" alt="{{object.get_profile_image_filename}}">
             <center>
         </div>
-        <div class="col-md-4 mx-auto">
+        <div class="col-md-4 mx-auto {% if request.user.is_superuser or request.user.is_staff%} border-bottom mb-5 {% endif %}">
             <center class="mb-3"><h5>Email Info</h5>
                 <h6><strong>Username</strong>: {{object.username}}</h6>
                 <h6><strong>First Name</strong>: {{object.first_name}}</h6>
@@ -38,13 +38,16 @@
                 <h6><strong>Email</strong>: {{object.email}}</h6>
             </center>
         </div>
-        <div class="col-md-4 mx-auto">
+        <div class="col-md-4 mx-auto {% if request.user.is_superuser or request.user.is_staff%} border-bottom mb-5 {% endif %}">
             <center class="mb-5"><h5>Personal Info</h5>
                 <h6><strong>Phone Numper</strong>: {{object.phone_number}}</h6>
                 <h6><strong>Country</strong>: {{object.country.name}}</h6>
                 <h6><strong>City</strong>: {{object.city}}</h6>
             </center>
         </div>
+        {% if request.user.is_superuser or request.user.is_staff%}
+        {% include "accounts/user_profile_booking.html" %}
+        {% endif %}
       </div>
       
       {% if request.user.is_superuser or request.user.is_staff%}
@@ -52,7 +55,6 @@
         {% csrf_token %}
         <input onchange="$('#show_moving_carts_form').submit()" type="checkbox" {% if object.toggle_cart_option %}checked {% endif %} name="show_moving_carts" id="show_moving_carts" style="margin-left: -16px;margin-right:7px"><label for="show_moving_carts">Toggle cards display</label>
       </form>
-      
       <div id="main_root_carts">
         {% if object.toggle_cart_option %}
         <div class="cards_head">
@@ -76,6 +78,8 @@
             
           </div>
       </div>
+      {% else %}
+      {% include "accounts/user_profile_booking.html" %}
       {% endif %}
         
     </div>

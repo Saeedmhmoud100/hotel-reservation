@@ -1,0 +1,80 @@
+<hr>
+<center><h4 class="mb-4">Your Rooms Reservations</h4></center>
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Room</th>
+        <th scope="col">Data From</th>
+        <th scope="col">Data To</th>
+        <th scope="col">Pepole Numper</th>
+        <th scope="col">Price</th>
+        <th scope="col">State</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+          {% for obj in object.room_Reservation.all %}
+            <th scope="row">{{forloop.counter}}</th>
+        <td><a href="{{obj.room.get_absolute_url}}">{{obj.room.title}}</a></td>
+        <td>{{obj.data_from}}</td>
+        <td>{{obj.data_to}}</td>
+        <td>{{obj.guste|add:obj.children}}</td>
+        <td>{{obj.price}}</td>
+        
+        {% if obj.canceled %}
+        <td>canceled</td>
+        {% elif obj.done %}
+        <td>done</td>
+        {% endif %}
+            
+      </tr>
+          {% endfor %}
+        
+    </tbody>
+  </table>
+  {% if not object.room_Reservation.exists %}
+  <center><h5>You haven't booked any tour yet</h5></center>
+  {% endif %}
+  <hr>
+  <hr>
+  <span style="border:1px solid #EEE;width:100%"></span>
+  <br>
+  <center><h4 class="mb-4{% if request.user.is_superuser or request.user.is_staff%}  mt-5 {% endif %}">Your Tours Reservations</h4></center>
+  <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">tour</th>
+          <th scope="col">Data From</th>
+          <th scope="col">Data To</th>
+          <th scope="col">Pepole Numper</th>
+          <th scope="col">Price</th>
+          <th scope="col">State</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+            {% for obj in object.tour_Reservation.all %}
+              <th scope="row">{{forloop.counter}}</th>
+          <td><a href="{{obj.tour.get_absolute_url}}">{{obj.tour.title}}</a></td>
+          <td>{{obj.data_from}}</td>
+          <td>{{obj.data_to}}</td>
+          <td>{{obj.guste|add:obj.children}}</td>
+          <td>{{obj.price}}</td>
+          
+          {% if obj.canceled %}
+          <td>canceled</td>
+          {% elif obj.done %}
+          <td>done</td>
+          {% endif %}
+              
+        </tr>
+            {% endfor %}
+      </tbody>
+    </table>
+    
+    {% if not object.tour_Reservation.exists %}
+    <center><h5>You haven't booked any tour yet</h5></center>
+    {% endif %}
+        
