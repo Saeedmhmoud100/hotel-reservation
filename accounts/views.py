@@ -73,9 +73,13 @@ def toggle_profile_option(request,slug):
     checked = request.POST.get('show_moving_carts',False)
     get_user_model().objects.filter(slug=slug).update(toggle_cart_option= True if checked=='on' else False )
     return redirect('accounts:profile',slug)
-class ProfileUpdateView(UpdateView):
+class ProfileUpdateView(UserPassesTestMixin,LoginRequiredMixin,UpdateView):
     model=get_user_model()
     form_class=UserUpdateForm
     def get_success_url(self):
         return self.get_object().get_absolute_url()
+    def test_func(self):
+        if self.get_object() == self.request.user:
+            return True
+        return False
     
