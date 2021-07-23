@@ -1,0 +1,128 @@
+<hr>
+<!--rooms-->
+<div class="row">
+  <div class="col-md-12 hotel-single ftco-animate mb-5 mt-4">
+    <center><h4 class="mb-4">Your Rooms</h4></center>
+    <div class="row">
+      {% for room in object.room_set.all %}
+  <div class="col-md-3">
+  <div class="destination">
+    <a href="{{room.get_absolute_url}}" class="img img-2" style="background-image: url({{room.img.url}});"></a>
+    <div class="text p-3">
+      <div class="d-flex">
+        <div class="one">
+          <h3><a href="{{room.get_absolute_url}}">{{room.title|truncatechars:16}}</a></h3>
+          <p class="rate">
+            {% for i in '12345'|make_list %}
+        
+        {% if forloop.counter <= room.total_rating %}
+          <i class="icon-star"></i>
+          {% else %}
+          <i class="icon-star-o"></i>
+        {% endif %}
+          {% empty %}
+          <i class="icon-star-o"></i>
+          <i class="icon-star-o"></i>
+          <i class="icon-star-o"></i>
+          <i class="icon-star-o"></i>
+          <i class="icon-star-o"></i>
+      {% endfor %}
+            <span style="padding-left: 3px;">{{ room.total_rating }} Rating</span>
+          </p>
+        </div>
+        <div class="two">
+          <span class="price per-price">${{room.price}}<br><small>/night</small></span>
+        </div>
+      </div>
+      <p>{{room.descriptions|safe|truncatewords:20}}</p>
+      <hr>
+      <p class="bottom-area d-flex">
+        <span><i class="icon-map-o"></i> {{room.city.name}}, Fl</span> 
+        <span class="ml-auto"><a href="{{room.get_reservation_url}}">Book Now</a></span>
+      </p>
+    </div>
+  </div>
+</div>
+{% empty %}
+<center><h5>You haven't added any rooms yet</h5></center>
+  {% endfor %}
+    </div>
+  </div>
+</div>
+  <hr>
+<!--tours-->
+<div class="col-md-12 hotel-single ftco-animate mb-5 mt-5">
+  <center><h4 class="mb-4">Your Tours</h4></center>
+  <div class="row">
+    {% for tour in object.tour_set.all %}
+      <div class="col-md-3">
+          <div class="destination">
+            <a href="{{tour.get_absolute_url}}" class="img img-2" style="background-image: url({{tour.img.url}});"></a>
+            <div class="text p-3">
+              <div class="d-flex">
+                <div class="one">
+                  <h3><a href="{{tour.get_absolute_url}}">{{tour.title}}</a></h3>
+                  <p class="rate">
+                  {% for i in '12345'|make_list %}
+                    
+                    {% if forloop.counter <= tour.total_rating %}
+                      <i class="icon-star"></i>
+                      {% else %}
+                      <i class="icon-star-o"></i>
+                    {% endif %}
+                      {% empty %}
+                      <i class="icon-star-o"></i>
+                      <i class="icon-star-o"></i>
+                      <i class="icon-star-o"></i>
+                      <i class="icon-star-o"></i>
+                      <i class="icon-star-o"></i>
+                  {% endfor %}
+                  
+                  <span style="padding-left: 3px;">{{tour.total_rating}} Rating</span>
+                </p>
+                </div>
+                <div class="two">
+                  <span class="price per-price">${{tour.price}}<br><small>/night</small></span>
+                </div>
+              </div>
+              <p>{{tour.descriptions|safe|truncatewords:20}}</p>
+              <hr>
+              <p class="bottom-area d-flex">
+                <span><i class="icon-map-o"></i>  {{tour.city}}, {{tour.locality|truncatechars:8}}</span> 
+                <span class="ml-auto"><a href="{{tour.get_reservation_url}}">Book Now</a></span>
+              </p>
+            </div>
+          </div>
+        </div>
+        {% empty %}
+        <center><h5>You haven't added any tours yet</h5></center>
+    {% endfor %}
+    
+  </div>
+</div>
+<hr>
+<!--posts-->
+<div class="col-md-12 hotel-single ftco-animate mb-5 mt-5">
+  <center><h4 class="mb-4">Your Posts</h4></center>
+<div class="row d-flex">
+  {% for post in object.post_set.all %}
+    <div class="col-md-3 d-flex ftco-animate">
+    <div class="blog-entry align-self-stretch">
+      <a href="{{post.get_absolute_url}}" class="block-20" style="background-image: url('{{post.img.url}}');">
+      </a>
+      <div class="text p-4 d-block">
+        <span class="tag">{{post.tags.first}}, {{post.tags.last}}</span>
+        <h3 class="heading mt-3"><a href="{{post.get_absolute_url}}">{{post.title}}</a></h3>
+        <div class="meta mb-3">
+          <div><a href="{{post.get_absolute_url}}">{{post.created_at|date:'F j Y'}}</a></div>
+          <div><a href="{{post.get_absolute_url}}">{{post.author.username}}</a></div>
+          <div><a href="{{post.get_absolute_url}}#disqus_threads" class="meta-chat"><span class="icon-chat"></span> </a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% empty %}
+  <center><h5>You haven't added any posts yet</h5></center>
+  {% endfor %}
+  </div>
+</div>

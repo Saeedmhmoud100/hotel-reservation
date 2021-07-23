@@ -48,16 +48,34 @@
       </div>
       
       {% if request.user.is_superuser or request.user.is_staff%}
-      <div class="row my-3" id="option_div">
-        <div class="col-md-4" data-option='tours'><center><h5><a href="{% url 'accounts:profile-option' 'tours' %}">Your Tours</a></h5></center></div>
-        <div class="col-md-4" data-option='rooms'><center><h5><a href="{% url 'accounts:profile-option' 'rooms' %}">Your Rooms</a></h5></center></div>
-        <div class="col-md-4" data-option='posts'><center><h5><a href="{% url 'accounts:profile-option' 'posts' %}">Your Posts</a> </h5></center></div>
+      <form id="show_moving_carts_form" method="POST" action="{% url 'accounts:toggle-profile-option' object.slug %}">
+        {% csrf_token %}
+        <input onchange="$('#show_moving_carts_form').submit()" type="checkbox" {% if object.toggle_cart_option %}checked {% endif %} name="show_moving_carts" id="show_moving_carts" style="margin-left: -16px;margin-right:7px"><label for="show_moving_carts">Toggle cards display</label>
+      </form>
+      
+      <div id="main_root_carts">
+        {% if object.toggle_cart_option %}
+        <div class="cards_head">
+    <div class="row my-3" id="option_div">
+      <div class="col-md-4" data-option='tours'><center><h5><h4 data-href="{% url 'accounts:profile-option' 'tours' %}" style='color: #f85959;cursor: pointer;'>Your Tours</h4></h5></center></div>
+      <div class="col-md-4" data-option='rooms'><center><h5><h4 data-href="{% url 'accounts:profile-option' 'rooms' %}" style='color: #f85959;cursor: pointer;'>Your Rooms</h4></h5></center></div>
+      <div class="col-md-4" data-option='posts'><center><h5><h4 data-href="{% url 'accounts:profile-option' 'posts' %}" style='color: #f85959;cursor: pointer;'>Your Posts</h4> </h5></center></div>
+    </div>
+    <hr>
+      <center><h2 id="profile_option_title">Your Rooms</h2></center>
+  </div>
+  {% endif %}
+          <div id="profile_option_div_row_root">
+            
+            {% if object.toggle_cart_option %}
+              {% include "accounts/profile_option.html" %}
+              {% else %}
+              {% include "accounts/profile_option_2.html" %}
+            {% endif %}
+              
+            
+          </div>
       </div>
-      <hr>
-        <center><h2 id="profile_option_title">Your Rooms</h2></center>
-        <div id="profile_option_div_row_root">
-          {% include "accounts/profile_option.html" %}
-        </div>
       {% endif %}
         
     </div>
@@ -65,25 +83,26 @@
 {% endblock content %}
     
 {% block script %}
-{% if request.user.is_superuser or request.user.is_staff%}
+{% if request.user.is_superuser or request.user.is_staff and object.toggle_cart_option%}
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-	$("#option_div > div[data-option] a").on('click',function(e){
-    e.preventDefault()
-		elm = $(this)
+	$("div[data-option] h4").on('click',function(e){
+		let elm = $(this)
+    console.log(elm)
 		$.ajax({
-      type:'PoST',
+      type:'POST',
       dataType:'json',
-			url:elm.attr('href'),
+			url:elm.data('href'),
 			data:{"csrfmiddlewaretoken" : "{{csrf_token}}"},
       success:function(res){
-        console.log(res['data'])
         $('#profile_option_title').text(res.title)
         $('#profile_option_div_row_root').html(res['data'])
-      },s
+      },error(err){
+        console.log(err)
+      }
     })
-	})
-	
+	});
+
 </script>
 {% endif %} 
 {% endblock script %}

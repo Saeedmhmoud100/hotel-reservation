@@ -24,7 +24,7 @@ class User(AbstractUser):
     phone_number = PhoneNumberField(blank=True)
     last_update = models.DateTimeField(auto_now=True)
     slug = models.SlugField(blank=True, null=True)
-    
+    toggle_cart_option = models.BooleanField(default=False)
     objects = MyUserManager()
     def get_profile_image_filename(self):
         if self.image:

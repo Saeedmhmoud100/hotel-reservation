@@ -10,4 +10,5 @@ urlpatterns = [
     path('profile/<slug:slug>/',views.ProfileView.as_view(),name='profile'),
     path('profile/<slug:slug>/update/',views.ProfileUpdateView.as_view(),name='profile-update'),
     path('profile/<slug:slug>/option/',views.profile_option,name='profile-option'),
+    path('profile/<slug:slug>/option/toggle/',views.toggle_profile_option,name='toggle-profile-option'),
 ]

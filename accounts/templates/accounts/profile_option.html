@@ -1,3 +1,7 @@
+{% if request.is_ajax %}
+{% include "accounts/profile_option_select.html" %}
+  
+{% endif %}
 <div class="row">
     {% if title == 'posts' %}
         {% for post in object_list %}
@@ -70,4 +74,5 @@
         {% endfor %}
     {% endif %}
   
-      </div>
+</div>
+    </div>
