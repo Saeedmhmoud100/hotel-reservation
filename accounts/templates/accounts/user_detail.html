@@ -22,7 +22,8 @@
     
       <center class="mb-3 mt-2"><h1>Your Profile</h1></center>
       <center><a href="{{object.get_absolute_url}}update/" class='btn btn-success mb-2'>Update Profile</a></center>
-    <div class="container">
+      <center><a href="{% url 'password_change' %}" class="mb-2">Change Password</a></center>
+      <div class="container">
       
       <div class="row border p-5">
         <div class="col-md-4 mx-auto {% if request.user.is_superuser or request.user.is_staff%} border-bottom mb-5 {% endif %}">
