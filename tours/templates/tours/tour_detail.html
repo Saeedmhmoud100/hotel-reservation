@@ -255,10 +255,7 @@
 					console.log(input_checked)
 				},error(err){
 					console.log(err)
-					{% comment %}
-					//window.location.replace("{% url 'rooms:login' %}"+'?next={{request.path}}')
-					{% endcomment %}
-					window.location.replace("{% url 'tours:tour' %}")
+					window.location.replace("{% url 'accounts:login' %}"+'?next={{request.path}}')
 				}
 			})
 		  }) 

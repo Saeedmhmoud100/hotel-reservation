@@ -1,14 +1,18 @@
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.http import JsonResponse
+from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.template.loader import render_to_string
+from django.urls import reverse_lazy
+from django.urls.base import reverse
 from django.views.generic import View,DetailView,UpdateView
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import get_user_model, login
+from django.contrib.auth.decorators import login_required
 from rooms.models import Room
 from .forms import LoginForm, UserRegisterForm, UserUpdateForm
 
 # Create your views here.
-
 class UserRegisterView(View):
     def get(self,request, *args, **kwargs):
         return render(request,'accounts/user_form.html',{'form':UserRegisterForm()})
@@ -18,8 +22,6 @@ class UserRegisterView(View):
             form.save()
             return redirect('accounts:login')
         else:
-            print('yes')
-
             return render(request,'accounts/user_form.html',{'form':form})
         
 
@@ -34,17 +36,22 @@ class UserLoginView(LoginView):
             self.request.session.set_expiry(0)
         return super(UserLoginView, self).form_valid(form)
     def get_success_url(self):
+        next = self.request.GET.get('next')
+        if next:
+            return next
         return self.request.user.get_absolute_url()
     
-class ProfileView(DetailView):
+class ProfileView(LoginRequiredMixin,DetailView):
     model =  get_user_model()
-    
+    def get(self, request, *args, **kwargs):
+        if self.kwargs['slug'] != self.request.user.slug:
+            return redirect('accounts:profile',slug=self.request.user.slug)
+        return super().get(request, *args, **kwargs)
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        print(self.get_slug_field)
         context['object_list'] = Room.objects.filter(owner__slug=self.kwargs['slug'])
         return context
-
+login_required
 def profile_option(request,slug):
     obj = None
     title = None
@@ -61,7 +68,7 @@ def profile_option(request,slug):
         'checked':False
     }
     return JsonResponse(data)
-
+login_required
 def toggle_profile_option(request,slug):
     checked = request.POST.get('show_moving_carts',False)
     get_user_model().objects.filter(slug=slug).update(toggle_cart_option= True if checked=='on' else False )

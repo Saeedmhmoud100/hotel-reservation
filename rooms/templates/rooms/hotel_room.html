@@ -270,11 +270,7 @@
 					}
 					console.log(input_checked)
 				},error(err){
-					{% comment %}
-					//window.location.replace("{% url 'rooms:login' %}"+'?next={{request.path}}')
-					
-					window.location.replace("{% url 'rooms:home' %}")
-					{% endcomment %}
+					window.location.replace("{% url 'accounts:login' %}"+'?next={{request.path}}')
 				}
 			})
 		  }) 

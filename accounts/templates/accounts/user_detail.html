@@ -103,7 +103,7 @@
         $('#profile_option_title').text(res.title)
         $('#profile_option_div_row_root').html(res['data'])
       },error(err){
-        console.log(err)
+        window.location.replace("{% url 'accounts:login' %}"+'?next={{request.path}}')
       }
     })
 	});
