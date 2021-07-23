@@ -27,7 +27,9 @@
           <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             {{form|crispy}}
-            <a href="{% url 'password_change' %}" class="mb-2">Change Password</a>
+            {% if 'update' in urlpath %}
+              <a href="{% url 'password_change' %}" class="mb-2">Change Password</a>
+            {% endif %}
             <div class="form-group">
               <input type="submit" value="{% if 'update' in urlpath %}Update{% else %}Sign Up{% endif %}" class="btn btn-primary py-3 px-5">
             </div>
