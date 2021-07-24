@@ -33,3 +33,11 @@ class CategorieListAPIView(generics.ListCreateAPIView):
 class CategorieDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset=Categorie.objects.all()
     serializer_class=CategorieSerializers
+
+@api_view(['GET'])
+def categorie_search_api(request,query):
+    categories=Categorie.objects.filter(
+        Q(title__icontains=query)
+    )
+    data = CategorieSerializers(categories,many=True).data
+    return Response({'data':data})

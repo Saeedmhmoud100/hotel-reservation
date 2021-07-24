@@ -30,5 +30,6 @@ urlpatterns = [
     path('api/list/post/search/<str:query>/', api_views.post_search_api,name='post-search-api'),
     path('api/list/categorie/', api_views.CategorieListAPIView.as_view(),name='categorie-list-api'),
     path('api/list/categorie/<int:pk>/', api_views.CategorieDetailAPIView.as_view(),name='categorie-detail-api'),
+    path('api/list/categorie/search/<str:query>/', api_views.categorie_search_api,name='categorie-search-api'),
     
 ]
