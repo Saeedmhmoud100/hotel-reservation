@@ -25,8 +25,10 @@ urlpatterns = [
     path('<slug:slug>/update/', views.BlogUpdateView.as_view(),name='blog-update'),
     path('<slug:slug>/delete/', views.BlogDeleteView.as_view(),name='blog-delete'),
     #APi
-    path('api/list/', api_views.PostListAPIView.as_view(),name='post-list-api'),
-    path('api/list/<int:pk>/', api_views.PostDetailAPIView.as_view(),name='post-detail-api'),
-    path('api/list/search/<str:query>/', api_views.post_search_api,name='post-search-api'),
+    path('api/list/post/', api_views.PostListAPIView.as_view(),name='post-list-api'),
+    path('api/list/post/<int:pk>/', api_views.PostDetailAPIView.as_view(),name='post-detail-api'),
+    path('api/list/post/search/<str:query>/', api_views.post_search_api,name='post-search-api'),
+    path('api/list/categorie/', api_views.CategorieListAPIView.as_view(),name='categorie-list-api'),
+    path('api/list/categorie/<int:pk>/', api_views.CategorieDetailAPIView.as_view(),name='categorie-detail-api'),
     
 ]
