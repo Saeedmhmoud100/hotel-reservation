@@ -26,7 +26,7 @@ urlpatterns = [
     path('<slug:slug>/delete/', views.BlogDeleteView.as_view(),name='blog-delete'),
     #APi
     path('api/list/', api_views.PostListAPIView.as_view(),name='post-list-api'),
-    path('api/list/<int:id>/', api_views.post_detail_api,name='post-detail-api'),
+    path('api/list/<int:pk>/', api_views.PostDetailAPIView.as_view(),name='post-detail-api'),
     path('api/list/search/<str:query>/', api_views.post_search_api,name='post-search-api'),
     
 ]

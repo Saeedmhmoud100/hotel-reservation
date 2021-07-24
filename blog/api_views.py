@@ -11,11 +11,10 @@ class PostListAPIView(generics.ListCreateAPIView):
     queryset=Post.objects.all()
     serializer_class=PostSerializers
 
-@api_view(['GET'])
-def post_detail_api(request,id):
-    post=get_object_or_404(Post,id=id)
-    data = PostSerializers(post,context={'request':request}).data
-    return Response({'data':data})
+class PostDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
+    queryset=Post.objects.all()
+    serializer_class=PostSerializers
+
 
 @api_view(['GET'])
 def post_search_api(request,query):
