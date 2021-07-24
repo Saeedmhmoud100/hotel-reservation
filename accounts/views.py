@@ -1,20 +1,24 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.http import JsonResponse
-from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, render
+from django.urls import reverse
 from django.template.loader import render_to_string
-from django.urls import reverse_lazy
-from django.urls.base import reverse
 from django.views.generic import View,DetailView,UpdateView
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import get_user_model, login
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from rooms.models import Room
 from .forms import LoginForm, UserRegisterForm, UserUpdateForm
 
 # Create your views here.
 class UserRegisterView(View):
     def get(self,request, *args, **kwargs):
+        if self.request.user.is_authenticated:
+            messages.success(request,'''You are already logged in to go to the registration page you must
+                                    <a onMouseOver="this.style.textDecoration='underline'"
+                                    onMouseOut="this.style.textDecoration='none'"href='{}'>log out</a>'''.format(reverse('accounts:logout')))
+            return redirect('accounts:profile',self.request.user.slug)
         return render(request,'accounts/user_form.html',{'form':UserRegisterForm()})
     def post(self,request, *args, **kwargs):
         form = UserRegisterForm(request.POST)
@@ -29,6 +33,13 @@ class UserLoginView(LoginView):
     authentication_form = LoginForm
     form_class = LoginForm
     template_name = 'accounts/login.html'
+    def get(self, request, *args, **kwargs):
+        if self.request.user.is_authenticated:
+            messages.success(request,'''You are already logged in to go to the login page you must
+                                    <a onMouseOver="this.style.textDecoration='underline'"
+                                    onMouseOut="this.style.textDecoration='none'"href='{}'>log out</a>'''.format(reverse('accounts:logout')))
+            return redirect('accounts:profile',self.request.user.slug) 
+        return super(UserLoginView,self).get(request, *args, **kwargs)
     def form_valid(self, form):
         remember_me = form.cleaned_data['remember_me']
         login(self.request, form.get_user())
