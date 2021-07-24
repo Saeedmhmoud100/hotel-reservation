@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.urls import path,include
 from . import views
-
+from . import api_views
 app_name = 'blog'
 
 urlpatterns = [
@@ -24,4 +24,7 @@ urlpatterns = [
     path('create/', views.BlogCreateView.as_view(),name='blog-create'),
     path('<slug:slug>/update/', views.BlogUpdateView.as_view(),name='blog-update'),
     path('<slug:slug>/delete/', views.BlogDeleteView.as_view(),name='blog-delete'),
+    #APi
+    path('api/list/', api_views.post_list_api,name='post-list-api'),
+    
 ]

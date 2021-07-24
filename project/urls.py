@@ -27,6 +27,7 @@ urlpatterns = [
     path('tours/',include('tours.urls', namespace='tours')),
     path('blog/',include('blog.urls', namespace='blog')),
     path('about/',include('about.urls', namespace='about')),
+    path('api-auth/', include('rest_framework.urls'))
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

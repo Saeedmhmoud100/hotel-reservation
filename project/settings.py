@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'phonenumber_field',
     'crispy_forms',
     'taggit',
+    'rest_framework',
 ]
 
 
@@ -161,3 +162,4 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'accounts.backends.EmailBackend',
 ]
+
