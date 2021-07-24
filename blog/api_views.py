@@ -8,13 +8,13 @@ from .models import Post
 @api_view(['GET'])
 def post_list_api(request):
     all_posts=get_list_or_404(Post)
-    data = PostSerializers(all_posts,many=True).data
+    data = PostSerializers(all_posts,many=True,context={'request':request}).data
     return Response({'data':data})
 
 @api_view(['GET'])
 def post_detail_api(request,id):
     post=get_object_or_404(Post,id=id)
-    data = PostSerializers(post).data
+    data = PostSerializers(post,context={'request':request}).data
     return Response({'data':data})
 
 @api_view(['GET'])
@@ -23,5 +23,5 @@ def post_search_api(request,query):
         Q(title__icontains=query) |
         Q(description__icontains=query) 
     )
-    data = PostSerializers(posts,many=True).data
+    data = PostSerializers(posts,many=True,context={'request':request}).data
     return Response({'data':data})
