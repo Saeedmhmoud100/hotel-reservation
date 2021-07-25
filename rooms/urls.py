@@ -9,7 +9,7 @@ app_name = 'rooms'
 router = DefaultRouter()
 router.register('room',RoomAPIViewSets)
 router.register('rating',RoomRatingAPIViewSets)
-router.register('rseservation',RoomReservationAPIViewSets)
+router.register('reservation',RoomReservationAPIViewSets)
 
 urlpatterns = [
     #room list url

@@ -124,6 +124,8 @@ class Tour_Rating(models.Model):
     rating = models.IntegerField(validators=[MaxValueValidator(5),MinValueValidator(1)])
     feedback = models.TextField(blank=True, null=True)
     
+    class Meta:
+        unique_together=(('user','tour'))
     def shourt_feedback(self):
         return truncatechars(self.feedback,150)  if self.feedback else '-'
     def __str__(self):
