@@ -1,7 +1,7 @@
 from rest_framework import viewsets
 from .permissions import IsOwnerUserOrReadOnly, IsStaffUser,IsOwnerOrReadOnly
-from .serializers import RoomSerializers,RoomRatingSerializers
-from .models import Room, Room_Rating
+from .serializers import RoomSerializers,RoomRatingSerializers,RoomReservationSerializers
+from .models import Room, Room_Rating, Room_Reservation
 
 
 class RoomAPIViewSets(viewsets.ModelViewSet):
@@ -15,3 +15,7 @@ class RoomRatingAPIViewSets(viewsets.ModelViewSet):
     serializer_class=RoomRatingSerializers
     permission_classes=[IsOwnerUserOrReadOnly]
     filterset_fields=('user','room')
+    
+class RoomReservationAPIViewSets(viewsets.ModelViewSet):
+    queryset=Room_Reservation.objects.all()
+    serializer_class=RoomReservationSerializers
