@@ -1,19 +1,21 @@
-from django.shortcuts import get_object_or_404,get_list_or_404
 from django.db.models.query_utils import Q
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import generics
-from .serializers import CategorieSerializers, PostSerializers
 from .models import Categorie, Post
+from .serializers import CategorieSerializers, PostSerializers
+from .permissions import IsStaffUser,IsAuthorOrReadOnly
 
 
 class PostListAPIView(generics.ListCreateAPIView):
     queryset=Post.objects.all()
     serializer_class=PostSerializers
+    permission_classes = [IsStaffUser]
 
 class PostDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset=Post.objects.all()
     serializer_class=PostSerializers
+    permission_classes = [IsAuthorOrReadOnly]
 
 
 @api_view(['GET'])
