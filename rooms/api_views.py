@@ -19,3 +19,7 @@ class RoomRatingAPIViewSets(viewsets.ModelViewSet):
 class RoomReservationAPIViewSets(viewsets.ModelViewSet):
     queryset=Room_Reservation.objects.all()
     serializer_class=RoomReservationSerializers
+    permission_classes=[IsOwnerUserOrReadOnly]
+    filterset_fields=('user','room')
+    search_fields = ['$name', '$email_registered','$email_entred']
+    
