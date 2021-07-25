@@ -20,3 +20,5 @@ class TourReservationAPIViewSets(viewsets.ModelViewSet):
 class TourRatingAPIViewSets(viewsets.ModelViewSet):
     queryset=Tour_Rating.objects.all()
     serializer_class=TourRatingSerializers
+    permission_classes=[IsOwnerUserOrReadOnly]
+    filterset_fields=('user','tour')
