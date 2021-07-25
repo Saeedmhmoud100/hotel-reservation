@@ -1,12 +1,13 @@
 from django.urls import path,include
 from rest_framework.routers import DefaultRouter
 from . import views
-from .api_views import TourAPIViewSets
+from .api_views import TourAPIViewSets,TourReservationAPIViewSets
 
 app_name = 'tours'
 
 router = DefaultRouter()
 router.register('tour',TourAPIViewSets)
+router.register('reservation',TourReservationAPIViewSets)
 
 urlpatterns = [
     path('', views.TourListView.as_view(),name='tour'),
