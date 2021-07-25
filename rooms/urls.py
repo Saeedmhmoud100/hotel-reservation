@@ -1,8 +1,13 @@
 from django.urls import path
+from django.urls.conf import include,include
+from rest_framework.routers import DefaultRouter
 from . import views
-
+from .api_views import RoomAPIViewSets
 
 app_name = 'rooms'
+
+router = DefaultRouter()
+router.register('api/room',RoomAPIViewSets)
 
 urlpatterns = [
     #room list url
@@ -16,4 +21,6 @@ urlpatterns = [
     path("room/<slug:slug>/update", views.HotelUpdateView.as_view(), name="update_room"),
     path("room/<slug:slug>/delete", views.HotelDeleteView.as_view(), name="delete_room"),
 
+    #api
+    path('api/',include(router.urls))
 ]
