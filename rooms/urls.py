@@ -2,12 +2,13 @@ from django.urls import path
 from django.urls.conf import include,include
 from rest_framework.routers import DefaultRouter
 from . import views
-from .api_views import RoomAPIViewSets
+from .api_views import RoomAPIViewSets,RoomRatingAPIViewSets
 
 app_name = 'rooms'
 
 router = DefaultRouter()
 router.register('room',RoomAPIViewSets)
+router.register('rating',RoomRatingAPIViewSets)
 
 urlpatterns = [
     #room list url

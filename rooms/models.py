@@ -81,8 +81,8 @@ class Room_Rating(models.Model):
     
     def __str__(self):
         return f'{self.room.title} - rating'
-    
-    
+    class Meta:
+        unique_together=(('user','room'))
 class Room_Reservation_Maneger(models.Manager):
     def is_active(self):
         return self.get_queryset().filter(canceled=False,done=False,data_to__gte=timezone.now())
