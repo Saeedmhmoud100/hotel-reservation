@@ -6,3 +6,4 @@ from .serializers import RoomSerializers
 class RoomAPIViewSets(viewsets.ModelViewSet):
     queryset=Room.objects.all()
     serializer_class=RoomSerializers
+    
