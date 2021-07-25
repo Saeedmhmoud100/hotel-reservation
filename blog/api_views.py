@@ -31,10 +31,12 @@ def post_search_api(request,query):
 class CategorieListAPIView(generics.ListCreateAPIView):
     queryset=Categorie.objects.all()
     serializer_class=CategorieSerializers
+    permission_classes=[IsStaffUser]
 
 class CategorieDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset=Categorie.objects.all()
     serializer_class=CategorieSerializers
+    permission_classes=[IsStaffUser]
 
 @api_view(['GET'])
 def categorie_search_api(request,query):
