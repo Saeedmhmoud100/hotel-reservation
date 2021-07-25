@@ -7,7 +7,7 @@ from .api_views import RoomAPIViewSets
 app_name = 'rooms'
 
 router = DefaultRouter()
-router.register('api/room',RoomAPIViewSets)
+router.register('room',RoomAPIViewSets)
 
 urlpatterns = [
     #room list url
