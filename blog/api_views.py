@@ -10,12 +10,12 @@ from .permissions import IsStaffUser,IsAuthorOrReadOnly
 class PostListAPIView(generics.ListCreateAPIView):
     queryset=Post.objects.all()
     serializer_class=PostSerializers
-    permission_classes = [IsStaffUser]
+    # permission_classes = [IsStaffUser]
 
 class PostDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset=Post.objects.all()
     serializer_class=PostSerializers
-    permission_classes = [IsAuthorOrReadOnly]
+    # permission_classes = [IsAuthorOrReadOnly]
 
 
 @api_view(['GET'])
@@ -31,12 +31,12 @@ def post_search_api(request,query):
 class CategorieListAPIView(generics.ListCreateAPIView):
     queryset=Categorie.objects.all()
     serializer_class=CategorieSerializers
-    permission_classes=[IsStaffUser]
+    # permission_classes=[IsStaffUser]
 
 class CategorieDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset=Categorie.objects.all()
     serializer_class=CategorieSerializers
-    permission_classes=[IsStaffUser]
+    # permission_classes=[IsStaffUser]
 
 @api_view(['GET'])
 def categorie_search_api(request,query):

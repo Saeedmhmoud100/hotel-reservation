@@ -13,9 +13,9 @@ class CreateOnly(permissions.IsAuthenticated,ReadOnly):
 class NewsletterEmailAPIViewSets(viewsets.ModelViewSet):
     queryset=Newsletter_Email.objects.all()
     serializer_class=NewsletterEmailSerializers
-    permission_classes=[CreateOnly]
+    # permission_classes=[CreateOnly]
 
 class InfoAPIViewSets(viewsets.ModelViewSet):
     queryset=Info.objects.all()
     serializer_class=InfoSerializers
-    permission_classes=[ReadOnly]
+    # permission_classes=[ReadOnly]

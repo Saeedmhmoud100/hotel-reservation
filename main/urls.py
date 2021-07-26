@@ -17,6 +17,6 @@ urlpatterns = [
     path('news_letter_Subcriber/',views.news_letter_Subcriber,name='news_letter_Subcriber'),
 
     #api
-    path('api/',include(router.urls))
+    path('main/api/',include(router.urls))
 
 ]

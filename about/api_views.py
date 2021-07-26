@@ -11,10 +11,10 @@ class ReadOnly(permissions.BasePermission):
 class AboutAPIViewSets(viewsets.ModelViewSet):
     queryset=About.objects.all().order_by('-id')
     serializer_class=AboutSerializers
-    permission_classes=[ReadOnly]
+    # permission_classes=[ReadOnly]
     
 
 class FaqAPIViewSets(viewsets.ModelViewSet):
     queryset=FAQ.objects.all().order_by('-id')
     serializer_class=FAQSerializers
-    permission_classes=[ReadOnly]
+    # permission_classes=[ReadOnly]

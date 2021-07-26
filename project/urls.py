@@ -17,6 +17,9 @@ from django.contrib import admin
 from django.urls import path,include
 from django.conf import settings
 from django.conf.urls.static import static
+from rest_framework_swagger.views import get_swagger_view
+
+schema_view = get_swagger_view(title='API Documentations')
 
 urlpatterns = [
     path('accounts/',include('accounts.urls', namespace='accounts')),
@@ -29,7 +32,8 @@ urlpatterns = [
     path('about/',include('about.urls', namespace='about')),
     path('api-auth/', include('rest_framework.urls')),
     path('rest-auth/', include('dj_rest_auth.urls')),
-    path('rest-auth/registration/', include('dj_rest_auth.registration.urls'))   
+    path('rest-auth/registration/', include('dj_rest_auth.registration.urls')),
+    path('api/docs/', schema_view) 
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
