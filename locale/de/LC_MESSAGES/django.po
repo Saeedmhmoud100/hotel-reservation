@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-27 12:20+0000\n"
+"POT-Creation-Date: 2021-07-27 12:27+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -93,6 +93,18 @@ msgstr "Kategorie"
 #| msgid "Categorie"
 msgid "Categories"
 msgstr "Kategorie"
+
+#: blog/views.py:39
+msgid "Created Post Successfully!!"
+msgstr "Beitrag erfolgreich erstellt!!"
+
+#: blog/views.py:52
+msgid "Updated Post Successfully!!"
+msgstr "Beitrag erfolgreich aktualisiert!!"
+
+#: blog/views.py:60
+msgid "Deleted Post Successfully!!"
+msgstr "Beitrag erfolgreich gelöscht!!"
 
 #: project/settings.py:174
 msgid "German"

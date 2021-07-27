@@ -8,7 +8,7 @@ from django.db.models.query_utils import Q
 from taggit.models import Tag
 from .models import Categorie, Post
 from .forms import BlogForm
-
+from django.utils.translation import gettext_lazy as _
 # Create your views here.
 class BlogListView(ListView):
     model = Post
@@ -36,7 +36,7 @@ class BlogDetailView(DetailView):
 class BlogCreateView(UserPassesTestMixin,LoginRequiredMixin,SuccessMessageMixin,CreateView):
     model= Post
     form_class = BlogForm
-    success_message='Created Post Successfully!!'
+    success_message=_('Created Post Successfully!!')
     def form_valid(self,form):
         myform = form.save(commit=False)
         myform.author=self.request.user
@@ -49,7 +49,7 @@ class BlogCreateView(UserPassesTestMixin,LoginRequiredMixin,SuccessMessageMixin,
 class BlogUpdateView(UserPassesTestMixin,LoginRequiredMixin,SuccessMessageMixin,UpdateView):
     model = Post
     form_class= BlogForm
-    success_message='Updated Post Successfully!!'
+    success_message=_('Updated Post Successfully!!')
     def test_func(self):
         if self.request.user.is_superuser or self.request.user.is_staff and self.get_object().author==self.request.user:
             return True
@@ -57,7 +57,7 @@ class BlogUpdateView(UserPassesTestMixin,LoginRequiredMixin,SuccessMessageMixin,
 class BlogDeleteView(UserPassesTestMixin,LoginRequiredMixin,SuccessMessageMixin,DeleteView):
     model = Post
     success_url=reverse_lazy('blog:blog')
-    success_message='Deleted Post Successfully!!'
+    success_message=_('Deleted Post Successfully!!')
     def delete(self, request, *args, **kwargs):
         messages.warning(self.request, self.success_message)
         return super(BlogDeleteView, self).delete(request, *args, **kwargs)
