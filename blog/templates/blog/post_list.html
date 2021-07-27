@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
+{% load i18n %}
 {% load static %}
 {% block title %}
-  Blog
+  {% trans "Blog" %}
 {% endblock title %}
 {% block content %}
   
@@ -10,15 +11,15 @@
       <div class="container">
         <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center" data-scrollax-parent="true">
           <div class="col-md-9 ftco-animate text-center" data-scrollax=" properties: { translateY: '70%' }">
-            <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="index.html">Home</a></span> <span>Blog</span></p>
-            <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Tips &amp; Articles</h1>
+            <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="/">{% trans "Home" %}</a></span> <span>Blog</span></p>
+            <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">{% trans 'Tips' %} &amp; {% trans 'Articles' %}</h1>
           </div>
         </div>
       </div>
     </div>
 
 	{% if request.user.is_superuser or request.user.is_staff %}
-	<a href="{% url 'blog:blog-create' %}" class="btn btn-success" style="margin: 27px 15px;cursor: pointer;z-index: 2;position: absolute;right: 12px;color: white;">Add New Post</a>
+	<a href="{% url 'blog:blog-create' %}" class="btn btn-success" style="margin: 27px 15px;cursor: pointer;z-index: 2;position: absolute;right: 12px;color: white;">{% trans 'Add New Post' %}</a>
 	{% endif %}
     <section class="ftco-section bg-light">
       <div class="container">
@@ -50,7 +51,7 @@
             </div>
           </div>
           {% empty %}
-          <center style="margin: auto;"><h2>Not Found</h2></center>
+          <center style="margin: auto;"><h2>{% trans 'Not Found' %}</h2></center>
           {% endfor %}
           
 
