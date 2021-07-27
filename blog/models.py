@@ -6,22 +6,23 @@ from ckeditor.fields import RichTextField
 from django.contrib.auth import get_user_model
 from django.utils import timezone
 from django.template.defaultfilters import slugify, truncatechars
+from django.utils.translation import gettext_lazy as _
 # Create your models here.
 
 class PostManager(models.Manager):
     def active(self):
         return self.get_queryset().filter(active=True)
 class Post(models.Model):
-    author = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
-    title = models.CharField(max_length = 30)
-    img = models.ImageField(upload_to='blog/')
-    tags = TaggableManager()
-    categorie = models.ForeignKey('Categorie', on_delete=models.CASCADE )
-    description = RichTextField()
-    created_at = models.DateTimeField(auto_now=True)
-    updated_at = models.DateTimeField(default=timezone.now)
-    slug = models.SlugField(blank=True, null=True)
-    active = models.BooleanField(default=True)
+    author = models.ForeignKey(get_user_model(),verbose_name=_('Author'), on_delete=models.CASCADE)
+    title = models.CharField(_('Title'),max_length = 30)
+    img = models.ImageField(_('Image'),upload_to='blog/')
+    tags = TaggableManager(_('Taggs'),)
+    categorie = models.ForeignKey('Categorie',verbose_name=_('Categorie'), on_delete=models.CASCADE )
+    description = RichTextField(_('Description'),)
+    created_at = models.DateTimeField(_('Created at'),auto_now=True)
+    updated_at = models.DateTimeField(_('Updated at'),default=timezone.now)
+    slug = models.SlugField(_('Slug'),blank=True, null=True)
+    active = models.BooleanField(_('Active'),default=True)
     objects=PostManager()
     def save(self,*args, **kwargs) :
         if self.title:
@@ -29,6 +30,8 @@ class Post(models.Model):
         super(Post,self).save(*args, **kwargs)
     
     class Meta:
+        verbose_name=_('post')
+        verbose_name_plural=_('Posts')
         ordering = ['-id']
         
     def show_img(self):
@@ -52,7 +55,10 @@ class Post(models.Model):
     
     
 class Categorie(models.Model):
-    title = models.CharField(max_length=25)
+    title = models.CharField(_('Name'),max_length=25)
     
     def __str__(self):
         return self.title
+    class Meta:
+        verbose_name=_('categorie')
+        verbose_name_plural=_('Categories')
