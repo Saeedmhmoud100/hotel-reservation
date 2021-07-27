@@ -25,7 +25,7 @@ class HomeView(TemplateView):
         context['popular_rooms'] = Room.objects.order_by('total_rating')[:5]
         res = list(chain(Room.objects.filter(category__name='Restaurant'),Tour.objects.filter(category__name='Restaurant')));shuffle(res)
         context['popular_restaurants']= res[:4]
-        posts =Post.objects.all().order_by('-id')[:20];shuffle(posts)
+        posts =Post.objects.all().order_by('-id')[:20];shuffle(list(posts))
         context['recent_blog']=posts[:4]
         context['users_count'] = get_user_model().objects.all().count()
         context['places_count']=Place.objects.all().count()
