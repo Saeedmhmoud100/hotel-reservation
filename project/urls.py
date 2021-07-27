@@ -33,7 +33,8 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),
     path('rest-auth/', include('dj_rest_auth.urls')),
     path('rest-auth/registration/', include('dj_rest_auth.registration.urls')),
-    path('api/docs/', schema_view,name='api-docs') 
+    path('api/docs/', schema_view,name='api-docs'),
+    path('i18n/', include('django.conf.urls.i18n')),    
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
