@@ -65,7 +65,15 @@
           {% endif %}
           {% endif %}
             
-          
+          <form action="{% url 'set_language' %}" method="post">{% csrf_token %}
+            {% get_current_language as LANGUAGE_CODE %}
+            <input name="next" type="hidden" value="{{ request.path }}">
+            {% if LANGUAGE_CODE == 'de' %}
+              <button type="submit" value="en" name='language' class="btn btn-outline-danger btn-sm ml-2">English</button>
+              {% else %}
+              <button type="submit" value="de" name='language' class="btn btn-outline-danger btn-sm ml-2">Deutsche</button>
+            {% endif %}
+        </form>
         </ul>
       </div>
     </div>
