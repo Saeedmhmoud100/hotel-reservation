@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-28 08:29+0000\n"
+"POT-Creation-Date: 2021-07-28 09:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -94,10 +94,36 @@ msgstr "Kategorie"
 msgid "Categories"
 msgstr "Kategorie"
 
+#: blog/templates/blog/post_confirm_delete.html:6
+#: blog/templates/blog/post_confirm_delete.html:29
+#, fuzzy
+#| msgid "Delete Post"
+msgid "Delete"
+msgstr "Beitrag löschen"
+
+#: blog/templates/blog/post_confirm_delete.html:17
 #: blog/templates/blog/post_detail.html:15
-#: blog/templates/blog/post_list.html:14
+#: blog/templates/blog/post_form.html:23 blog/templates/blog/post_list.html:14
 msgid "Home"
 msgstr "Heim"
+
+#: blog/templates/blog/post_confirm_delete.html:17
+#: blog/templates/blog/post_form.html:23
+msgid "Hotel"
+msgstr "Hotel"
+
+#: blog/templates/blog/post_confirm_delete.html:18
+#: blog/templates/blog/post_form.html:24
+msgid "Hotels"
+msgstr "Hotels"
+
+#: blog/templates/blog/post_confirm_delete.html:25
+msgid "Are you sure Do you want delete"
+msgstr "Bist du sicher Möchtest du löschen"
+
+#: blog/templates/blog/post_confirm_delete.html:28
+msgid "Cancel"
+msgstr "Stornieren"
 
 #: blog/templates/blog/post_detail.html:15
 msgid "Blog Single"
@@ -117,7 +143,8 @@ msgstr "Artikel"
 msgid "Delete Post"
 msgstr "Beitrag löschen"
 
-#: blog/templates/blog/post_detail.html:51
+#: blog/templates/blog/post_detail.html:51 blog/templates/blog/post_form.html:9
+#: blog/templates/blog/post_form.html:35
 #, fuzzy
 #| msgid "Updated at"
 msgid "Update Post"
@@ -139,6 +166,18 @@ msgstr "Nicht gefunden"
 #: blog/templates/blog/post_detail.html:117
 msgid "Tag Cloud"
 msgstr "Schlagwortwolke"
+
+#: blog/templates/blog/post_form.html:11
+#, fuzzy
+#| msgid "Add New Post"
+msgid "New Post"
+msgstr "Beitrag hinzufügen"
+
+#: blog/templates/blog/post_form.html:35
+#, fuzzy
+#| msgid "Add New Post"
+msgid "Add Post"
+msgstr "Neuen Beitrag hinzufügen"
 
 #: blog/templates/blog/post_list.html:5
 msgid "Blog"

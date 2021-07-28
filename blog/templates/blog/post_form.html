@@ -1,12 +1,14 @@
 {% extends "base.html" %}
 {% load static %}
+{% load i18n %}
+
 {% load crispy_forms_tags %}
 
 {% block title %}
   {% if 'update' in request.path %}
-	  Update Post
+	  {% trans 'Update Post' %}
   {% else %}
-  		New Post
+  		{% trans 'New Post' %}
   {% endif %}
 {% endblock title %}
 
@@ -18,8 +20,8 @@
 			data-scrollax-parent="true">
 			<div class="col-md-9 ftco-animate text-center" data-scrollax=" properties: { translateY: '70%' }">
 				<p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span
-						class="mr-2"><a href="/">Home</a></span> <span>Hotel</span></p>
-				<h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Hotels</h1>
+						class="mr-2"><a href="/">{% trans "Home" %}</a></span> <span>{% trans 'Hotel' %}</span></p>
+				<h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">{% trans 'Hotels' %}</h1>
 			</div>
 		</div>
 	</div>
@@ -30,7 +32,7 @@
             {% csrf_token %}
             {{ form.media }}
             {{ form|crispy }}
-                <button type="submit" class="btn btn-primary py-3">Add Post </button>
+                <button type="submit" class="btn btn-primary py-3">{% if 'update' in request.path %}{% trans 'Update Post' %}{% else %}{% trans 'Add Post' %} {% endif %}</button>
         
         </form>
     </div>
