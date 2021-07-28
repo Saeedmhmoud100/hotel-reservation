@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-
+{% load i18n %}
 {% block title %}
 {{object.title}}
 {% endblock title %}
@@ -12,8 +12,8 @@
       <div class="container">
         <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center" data-scrollax-parent="true">
           <div class="col-md-9 ftco-animate text-center" data-scrollax=" properties: { translateY: '70%' }">
-            <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="index.html">Home</a></span> <span class="mr-2"><a href="blog.html">Blog</a></span> <span>Blog Single</span></p>
-            <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Tips &amp; Articles</h1>
+            <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="/">{% trans 'Home' %}</a></span> <span class="mr-2"><a href="blog.html">Blog</a></span> <span>{% trans 'Blog Single' %}</span></p>
+            <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">{% trans 'Tips' %} &amp; {% trans 'Articles' %}</h1>
           </div>
         </div>
       </div>
@@ -47,24 +47,24 @@
                   
               </div>
               {% if request.user.is_superuser or request.user.is_staff and object.author == request.user %}
-              <a href="{{object.get_delete_url}}" class="btn btn-danger ml-3	" style="float:right">Delete Post</a>
-              <a href="{{object.get_update_url}}" class="btn btn-success" style="float:right">Update Post</a>
+              <a href="{{object.get_delete_url}}" class="btn btn-danger ml-3	" style="float:right">{% trans 'Delete Post' %}</a>
+              <a href="{{object.get_update_url}}" class="btn btn-success" style="float:right">{% trans "Update Post" %}</a>
 					    {% endif %}
             </div>
             
             <div class="about-author d-flex p-5 bg-light">
               <div class="bio align-self-md-center mr-5">
-                <img src="images/person_1.jpg" alt="Image placeholder" class="img-fluid mb-4">
+                <img src="{{object.author.get_profile_image_filename}}" alt="Image placeholder" class="img-fluid mb-4">
               </div>
               <div class="desc align-self-md-center">
-                <h3>Lance Smith</h3>
+                <h3>{{object.author.username}}</h3>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem necessitatibus voluptate quod mollitia delectus aut, sunt placeat nam vero culpa sapiente consectetur similique, inventore eos fugit cupiditate numquam!</p>
               </div>
             </div>
 
 
             <div class="pt-5 mt-5">
-              <h3 class="mb-5">Comments</h3>
+              <h3 class="mb-5">{% trans 'Comments' %}</h3>
               <div id="disqus_thread"></div>
               <!-- END comment-list -->
               
@@ -83,7 +83,7 @@
             </div>
             <div class="sidebar-box ftco-animate">
               <div class="categories">
-                <h3>Categories</h3>
+                <h3>{% trans "Categories" %}</h3>
                 
                 {% for categorie in categories %}
                   <li><a href="{% url 'blog:blog' %}?categorie={{categorie}}">{{categorie}} <span>({{categorie.posts}})</span></a></li>
@@ -92,7 +92,7 @@
             </div>
 
             <div class="sidebar-box ftco-animate">
-              <h3>Recent Blog</h3>
+              <h3>{% trans "Recent Blog" %}</h3>
               
               {% for post in recent_posts %}
                 <div class="block-21 mb-4 d-flex">
@@ -107,14 +107,14 @@
                 </div>
               </div>
               {% empty %}
-              <p>Not Found</p>
+              <p>{% trans 'Not Found' %}</p>
               {% endfor %}
                 
               
             </div>
 
             <div class="sidebar-box ftco-animate">
-              <h3>Tag Cloud</h3>
+              <h3>{% trans "Tag Cloud" %}</h3>
               <div class="tagcloud">
                 
                 {% for tag in tags %}

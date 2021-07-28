@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-27 12:37+0000\n"
+"POT-Creation-Date: 2021-07-28 08:29+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -88,35 +88,65 @@ msgstr "Name"
 msgid "categorie"
 msgstr "Kategorie"
 
-#: blog/models.py:64
+#: blog/models.py:64 blog/templates/blog/post_detail.html:86
 #, fuzzy
 #| msgid "Categorie"
 msgid "Categories"
 msgstr "Kategorie"
 
-#: blog/templates/blog/post_list.html:5
-msgid "Blog"
-msgstr "Blog"
-
+#: blog/templates/blog/post_detail.html:15
 #: blog/templates/blog/post_list.html:14
 msgid "Home"
 msgstr "Heim"
 
+#: blog/templates/blog/post_detail.html:15
+msgid "Blog Single"
+msgstr "Blog-Single"
+
+#: blog/templates/blog/post_detail.html:16
 #: blog/templates/blog/post_list.html:15
 msgid "Tips"
 msgstr "Tipps"
 
+#: blog/templates/blog/post_detail.html:16
 #: blog/templates/blog/post_list.html:15
 msgid "Articles"
 msgstr "Artikel"
 
-#: blog/templates/blog/post_list.html:22
-msgid "Add New Post"
-msgstr "Neuen Beitrag hinzufügen"
+#: blog/templates/blog/post_detail.html:50
+msgid "Delete Post"
+msgstr "Beitrag löschen"
 
+#: blog/templates/blog/post_detail.html:51
+#, fuzzy
+#| msgid "Updated at"
+msgid "Update Post"
+msgstr "Aktualisiert am"
+
+#: blog/templates/blog/post_detail.html:67
+msgid "Comments"
+msgstr "Bemerkungen"
+
+#: blog/templates/blog/post_detail.html:95
+msgid "Recent Blog"
+msgstr "Aktuelles Blog"
+
+#: blog/templates/blog/post_detail.html:110
 #: blog/templates/blog/post_list.html:54
 msgid "Not Found"
 msgstr "Nicht gefunden"
+
+#: blog/templates/blog/post_detail.html:117
+msgid "Tag Cloud"
+msgstr "Schlagwortwolke"
+
+#: blog/templates/blog/post_list.html:5
+msgid "Blog"
+msgstr "Blog"
+
+#: blog/templates/blog/post_list.html:22
+msgid "Add New Post"
+msgstr "Neuen Beitrag hinzufügen"
 
 #: blog/views.py:39
 msgid "Created Post Successfully!!"
