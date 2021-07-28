@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-28 09:34+0000\n"
+"POT-Creation-Date: 2021-07-28 20:03+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -104,7 +104,7 @@ msgstr "Beitrag löschen"
 #: blog/templates/blog/post_confirm_delete.html:17
 #: blog/templates/blog/post_detail.html:15
 #: blog/templates/blog/post_form.html:23 blog/templates/blog/post_list.html:14
-#: main/templates/base.html:46
+#: main/templates/base.html:46 main/templates/main/home.html:6
 msgid "Home"
 msgstr "Heim"
 
@@ -115,6 +115,7 @@ msgstr "Hotel"
 
 #: blog/templates/blog/post_confirm_delete.html:18
 #: blog/templates/blog/post_form.html:24 main/templates/base.html:49
+#: main/templates/main/home.html:200 main/templates/main/home.html:224
 msgid "Hotels"
 msgstr "Hotels"
 
@@ -131,12 +132,12 @@ msgid "Blog Single"
 msgstr "Blog-Single"
 
 #: blog/templates/blog/post_detail.html:16
-#: blog/templates/blog/post_list.html:15
+#: blog/templates/blog/post_list.html:15 main/templates/main/home.html:404
 msgid "Tips"
 msgstr "Tipps"
 
 #: blog/templates/blog/post_detail.html:16
-#: blog/templates/blog/post_list.html:15
+#: blog/templates/blog/post_list.html:15 main/templates/main/home.html:404
 msgid "Articles"
 msgstr "Artikel"
 
@@ -155,7 +156,7 @@ msgstr "Aktualisiert am"
 msgid "Comments"
 msgstr "Bemerkungen"
 
-#: blog/templates/blog/post_detail.html:95
+#: blog/templates/blog/post_detail.html:95 main/templates/main/home.html:403
 msgid "Recent Blog"
 msgstr "Aktuelles Blog"
 
@@ -288,6 +289,191 @@ msgstr "Kontaktiere uns"
 #: main/templates/base.html:125
 msgid "Have a Questions?"
 msgstr "Haben Sie eine Frage?"
+
+#: main/templates/main/home.html:16
+msgid "Explore"
+msgstr "Entdecken"
+
+#: main/templates/main/home.html:16
+msgid "your amazing city"
+msgstr "deine tolle Stadt"
+
+#: main/templates/main/home.html:17
+msgid "Find great places to stay, eat, shop, or visit from local experts"
+msgstr ""
+"Finden Sie tolle Orte zum Übernachten, Essen, Einkaufen oder Besuchen von "
+"lokalen Experten"
+
+#: main/templates/main/home.html:26
+msgid "Keyword search"
+msgstr "Schlagwortsuche"
+
+#: main/templates/main/home.html:27
+msgid "Where"
+msgstr "Wo"
+
+#: main/templates/main/home.html:39
+msgid "Or browse the highlights"
+msgstr "Oder stöbern Sie in den Highlights"
+
+#: main/templates/main/home.html:76 main/templates/main/home.html:77
+msgid "Featured"
+msgstr "Empfohlen"
+
+#: main/templates/main/home.html:77
+#, fuzzy
+#| msgid "Description"
+msgid "Destination"
+msgstr "Beschreibung"
+
+#: main/templates/main/home.html:94
+msgid "Listing"
+msgstr "Auflistung"
+
+#: main/templates/main/home.html:111 main/templates/main/home.html:223
+#: main/templates/main/home.html:352
+msgid "Special Offers"
+msgstr "Spezialangebot"
+
+#: main/templates/main/home.html:112
+msgid "Top"
+msgstr "Oberteil"
+
+#: main/templates/main/home.html:112
+msgid "Tour Packages"
+msgstr "Tour-Pakete"
+
+#: main/templates/main/home.html:145 main/templates/main/home.html:258
+#: main/templates/main/home.html:381
+msgid "Rating"
+msgstr "Bewertung"
+
+#: main/templates/main/home.html:154
+msgid "days"
+msgstr "Tage"
+
+#: main/templates/main/home.html:154
+msgid "nights"
+msgstr "Nächte"
+
+#: main/templates/main/home.html:158 main/templates/main/home.html:387
+msgid "Discover"
+msgstr "Entdecken"
+
+#: main/templates/main/home.html:173
+msgid "Some fun facts"
+msgstr "Ein paar lustige Fakten"
+
+#: main/templates/main/home.html:174
+msgid "More than 100,000 websites hosted"
+msgstr "Mehr als 100.000 gehostete Websites"
+
+#: main/templates/main/home.html:184
+msgid "Happy Customers"
+msgstr "Zufriedene Kunden"
+
+#: main/templates/main/home.html:192
+msgid "Destination Places"
+msgstr "Zielorte"
+
+#: main/templates/main/home.html:208
+msgid "Restaurant"
+msgstr "Restaurant"
+
+#: main/templates/main/home.html:224 main/templates/main/home.html:353
+msgid "Popular"
+msgstr "Beliebt"
+
+#: main/templates/main/home.html:224
+#, fuzzy
+#| msgid "Room"
+msgid "Rooms"
+msgstr "Zimmer"
+
+#: main/templates/main/home.html:262
+msgid "night"
+msgstr "Nacht"
+
+#: main/templates/main/home.html:269
+msgid "Book Now"
+msgstr "buchen Sie jetzt"
+
+#: main/templates/main/home.html:286
+msgid "Best Directory Website"
+msgstr "Beste Verzeichnis-Website"
+
+#: main/templates/main/home.html:287
+msgid "Why"
+msgstr "Warum"
+
+#: main/templates/main/home.html:287
+msgid "Choose Us"
+msgstr "Wählen Sie uns"
+
+#: main/templates/main/home.html:289
+msgid "Read more"
+msgstr "Weiterlesen"
+
+#: main/templates/main/home.html:293
+msgid "Testimony"
+msgstr "Zeugnis"
+
+#: main/templates/main/home.html:294
+msgid "Our"
+msgstr "Unser"
+
+#: main/templates/main/home.html:294
+msgid "Guests Says"
+msgstr "Gäste sagen"
+
+#: main/templates/main/home.html:306 main/templates/main/home.html:320
+#: main/templates/main/home.html:334
+msgid ""
+"Far far away, behind the word mountains, far from the countries Vokalia and "
+"Consonantia, there live the blind texts"
+msgstr ""
+"Weit weg, hinter den Wortbergen, weit weg von den Ländern Vokalia und "
+"Consonantia, leben die Blindtexte"
+
+#: main/templates/main/home.html:307 main/templates/main/home.html:321
+#: main/templates/main/home.html:335
+msgid "Dennis Green"
+msgstr "Dennis Grün"
+
+#: main/templates/main/home.html:308 main/templates/main/home.html:322
+#: main/templates/main/home.html:336
+msgid "Guest from italy"
+msgstr "Gast aus Italien"
+
+#: main/templates/main/home.html:353
+msgid "Restaurants"
+msgstr "Restaurants"
+
+#: main/templates/main/home.html:437
+msgid "Subcribe to our Newsletter"
+msgstr "Abonnieren Sie unseren Newsletter"
+
+#: main/templates/main/home.html:438
+msgid ""
+"Far far away, behind the word mountains, far from the countries Vokalia and "
+"Consonantia, there live the blind texts. Separated they live in"
+msgstr ""
+"Weit weg, hinter den Wortbergen, weit weg von den Ländern Vokalia und "
+"Consonantia, leben die Blindtexte. Getrennt leben sie in"
+
+#: main/templates/main/home.html:444
+msgid "Enter email address"
+msgstr "E-Mail Adresse eingeben"
+
+#: main/templates/main/home.html:445
+msgid "Subscribe"
+msgstr "Abonnieren"
+
+#: main/templates/main/home.html:452
+#, fuzzy
+#| msgid "Created Post Successfully!!"
+msgid "Subscribed Successfully"
+msgstr "Beitrag erfolgreich erstellt!!"
 
 #: project/settings.py:174
 msgid "German"
