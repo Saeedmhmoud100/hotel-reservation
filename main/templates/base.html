@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -36,31 +37,31 @@
     <div class="container">
       <a class="navbar-brand" href="/">dirEngine.</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="oi oi-menu"></span> Menu
+        <span class="oi oi-menu"></span> {% trans 'Menu' %}
       </button>
 
       <div class="collapse navbar-collapse" id="ftco-nav">
         <ul class="navbar-nav ml-auto">
           
-          <li class="nav-item {% if urlpath == '/' %}active{% endif %}"><a href="{% url 'main:home' %}" class="nav-link">Home</a></li>
-          <li class="nav-item {% if 'about' in urlpath %}active{% endif %}"><a href="{% url 'about:about' %}" class="nav-link">About</a></li>
-          <li class="nav-item {% if 'tour' in urlpath %}active{% endif %}"><a href="{% url 'tours:tour' %}" class="nav-link">Tour</a></li>
-          <li class="nav-item {% if 'hotel' in urlpath %}active{% endif %}"><a href="{% url 'rooms:hotel' %}" class="nav-link">Hotels</a></li>
-          <li class="nav-item {% if 'blog' in urlpath %}active{% endif %}"><a href="{% url 'blog:blog' %}" class="nav-link">Blog</a></li>
-          <li class="nav-item {% if 'content' in urlpath %}active{% endif %}"><a href="{% url 'about:contact' %}" class="nav-link">Contact</a></li>
-          <li class="nav-item {% if 'api' in urlpath %}active{% endif %}"><a href="{% url 'api-docs' %}" class="nav-link">API</a></li>
+          <li class="nav-item {% if urlpath == '/' %}active{% endif %}"><a href="{% url 'main:home' %}" class="nav-link">{% trans 'Home' %}</a></li>
+          <li class="nav-item {% if 'about' in urlpath %}active{% endif %}"><a href="{% url 'about:about' %}" class="nav-link">{% trans 'About' %}</a></li>
+          <li class="nav-item {% if 'tour' in urlpath %}active{% endif %}"><a href="{% url 'tours:tour' %}" class="nav-link">{% trans 'Tour' %}</a></li>
+          <li class="nav-item {% if 'hotel' in urlpath %}active{% endif %}"><a href="{% url 'rooms:hotel' %}" class="nav-link">{% trans 'Hotels' %}</a></li>
+          <li class="nav-item {% if 'blog' in urlpath %}active{% endif %}"><a href="{% url 'blog:blog' %}" class="nav-link">{% trans 'Blog' %}</a></li>
+          <li class="nav-item {% if 'content' in urlpath %}active{% endif %}"><a href="{% url 'about:contact' %}" class="nav-link">{% trans 'Contact' %}</a></li>
+          <li class="nav-item "><a href="{% url 'api-docs' %}" class="nav-link">API</a></li>
           
           {% if request.user.is_superuser or request.user.is_staff %}
-          <li class="nav-item cta mr-3"><a href="{% if 'tour' in urlpath %}{% url 'tours:new-tour' %}{% elif 'blog' in urlpath %}{% url 'blog:blog-create' %}{% else %} {% url 'rooms:new-room' %}{% endif %}" class="nav-link"><span>Add {% if 'tour' in urlpath %}Tour {% elif 'blog' in urlpath %} Blog {% else %} Room {% endif %}</span></a></li>
-          <li class="nav-item cta"><a href="{% url 'accounts:logout' %}" class="nav-link"><span>Logout</span></a></li>
+          <li class="nav-item cta mr-3"><a href="{% if 'tour' in urlpath %}{% url 'tours:new-tour' %}{% elif 'blog' in urlpath %}{% url 'blog:blog-create' %}{% else %} {% url 'rooms:new-room' %}{% endif %}" class="nav-link"><span>Add {% if 'tour' in urlpath %}{% trans 'Tour' %} {% elif 'blog' in urlpath %} {% trans 'Blog' %} {% else %} {% trans 'Room' %} {% endif %}</span></a></li>
+          <li class="nav-item cta"><a href="{% url 'accounts:logout' %}" class="nav-link"><span>{% trans 'Logout' %}</span></a></li>
           {% else %}
           
           {% if request.user.is_authenticated %}
-          <li class="nav-item cta mr-3"><a href="{{request.user.get_absolute_url}}" class="nav-link"><span>Profile</span></a></li>
-          <li class="nav-item cta"><a href="{% url 'accounts:logout' %}" class="nav-link"><span>Logout</span></a></li>
+          <li class="nav-item cta mr-3"><a href="{{request.user.get_absolute_url}}" class="nav-link"><span>{% trans 'Profile' %}</span></a></li>
+          <li class="nav-item cta"><a href="{% url 'accounts:logout' %}" class="nav-link"><span>{% trans 'Logout' %}</span></a></li>
           {% else %}
-          <li class="nav-item cta mr-3"><a href="{% url 'accounts:login' %}" class="nav-link"><span>Login</span></a></li>
-          <li class="nav-item cta"><a href="{% url 'accounts:register' %}" class="nav-link"><span>Register</span></a></li>
+          <li class="nav-item cta mr-3"><a href="{% url 'accounts:login' %}" class="nav-link"><span>{% trans 'Login' %}</span></a></li>
+          <li class="nav-item cta"><a href="{% url 'accounts:register' %}" class="nav-link"><span>{% trans 'Register' %}</span></a></li>
           {% endif %}
           {% endif %}
             
@@ -96,32 +97,32 @@
           </div>
           <div class="col-md">
             <div class="ftco-footer-widget mb-4 ml-md-5">
-              <h2 class="ftco-heading-2">Information</h2>
+              <h2 class="ftco-heading-2">{% trans 'Information' %}</h2>
               <ul class="list-unstyled">
-                <li><a href="#" class="py-2 d-block">About</a></li>
-                <li><a href="#" class="py-2 d-block">Service</a></li>
-                <li><a href="#" class="py-2 d-block">Terms and Conditions</a></li>
-                <li><a href="#" class="py-2 d-block">Become a partner</a></li>
-                <li><a href="#" class="py-2 d-block">Best Price Guarantee</a></li>
-                <li><a href="#" class="py-2 d-block">Privacy and Policy</a></li>
+                <li><a href="{% url 'about:about' %}" class="py-2 d-block">{% trans 'About' %}</a></li>
+                <li><a href="#" class="py-2 d-block">{% trans 'Service' %}</a></li>
+                <li><a href="#" class="py-2 d-block">{% trans 'Terms and Conditions' %}</a></li>
+                <li><a href="#" class="py-2 d-block">{% trans 'Become a partner' %}</a></li>
+                <li><a href="#" class="py-2 d-block">{% trans 'Best Price Guarantee' %}</a></li>
+                <li><a href="#" class="py-2 d-block">{% trans 'Privacy and Policy' %}</a></li>
               </ul>
             </div>
           </div>
           <div class="col-md">
              <div class="ftco-footer-widget mb-4">
-              <h2 class="ftco-heading-2">Customer Support</h2>
+              <h2 class="ftco-heading-2">{% trans 'Customer Support' %}</h2>
               <ul class="list-unstyled">
-                <li><a href="#" class="py-2 d-block">FAQ</a></li>
-                <li><a href="#" class="py-2 d-block">Payment Option</a></li>
-                <li><a href="#" class="py-2 d-block">Booking Tips</a></li>
-                <li><a href="#" class="py-2 d-block">How it works</a></li>
-                <li><a href="#" class="py-2 d-block">Contact Us</a></li>
+                <li><a href="{% url 'about:about' %}" class="py-2 d-block">{% trans "FAQ" %}</a></li>
+                <li><a href="#" class="py-2 d-block">{% trans "Payment Option" %}</a></li>
+                <li><a href="#" class="py-2 d-block">{% trans "Booking Tips" %}</a></li>
+                <li><a href="#" class="py-2 d-block">{% trans "How it works" %}</a></li>
+                <li><a href="#" class="py-2 d-block">{% trans "Contact Us" %}</a></li>
               </ul>
             </div>
           </div>
           <div class="col-md">
             <div class="ftco-footer-widget mb-4">
-            	<h2 class="ftco-heading-2">Have a Questions?</h2>
+            	<h2 class="ftco-heading-2">{% trans "Have a Questions?" %}</h2>
             	<div class="block-23 mb-3">
 	              <ul>
 	                <li><span class="icon icon-map-marker"></span><span class="text">{{myfooter.address}}</span></li>

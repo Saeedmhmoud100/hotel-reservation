@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-28 09:05+0000\n"
+"POT-Creation-Date: 2021-07-28 09:34+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -104,6 +104,7 @@ msgstr "Beitrag löschen"
 #: blog/templates/blog/post_confirm_delete.html:17
 #: blog/templates/blog/post_detail.html:15
 #: blog/templates/blog/post_form.html:23 blog/templates/blog/post_list.html:14
+#: main/templates/base.html:46
 msgid "Home"
 msgstr "Heim"
 
@@ -113,7 +114,7 @@ msgid "Hotel"
 msgstr "Hotel"
 
 #: blog/templates/blog/post_confirm_delete.html:18
-#: blog/templates/blog/post_form.html:24
+#: blog/templates/blog/post_form.html:24 main/templates/base.html:49
 msgid "Hotels"
 msgstr "Hotels"
 
@@ -179,7 +180,8 @@ msgstr "Beitrag hinzufügen"
 msgid "Add Post"
 msgstr "Neuen Beitrag hinzufügen"
 
-#: blog/templates/blog/post_list.html:5
+#: blog/templates/blog/post_list.html:5 main/templates/base.html:50
+#: main/templates/base.html:55
 msgid "Blog"
 msgstr "Blog"
 
@@ -198,6 +200,94 @@ msgstr "Beitrag erfolgreich aktualisiert!!"
 #: blog/views.py:60
 msgid "Deleted Post Successfully!!"
 msgstr "Beitrag erfolgreich gelöscht!!"
+
+#: main/templates/base.html:40
+msgid "Menu"
+msgstr "Speisekarte"
+
+#: main/templates/base.html:47 main/templates/base.html:102
+msgid "About"
+msgstr "Über"
+
+#: main/templates/base.html:48 main/templates/base.html:55
+msgid "Tour"
+msgstr "Tour"
+
+#: main/templates/base.html:51
+msgid "Contact"
+msgstr "Kontakt"
+
+#: main/templates/base.html:55
+msgid "Room"
+msgstr "Zimmer"
+
+#: main/templates/base.html:56 main/templates/base.html:61
+msgid "Logout"
+msgstr "Ausloggen"
+
+#: main/templates/base.html:60
+msgid "Profile"
+msgstr "Profil"
+
+#: main/templates/base.html:63
+msgid "Login"
+msgstr "Anmeldung"
+
+#: main/templates/base.html:64
+msgid "Register"
+msgstr "Registrieren"
+
+#: main/templates/base.html:100
+msgid "Information"
+msgstr "Information"
+
+#: main/templates/base.html:103
+msgid "Service"
+msgstr "Service"
+
+#: main/templates/base.html:104
+msgid "Terms and Conditions"
+msgstr "Geschäftsbedingungen"
+
+#: main/templates/base.html:105
+msgid "Become a partner"
+msgstr "Ein Partner werden"
+
+#: main/templates/base.html:106
+msgid "Best Price Guarantee"
+msgstr "Bestpreisgarantie"
+
+#: main/templates/base.html:107
+msgid "Privacy and Policy"
+msgstr "Datenschutz und Richtlinien"
+
+#: main/templates/base.html:113
+msgid "Customer Support"
+msgstr "Kundendienst"
+
+#: main/templates/base.html:115
+msgid "FAQ"
+msgstr "FAQ"
+
+#: main/templates/base.html:116
+msgid "Payment Option"
+msgstr "Bezahlmöglichkeit"
+
+#: main/templates/base.html:117
+msgid "Booking Tips"
+msgstr "Buchungstipps"
+
+#: main/templates/base.html:118
+msgid "How it works"
+msgstr "Wie es funktioniert"
+
+#: main/templates/base.html:119
+msgid "Contact Us"
+msgstr "Kontaktiere uns"
+
+#: main/templates/base.html:125
+msgid "Have a Questions?"
+msgstr "Haben Sie eine Frage?"
 
 #: project/settings.py:174
 msgid "German"
