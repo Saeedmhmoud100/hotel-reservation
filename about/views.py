@@ -5,8 +5,7 @@ from django.views.generic import ListView,View
 from django.contrib import messages
 from about.models import About, FAQ
 from main.models import Info
-from django.core.mail import send_mail
-from django.conf import settings
+from .tasks import send_mail_task
 # Create your views here.
 
 class Aboutview(ListView):
@@ -26,12 +25,6 @@ class ContactView(View):
         name = request.POST['name']
         email = request.POST['email']
         message = request.POST['message']
-        send_mail(
-            subject,
-            f'message from {name} \n email : {email} \n Message : {message}',
-            email,
-            [settings.EMAIL_HOST_USER],
-            fail_silently=False,
-        )
+        send_mail_task.delay(subject,name,email,message)
         messages.success(request,'sended email successfully!!')
         return render(request,'about/contact.html',{'info':Info.objects.last()})
