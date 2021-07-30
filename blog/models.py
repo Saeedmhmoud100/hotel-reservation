@@ -25,9 +25,9 @@ class Post(models.Model):
     active = models.BooleanField(_('Active'),default=True)
     objects=PostManager()
     def save(self,*args, **kwargs) :
+        super(Post,self).save(*args, **kwargs)
         if self.title:
             self.slug = slugify(f'{self.pk}-{self.title}')
-        super(Post,self).save(*args, **kwargs)
     
     class Meta:
         verbose_name=_('post')
