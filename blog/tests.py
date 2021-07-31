@@ -11,7 +11,7 @@ class TestBlogModel(TestCase):
     def setUp(self):
         self.user = User.objects.create_user(username='testuser',password='12345678Tests')
         self.categorie=Categorie.objects.create(title='test categorie')
-        self.post = Post.objects.create(author=self.user,title='test post',categorie=self.categorie,description=('test posts'*50),img='blog/img1.jpg')
+        self.post = Post.objects.create(id=1,author=self.user,title='test post',categorie=self.categorie,description=('test posts'*50),img='blog/img1.jpg')
     
     def test_model_str(self):
         self.assertEqual(self.categorie.__str__(),self.categorie.title)
@@ -55,3 +55,23 @@ class TestBlogUrls(TestCase):
     def test_post_delete_urls(self):
         url = reverse('blog:blog-delete',args=[self.post.slug])
         self.assertEqual(resolve(url).func.view_class,BlogDeleteView)
+        
+class TestBlogViews(TestCase):
+    def setUp(self):
+        self.user = User.objects.create_user(username='testuser',password='12345678Tests')
+        self.categorie=Categorie.objects.create(title='test categorie')
+        self.post = Post.objects.create(author=self.user,title='test post',categorie=self.categorie,description=('test posts'*50),img='blog/img1.jpg')
+        
+
+    def test_post_list(self):
+        url=reverse('blog:blog')
+        response =self.client.get(url)
+        self.assertEqual(response.status_code,200)
+        self.assertEqual(self.client.get(url+"?q=test").status_code,200)
+        self.assertTemplateUsed(response,'blog/post_list.html')
+    
+    def test_post_detail(self):
+        url=reverse('blog:blog-detail',args=[self.post.slug])
+        response =self.client.get(url)
+        self.assertEquals(response.status_code,200)
+        self.assertTemplateUsed(response,'blog/post_detail.html')
