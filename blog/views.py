@@ -40,7 +40,7 @@ class BlogCreateView(UserPassesTestMixin,LoginRequiredMixin,SuccessMessageMixin,
     def form_valid(self,form):
         myform = form.save(commit=False)
         myform.author=self.request.user
-        self.object=form.save()
+        self.object=myform.save()
         return super(BlogCreateView, self).form_valid(form)
     def test_func(self):
         if self.request.user.is_superuser or self.request.user.is_staff:

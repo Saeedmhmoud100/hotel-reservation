@@ -1,9 +1,14 @@
+from django.conf import settings
+from django.http import HttpResponseForbidden
 from django.test import TestCase, testcases
 from django.contrib.auth import get_user_model
 from django.urls import reverse,resolve
 from .models import Post,Categorie
 from .views import BlogCreateView, BlogDeleteView, BlogDetailView, BlogListView, BlogUpdateView
+from .forms import BlogForm
+from django.core.files.uploadedfile import SimpleUploadedFile
 # Create your tests here.
+
 
 User = get_user_model()
 
@@ -75,3 +80,14 @@ class TestBlogViews(TestCase):
         response =self.client.get(url)
         self.assertEquals(response.status_code,200)
         self.assertTemplateUsed(response,'blog/post_detail.html')
+        
+    def test_post_create(self):
+        self.client.force_login(self.user)
+        response =self.client.post('/blog/create/',{
+            'title':'test form',
+            'tags':'test,form',
+            'categorie':self.categorie,
+            'description':'test form description',
+            'img':SimpleUploadedFile(name='test_image.jpg', content=open(str(settings.BASE_DIR) +'/static/images/bg_1.jpg' , 'rb').read(), content_type='image/jpeg')
+        },follow=True)
+        self.assertEquals(response.status_code,HttpResponseForbidden.status_code)
