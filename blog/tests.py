@@ -204,3 +204,16 @@ class TestBlogDeleteView(TestCase):
         self.assertEquals(response.status_code,302)
         self.assertEquals(Post.objects.count(),0)
             
+class TestBlogForms(TestCase):
+    def test_post_form(self):
+        categorie=Categorie.objects.create(title='test categorie')
+        form = BlogForm(data={
+            'title':'test form',
+            'tags':'test,form',
+            'categorie':categorie,
+            'description':'test form description'
+        },files={
+            'img':SimpleUploadedFile(name='test_image.jpg', content=open(str(settings.BASE_DIR) +'/static/images/bg_1.jpg' , 'rb').read(), content_type='image/jpeg')
+        })
+        self.assertTrue(form.is_valid())
+    
