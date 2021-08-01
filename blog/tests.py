@@ -123,6 +123,7 @@ class TestBlogCreateView(TestCase):
         self.assertEquals(response.status_code,302)
         self.assertEquals(Post.objects.first().title,'test form')
         self.assertEquals(Post.objects.count(),2)
+        self.assertRedirects(response,reverse('blog:blog-detail',args=['2-test-form']))
             
             
 class TestBlogUpdateView(TestCase):
@@ -167,6 +168,7 @@ class TestBlogUpdateView(TestCase):
         self.assertEquals(response.status_code,302)
         self.assertEquals(Post.objects.first().title,'test form update')
         self.assertEquals(Post.objects.count(),1)
+        self.assertRedirects(response,reverse('blog:blog-detail',args=['1-test-form-update']))
             
 class TestBlogDeleteView(TestCase):
     def setUp(self):
@@ -203,6 +205,7 @@ class TestBlogDeleteView(TestCase):
         response =self.client.post(self.delete_url)
         self.assertEquals(response.status_code,302)
         self.assertEquals(Post.objects.count(),0)
+        self.assertRedirects(response,reverse('blog:blog'))
             
 class TestBlogForms(TestCase):
     def test_post_form(self):
