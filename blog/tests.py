@@ -168,3 +168,39 @@ class TestBlogUpdateView(TestCase):
         self.assertEquals(Post.objects.first().title,'test form update')
         self.assertEquals(Post.objects.count(),1)
             
+class TestBlogDeleteView(TestCase):
+    def setUp(self):
+        self.user = User.objects.create_user(username='testuser',password='12345678Tests')
+        self.categorie=Categorie.objects.create(title='test categorie')
+        self.post = Post.objects.create(author=self.user,title='test post',categorie=self.categorie,description=('test posts'*50),img='blog/img1.jpg')
+        self.delete_url = reverse('blog:blog-delete',args=[self.post.slug])
+    def test_post_delete_GET(self):
+        user = self.user
+        user.is_superuser = True
+        user.save()
+        self.client.force_login(user)
+        response =self.client.get(self.delete_url)
+        self.assertEquals(response.status_code,200)
+        self.assertTemplateUsed(response,'blog/post_confirm_delete.html')
+        self.assertContains(response,'Delete-test post')
+        
+    def test_post_delete_POST_Forbidden(self):
+        self.client.force_login(self.user) 
+        response =self.client.post(self.delete_url,{
+            'title':'test form',
+            'tags':'test,form',
+            'categorie':self.categorie,
+            'description':'test form description',
+            'img':SimpleUploadedFile(name='test_image.jpg', content=open(str(settings.BASE_DIR) +'/static/images/bg_1.jpg' , 'rb').read(), content_type='image/jpeg')
+        },follow=True)
+        self.assertEquals(response.status_code,HttpResponseForbidden.status_code)
+    
+    def test_post_delete_POST(self):
+        user = self.user
+        user.is_superuser = True
+        user.save()
+        self.client.force_login(user)
+        response =self.client.post(self.delete_url)
+        self.assertEquals(response.status_code,302)
+        self.assertEquals(Post.objects.count(),0)
+            
