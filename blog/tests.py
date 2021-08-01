@@ -80,6 +80,12 @@ class TestBlogViews(TestCase):
         response =self.client.get(url)
         self.assertEquals(response.status_code,200)
         self.assertTemplateUsed(response,'blog/post_detail.html')
+
+class TestBlogCreateView(TestCase):
+    def setUp(self):
+        self.user = User.objects.create_user(username='testuser',password='12345678Tests')
+        self.categorie=Categorie.objects.create(title='test categorie')
+        self.post = Post.objects.create(author=self.user,title='test post',categorie=self.categorie,description=('test posts'*50),img='blog/img1.jpg')
         
     def test_post_create_GET(self):
         user = self.user
@@ -89,7 +95,7 @@ class TestBlogViews(TestCase):
         response =self.client.get('/blog/create/')
         self.assertEquals(response.status_code,200)
         self.assertTemplateUsed(response,'blog/post_form.html')
-        self.assertContains(response,'create')
+        self.assertContains(response,'New Post')
         
     def test_post_create_POST_Forbidden(self):
         self.client.force_login(self.user) 
@@ -117,4 +123,48 @@ class TestBlogViews(TestCase):
         self.assertEquals(response.status_code,302)
         self.assertEquals(Post.objects.first().title,'test form')
         self.assertEquals(Post.objects.count(),2)
+            
+            
+class TestBlogUpdateView(TestCase):
+    def setUp(self):
+        self.user = User.objects.create_user(username='testuser',password='12345678Tests')
+        self.categorie=Categorie.objects.create(title='test categorie')
+        self.post = Post.objects.create(author=self.user,title='test post',categorie=self.categorie,description=('test posts'*50),img='blog/img1.jpg')
+        self.update_url = reverse('blog:blog-update',args=[self.post.slug])
+    def test_post_update_GET(self):
+        user = self.user
+        user.is_superuser = True
+        user.save()
+        self.client.force_login(user)
+        response =self.client.get(self.update_url)
+        self.assertEquals(response.status_code,200)
+        self.assertTemplateUsed(response,'blog/post_form.html')
+        self.assertContains(response,'Update Post')
+        
+    def test_post_update_POST_Forbidden(self):
+        self.client.force_login(self.user) 
+        response =self.client.post(self.update_url,{
+            'title':'test form',
+            'tags':'test,form',
+            'categorie':self.categorie,
+            'description':'test form description',
+            'img':SimpleUploadedFile(name='test_image.jpg', content=open(str(settings.BASE_DIR) +'/static/images/bg_1.jpg' , 'rb').read(), content_type='image/jpeg')
+        },follow=True)
+        self.assertEquals(response.status_code,HttpResponseForbidden.status_code)
+    
+    def test_post_update_POST(self):
+        user = self.user
+        user.is_superuser = True
+        user.save()
+        self.client.force_login(user)
+        response =self.client.post(self.update_url,{
+            'title':'test form update',
+            'img':SimpleUploadedFile(name='test_image.jpg', content=open(str(settings.BASE_DIR) +'/static/images/bg_1.jpg' , 'rb').read(), content_type='image/jpeg'),
+            'tags':'test,form',
+            'categorie':self.categorie.id,
+            'description':'test form description',
+        })
+        self.assertEquals(response.status_code,302)
+        self.assertEquals(Post.objects.first().title,'test form update')
+        self.assertEquals(Post.objects.count(),1)
             
