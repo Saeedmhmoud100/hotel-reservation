@@ -81,8 +81,18 @@ class TestBlogViews(TestCase):
         self.assertEquals(response.status_code,200)
         self.assertTemplateUsed(response,'blog/post_detail.html')
         
-    def test_post_create(self):
-        self.client.force_login(self.user)
+    def test_post_create_GET(self):
+        user = self.user
+        user.is_superuser = True
+        user.save()
+        self.client.force_login(user)
+        response =self.client.get('/blog/create/')
+        self.assertEquals(response.status_code,200)
+        self.assertTemplateUsed(response,'blog/post_form.html')
+        self.assertContains(response,'create')
+        
+    def test_post_create_POST_Forbidden(self):
+        self.client.force_login(self.user) 
         response =self.client.post('/blog/create/',{
             'title':'test form',
             'tags':'test,form',
@@ -91,3 +101,20 @@ class TestBlogViews(TestCase):
             'img':SimpleUploadedFile(name='test_image.jpg', content=open(str(settings.BASE_DIR) +'/static/images/bg_1.jpg' , 'rb').read(), content_type='image/jpeg')
         },follow=True)
         self.assertEquals(response.status_code,HttpResponseForbidden.status_code)
+    
+    def test_post_create_POST(self):
+        user = self.user
+        user.is_superuser = True
+        user.save()
+        self.client.force_login(user)
+        response =self.client.post('/blog/create/',{
+            'title':'test form',
+            'img':SimpleUploadedFile(name='test_image.jpg', content=open(str(settings.BASE_DIR) +'/static/images/bg_1.jpg' , 'rb').read(), content_type='image/jpeg'),
+            'tags':'test,form',
+            'categorie':self.categorie.id,
+            'description':'test form description',
+        })
+        self.assertEquals(response.status_code,302)
+        self.assertEquals(Post.objects.first().title,'test form')
+        self.assertEquals(Post.objects.count(),2)
+            

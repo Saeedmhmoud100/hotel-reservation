@@ -38,9 +38,8 @@ class BlogCreateView(UserPassesTestMixin,LoginRequiredMixin,SuccessMessageMixin,
     form_class = BlogForm
     success_message=_('Created Post Successfully!!')
     def form_valid(self,form):
-        myform = form.save(commit=False)
-        myform.author=self.request.user
-        self.object=myform.save()
+        form.instance.author=self.request.user
+        self.object=form.save()
         return super(BlogCreateView, self).form_valid(form)
     def test_func(self):
         if self.request.user.is_superuser or self.request.user.is_staff:
