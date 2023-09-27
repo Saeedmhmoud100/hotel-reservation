@@ -32,7 +32,7 @@ def random_rooms(rooms,num=None):
 class HotelListView(FilterView):
     template_name = 'rooms/hotel.html'
     model = Room
-    paginate_by = 9
+    paginate_by = 6
     filterset_fields = ['city', 'locality','data_from','data_to','total_rating']
     
     def get_queryset(self):
