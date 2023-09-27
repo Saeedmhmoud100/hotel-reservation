@@ -71,23 +71,40 @@
           	<span class="subheading">FAQS</span>
             <h2 class="mb-4"><strong>Frequently</strong> Ask Question</h2>
           </div>
-        </div>  
+        </div>
+
     		<div class="row">
     			<div class="col-md-12 ftco-animate">
     				<div id="accordion">
     					<div class="row">
-    						<div class="col-md-6">
+    						<div class="col-md-12">
 								{% for faq in object_list %}
-								  <div class="card">
-						        <div class="card-header">
-										  <a class="card-link" data-toggle="collapse"  href="#menu{{faq.id}}" aria-expanded="true" aria-controls="menuone">{{faq.title}} <span class="collapsed"><i class="icon-plus-circle"></i></span><span class="expanded"><i class="icon-minus-circle"></i></span></a>
-						        </div>
-						        <div id="menu{{faq.id}}" class="collapse {% if forloop.first %}show{% endif %}">
-						          <div class="card-body">
-												<p>{{faq.content}}</p>
-						          </div>
-						        </div>
-						      </div>
+								{% if forloop.first %}
+
+								<div class="card">
+									<div class="card-header">
+										  <a class="card-link" data-toggle="collapse"  href="#menu{{faq.id}}" aria-expanded="true" aria-controls="menuone{{faq.id}}">{{faq.title}} <span class="collapsed"><i class="icon-plus-circle"></i></span><span class="expanded"><i class="icon-minus-circle"></i></span></a>
+									</div>
+									<div id="menu{{faq.id}}" class="collapse show">
+									  <div class="card-body">
+											<p>{{faq.content}}</p>
+									  </div>
+									</div>
+								  </div>
+								{% else %}
+								<div class="card">
+									<div class="card-header">
+										  <a class="card-link" data-toggle="collapse"  href="#menu{{faq.id}}" aria-expanded="false" aria-controls="menuone{{faq.id}}">{{faq.title}} <span class="collapsed"><i class="icon-plus-circle"></i></span><span class="expanded"><i class="icon-minus-circle"></i></span></a>
+									</div>
+									<div id="menu{{faq.id}}" class="collapse">
+									  <div class="card-body">
+											<p>{{faq.content}}</p>
+									  </div>
+									</div>
+								  </div>
+								{% endif %}
+
+
 								{% endfor %}
     							
     						</div>

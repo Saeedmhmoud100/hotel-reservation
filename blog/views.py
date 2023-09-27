@@ -12,7 +12,7 @@ from django.utils.translation import gettext_lazy as _
 # Create your views here.
 class BlogListView(ListView):
     model = Post
-    paginate_by=12
+    paginate_by=8
     
     def get_queryset(self):
         queryset = super(BlogListView, self).get_queryset().filter(active=True)

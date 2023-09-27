@@ -36,19 +36,35 @@
           <div class="col-md-12 mb-4">
             <h2 class="h4">Contact Information</h2>
           </div>
-          <div class="w-100"></div>
-          <div class="col-md-3">
-            <p><span>Address:</span> {{info.address}}</p>
+
+
+          <div class="d-flex flex-row flex-wrap">
+
+            <div class="d-flex flex-row flex-wrap">
+              <div class="mx-3">
+                <div class="w-100"></div>
+                <div class="">
+                  <p><span>Address:</span> {{info.address}}</p>
+                </div>
+              </div>
+
+              <div class="mx-3">
+                <p><span>Phone:</span> <a href="tel://{{info.phone_number}}">{{info.phone_number}}</a></p>
+              </div>
+            </div>
+            <div class="d-flex flex-row flex-wrap">
+
+
+              <div class="mx-3">
+                <p><span>Email:</span> <a href="mailto:{{info.mail}}">{{info.mail}}</a></p>
+              </div>
+              <div class="mx-3">
+                <p><span>Website</span> <a href="/">{{info.site_name}}</a></p>
+              </div>
+            </div>
+
           </div>
-          <div class="col-md-3">
-            <p><span>Phone:</span> <a href="tel://{{info.phone_number}}">{{info.phone_number}}</a></p>
-          </div>
-          <div class="col-md-3">
-            <p><span>Email:</span> <a href="mailto:{{info.mail}}">{{info.mail}}</a></p>
-          </div>
-          <div class="col-md-3">
-            <p><span>Website</span> <a href="/">{{info.site_name}}</a></p>
-          </div>
+
         </div>
         <div class="row block-9">
           <div class="col-md-6 pr-md-5">

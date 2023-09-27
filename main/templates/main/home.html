@@ -285,7 +285,7 @@
 		<div class="col-md-5 heading-section ftco-animate">
 			<span class="subheading">{% trans 'Best Directory Website' %}</span>
 		  <h2 class="mb-4 pb-3"><strong>{% trans 'Why' %}</strong> {% trans 'Choose Us' %}?</h2>
-		  <p>{{about.why_choose_us}}</p>
+		  <p>{{about.why_choose_us|safe}}</p>
 		  <p><a href="{% url 'about:about' %}" class="btn btn-primary btn-outline-primary mt-4 px-4 py-3">{% trans 'Read more' %}</a></p>
 		</div>
 				  <div class="col-md-1"></div>
