@@ -1,3 +1,5 @@
+from django.conf import settings
+from django.core.mail import send_mail
 from django.shortcuts import render
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
@@ -25,6 +27,15 @@ class ContactView(View):
         name = request.POST['name']
         email = request.POST['email']
         message = request.POST['message']
-        send_mail_task.delay(subject,name,email,message)
+        print(message)
+        # send_mail_task.delay(subject,name,email,message) need celery
+        send_mail(
+            subject,
+            f'message from {name} \n email : {email} \n Message : {message}',
+            settings.EMAIL_HOST_USER,
+            [email,'saeedmhmoud109@gmail.com'],
+            fail_silently=False,
+        )
+        print(message)
         messages.success(request,'sended email successfully!!')
         return render(request,'about/contact.html',{'info':Info.objects.last()})

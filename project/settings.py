@@ -202,7 +202,8 @@ MEDIA_ROOT=BASE_DIR /'media'
 CRISPY_TEMPLATE_PACK  = 'bootstrap4'
 
 AUTH_USER_MODEL = 'accounts.User'
-DEFAULT_AUTO_FIELD='django.db.models.AutoField' 
+DEFAULT_AUTO_FIELD='django.db.models.AutoField'
+
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST_USER = 'saeedmhmoud10@gmail.com'
 EMAIL_HOST_PASSWORD = 'kkliuqblmbjqkqgd'
