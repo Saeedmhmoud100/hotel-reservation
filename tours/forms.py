@@ -49,6 +49,6 @@ class TourForm(forms.ModelForm):
     days_number = forms.IntegerField(max_value=60)
     class Meta:
         model = Tour
-        fields = ('title','price','city','locality','street','descriptions','data_from','data_to','days_number','img')
+        fields = ('title','price','city','locality','street','category','descriptions','data_from','data_to','days_number','img')
 
 TourImgInlineForm = inlineformset_factory(Tour,Tour_image,fields=('img',),extra=3,max_num=3,can_delete=False)
