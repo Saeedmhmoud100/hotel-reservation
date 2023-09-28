@@ -53,11 +53,13 @@
           
           {% if request.user.is_superuser or request.user.is_staff %}
           <li class="nav-item cta mr-3"><a href="{% if 'tour' in urlpath %}{% url 'tours:new-tour' %}{% elif 'blog' in urlpath %}{% url 'blog:blog-create' %}{% else %} {% url 'rooms:new-room' %}{% endif %}" class="nav-link"><span>Add {% if 'tour' in urlpath %}{% trans 'Tour' %} {% elif 'blog' in urlpath %} {% trans 'Blog' %} {% else %} {% trans 'Room' %} {% endif %}</span></a></li>
+          <li class="nav-item cta mr-1"><a href="{% url 'accounts:profile' slug=user.slug%}" class="nav-link"><span>{% trans 'Profile' %}</span></a></li>
           <li class="nav-item cta"><a href="{% url 'accounts:logout' %}" class="nav-link"><span>{% trans 'Logout' %}</span></a></li>
           {% else %}
-          
+
           {% if request.user.is_authenticated %}
           <li class="nav-item cta mr-3"><a href="{{request.user.get_absolute_url}}" class="nav-link"><span>{% trans 'Profile' %}</span></a></li>
+          <li class="nav-item cta mr-1"><a href="{% url 'accounts:profile' slug=user.slug%}" class="nav-link"><span>{% trans 'Profile' %}</span></a></li>
           <li class="nav-item cta"><a href="{% url 'accounts:logout' %}" class="nav-link"><span>{% trans 'Logout' %}</span></a></li>
           {% else %}
           <li class="nav-item cta mr-3"><a href="{% url 'accounts:login' %}" class="nav-link"><span>{% trans 'Login' %}</span></a></li>
